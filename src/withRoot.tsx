@@ -6,6 +6,8 @@ import blue from '@material-ui/core/colors/blue';
 // import red from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+export const drawerWidth: number = 240;
+
 // A theme with custom primary and secondary color.
 // It's optional.
 const theme = createMuiTheme({

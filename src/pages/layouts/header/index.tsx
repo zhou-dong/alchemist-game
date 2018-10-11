@@ -10,7 +10,7 @@ import Title from './Title';
 import Search from './Search';
 import Section from './Section';
 
-const drawerWidth = 240;
+import { drawerWidth } from '../../../withRoot';
 
 const basicStyles = createStyles({
     root: {
@@ -28,6 +28,7 @@ const appBarStyles = (theme: Theme) => createStyles({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
+        boxShadow: 'none',
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,

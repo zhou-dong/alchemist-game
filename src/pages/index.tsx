@@ -9,7 +9,7 @@ import withRoot from '../withRoot';
 import Header from './layouts/header';
 import Sidebar from './layouts/sidebar';
 
-const drawerWidth = 240;
+import { drawerWidth } from '../withRoot';
 
 const contentStyles = (theme: Theme) => createStyles({
   drawerHeader: {

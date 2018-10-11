@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-const drawerWidth = 240;
+import { drawerWidth } from '../../../withRoot';
 
 const styles = (theme: Theme) => createStyles({
     drawerPaper: {
@@ -29,8 +29,8 @@ interface Props extends WithStyles<typeof styles> {
     closeDrawer: () => void;
 }
 
-const mailFolderListItems = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => <ListItem key={num}>{num}</ListItem>);
-const otherMailFolderListItems = ['a', 'b', 'c', 'd', 'e'].map(char => <ListItem key={char}>{char}</ListItem> );
+const mailFolderListItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e']
+    .map(num => <ListItem key={num}>{num}</ListItem>);
 
 const Sidebar = (props: Props) => {
     const { classes, open, closeDrawer } = props;
@@ -50,8 +50,6 @@ const Sidebar = (props: Props) => {
             </div>
             <Divider />
             <List>{mailFolderListItems}</List>
-            <Divider />
-            <List>{otherMailFolderListItems}</List>
         </Drawer>
     );
 };
