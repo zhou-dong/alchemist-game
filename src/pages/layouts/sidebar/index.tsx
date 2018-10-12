@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
+import { Link } from 'react-router-dom';
+
 import { drawerWidth } from '../../../withRoot';
 
 const styles = (theme: Theme) => createStyles({
@@ -29,8 +31,8 @@ interface Props extends WithStyles<typeof styles> {
     closeDrawer: () => void;
 }
 
-const mailFolderListItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e']
-    .map(num => <ListItem key={num}>{num}</ListItem>);
+const mailFolderListItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'home', 'about']
+    .map(num => <ListItem key={num}><Link to={`/algorithms/${num}`}>{num}</Link></ListItem>);
 
 const Sidebar = (props: Props) => {
     const { classes, open, closeDrawer } = props;
