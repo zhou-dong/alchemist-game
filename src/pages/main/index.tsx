@@ -9,7 +9,8 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import { drawerWidth } from '../withRoot';
 
 import Welcome from './welcome';
-import AlgorithmCard from './AlgorithmCard';
+import { containers } from '../../store/index';
+import Names from '../../algorithms/Names';
 
 const styles = (theme: Theme) => createStyles({
     drawerHeader: {
@@ -44,7 +45,7 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 interface PathParamsType {
-    algorithmId: string;
+    name: string;
 }
 
 interface PathParamsType1 extends RouteComponentProps<PathParamsType> {
@@ -52,51 +53,17 @@ interface PathParamsType1 extends RouteComponentProps<PathParamsType> {
 }
 
 const Algorithm = ({ match }: PathParamsType1) => {
-
-    const id: number = 1;
-    const success: boolean = true;
-    const loading: boolean = true;
-    const steps: number = 20;
-    const errors: number = 10;
-    const title: string = 'Edit Distance';
-    const subHeader: string = 'Hard';
-    const tableMatrix: Array<Array<number | string>> = [
-        ['a', 'b', 'c', 'd', 'e'],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-        [3, 4, 5, 6, 7],
-    ];
-    const tableStyles: Array<Array<React.CSSProperties>> = [
-        [{ color: 'red' }, { color: 'red' }, { color: 'red' }, { color: 'red' }, { color: 'red' }],
-        [{ color: 'red' }, { color: 'yellow' }, { color: 'red' }, { color: 'red' }, { color: 'red' }],
-        [{ color: 'red' }, { color: 'red' }, { color: 'yellow' }, { color: 'red' }, { color: 'red' }],
-        [{ color: 'red' }, { color: 'yellow' }, { color: 'red' }, { color: 'red' }, { color: 'red' }],
-    ];
-    const buttonsArray: Array<number | string> = ['a', 1, 2, 3, 4];
-    const buttonsStyles: Array<React.CSSProperties> =
-        [{ color: 'red' }, { color: 'red' }, { color: 'red' }, { color: 'red' }, { color: 'red' }];
-    const buttonsHandleClick = (data: number | string) => alert(data);
-    return (
-        <AlgorithmCard
-            id={id}
-            success={success}
-            loading={loading}
-            steps={steps}
-            errors={errors}
-            title={title}
-            subHeader={subHeader}
-            tableMatrix={tableMatrix}
-            tableStyles={tableStyles}
-            buttonsArray={buttonsArray}
-            buttonsStyles={buttonsStyles}
-            buttonsHandleClick={buttonsHandleClick}
-        />
-    );
+    switch (match.params.name) {
+        case Names.EditDistance:
+            return (<containers.EditDistance />);
+        default:
+            return (<div>{match.params.name}</div>);
+    }
 };
 
 const Algorithms = ({ match }: PathParamsType1) => (
     <React.Fragment>
-        <Route path={`${match.path}/:algorithmId`} component={Algorithm} />
+        <Route path={`${match.path}/:name`} component={Algorithm} />
         <Route exact path={match.path} render={() => (<div>Algorithms</div>)} />
     </React.Fragment>
 );

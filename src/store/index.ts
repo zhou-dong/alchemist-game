@@ -1,6 +1,7 @@
-import { combineReducers, Dispatch, Reducer, Action, AnyAction } from 'redux';
+import { combineReducers } from 'redux';
+import { all } from 'redux-saga/effects';
 
-import { EditDistanceState, EditDistanceReducer } from './edit-distance';
+import { EditDistanceState, EditDistanceReducer, EditDistance, EditDistanceWatchRecord } from './edit-distance';
 
 export interface ApplicationState {
     editDistance: EditDistanceState;
@@ -8,4 +9,14 @@ export interface ApplicationState {
 
 export const rootReducer = combineReducers<ApplicationState>({
     editDistance: EditDistanceReducer,
-})
+});
+
+export const containers = {
+    EditDistance,
+};
+
+export function* rootSaga() {
+    yield all([
+        EditDistanceWatchRecord(),
+    ]);
+}

@@ -1,7 +1,9 @@
+import Container from './container';
 import { State } from './types';
 import Reducer from './reducer';
-import Container from './container';
+import { watchRecord } from './sagas';
 
-export { State as EditDistanceState }
-export { Reducer as EditDistanceReducer }
-export { Container as EditDistanceContainer }
+export { Container as EditDistance };
+export { State as EditDistanceState };
+export { Reducer as EditDistanceReducer };
+export { watchRecord as EditDistanceWatchRecord};

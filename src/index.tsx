@@ -1,31 +1,31 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { createStore, Store, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from 'redux-devtools-extension';
-
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter } from 'connected-react-router';
 import Index from './pages';
-import reducers from './reducers';
-import sagas from './sagas';
+import configureStore from './store/configure-store';
+import * as serviceWorker from './serviceWorker';
 
-const composeEnhancers = composeWithDevTools({});
+declare global {
+    interface Window { initialReduxState: any; }
+}
 
-const sagaMiddleware = createSagaMiddleware();
-const store: Store = createStore(
-    reducers,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
-);
+window.initialReduxState = window.initialReduxState || {};
 
-sagaMiddleware.run(sagas);
+const initialState = window.initialReduxState;
+const history = createBrowserHistory();
+
+const store = configureStore(history, initialState);
 
 const Root = () => (
     <Provider store={store}>
-        <Router>
+        <ConnectedRouter history={history}>
             <Index />
-        </Router>
+        </ConnectedRouter>
     </Provider>
 );
 
 ReactDOM.render(<Root />, document.querySelector('#root'));
+
+serviceWorker.unregister();

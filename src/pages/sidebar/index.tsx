@@ -11,6 +11,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { Link } from 'react-router-dom';
 
 import { drawerWidth } from '../withRoot';
+import Names from '../../algorithms/Names';
 
 const styles = (theme: Theme) => createStyles({
     drawerPaper: {
@@ -31,8 +32,12 @@ interface Props extends WithStyles<typeof styles> {
     closeDrawer: () => void;
 }
 
-const mailFolderListItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'home', 'about']
-    .map(num => <ListItem key={num}><Link to={`/algorithms/${num}`}>{num}</Link></ListItem>);
+const mailFolderListItems = Object.keys(Names).map(key => {
+    const name = Names[key];
+    return (
+        <ListItem key={key}><Link to={`/algorithms/${name}`}>{key}</Link></ListItem>
+    );
+});
 
 const Sidebar = (props: Props) => {
     const { classes, open, closeDrawer } = props;

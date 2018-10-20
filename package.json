@@ -12,7 +12,9 @@
     "@types/react-dom": "*",
     "@types/react-redux": "^6.0.9",
     "@types/react-router-dom": "^4.3.1",
+    "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "connected-react-router": "^4.5.0",
     "react": "latest",
     "react-dom": "latest",
     "react-redux": "^5.0.7",
@@ -26,7 +28,7 @@
   "devDependencies": {
     "@types/ejs": "^2.6.0",
     "@types/jest": "*",
-    "@types/node": "*",
+    "@types/node": "^10.12.0",
     "ejs": "^2.6.1",
     "redux-devtools": "^3.4.1",
     "typescript": "latest"

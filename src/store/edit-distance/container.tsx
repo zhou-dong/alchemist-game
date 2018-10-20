@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
-import { ApplicationState } from '../index';
+import { ApplicationState } from '..';
 import Card from '../../components/Card';
 
 const mapStateToProps = ({ editDistance }: ApplicationState) => ({

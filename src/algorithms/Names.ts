@@ -1,0 +1,25 @@
+enum Names {
+    EditDistance = 'edit-distance',
+    WordBreakI = 'word-break-one',
+    KnapsackProblem = 'knapsack-problem',
+    MinimumPathSum = 'minimum-path-sum',
+    IsSubsequence = 'is-subsequence',
+    LongestCommonSubsequence = 'longest-common-subsequence',
+    LongestCommonSubstring = 'longest-common-substring',
+    CoinChanging = 'coin-changing',
+    CoinChange = 'coin-change',
+    MaximumSubarrayProblem = 'maximum-subarray-problem',
+    SubsetSumProblem = 'subset-sum-problem',
+    LongestPalindromicSubsequence = 'longest-palindromic-subsequence',
+    LongestPalindromicSubstring = 'longest-palindromic-substring',
+    PalindromePartitioning = 'palindrome-partitioning',
+    LongestIncreasingSubsequence = 'longest-increasing-subsequence',
+    LongestIncreasingSubsequenceII = 'longest-increasing-subsequence-two',
+    RegularExpressionMatching = 'regular-expression-matching',
+    WildcardMatching = 'wildcard-matching',
+    RodCuttingProblem = 'rod-cutting-problem',
+    EggDroppingProblem = 'egg-dropping-problem',
+    MinimumNumberOfJumpsToReachEnd = 'minimum-number-of-jumps-to-reach-end',
+}
+
+export default Names;
