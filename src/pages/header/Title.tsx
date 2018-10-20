@@ -13,6 +13,7 @@ const styles = (theme: Theme) => createStyles({
         },
         textDecoration: 'none',
         color: 'inherit',
+        fontWeight: 'normal',
     },
 });
 

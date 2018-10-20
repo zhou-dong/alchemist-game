@@ -1,22 +1,44 @@
 import * as React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-// import purple from '@material-ui/core/colors/purple';
-// import blue from '@material-ui/core/colors/blue';
-import green from '@material-ui/core/colors/green';
-import red from '@material-ui/core/colors/red';
+import primary from '@material-ui/core/colors/green';
+import secondary from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import grey from '@material-ui/core/colors/grey';
 
 export const drawerWidth: number = 240;
 
-// A theme with custom primary and secondary color.
-// It's optional.
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
   palette: {
-    primary: green,
-    secondary: red,
+    primary: primary,
+    secondary: secondary,
+    background: {
+      default: grey['200'],
+    },
+  },
+  overrides: {
+    MuiTableCell: {
+      root: {
+        width: '1%',
+        textAlign: 'center',
+        borderBottom: 'none',
+      },
+      body: {
+        borderWidth: 2,
+        borderStyle: 'solid',
+        borderColor: 'white',
+        color: 'white',
+        backgroundColor: primary.A700,
+        borderRadius: 10,
+      },
+    },
+    MuiTableRow: {
+      root: {
+        height: 36,
+      },
+    }
   },
 });
 

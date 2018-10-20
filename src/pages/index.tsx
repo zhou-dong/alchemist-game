@@ -3,10 +3,10 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles, { WithStyles } from '@material-ui/core/styles/withStyles';
 
-import withRoot from '../withRoot';
-import Header from './layouts/header';
-import Sidebar from './layouts/sidebar';
-import Main from './layouts/main';
+import withRoot from './withRoot';
+import Header from './header';
+import Sidebar from './sidebar';
+import Main from './main';
 
 const styles = (theme: Theme) => createStyles({
   root: {

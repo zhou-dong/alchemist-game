@@ -6,19 +6,29 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^3.0.1",
+    "@material-ui/lab": "^3.0.0-alpha.20",
     "@types/classnames": "^2.2.6",
     "@types/react": "*",
     "@types/react-dom": "*",
+    "@types/react-redux": "^6.0.9",
     "@types/react-router-dom": "^4.3.1",
     "classnames": "^2.2.6",
     "react": "latest",
     "react-dom": "latest",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "latest"
+    "react-scripts-ts": "latest",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-saga": "^0.16.2",
+    "typesafe-actions": "^2.0.4"
   },
   "devDependencies": {
+    "@types/ejs": "^2.6.0",
     "@types/jest": "*",
     "@types/node": "*",
+    "ejs": "^2.6.1",
+    "redux-devtools": "^3.4.1",
     "typescript": "latest"
   },
   "scripts": {

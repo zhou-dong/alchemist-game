@@ -10,7 +10,7 @@ import Title from './Title';
 import Search from './Search';
 import Section from './Section';
 
-import { drawerWidth } from '../../../withRoot';
+import { drawerWidth } from '../withRoot';
 
 const basicStyles = createStyles({
     root: {

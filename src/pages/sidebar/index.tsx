@@ -10,7 +10,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { Link } from 'react-router-dom';
 
-import { drawerWidth } from '../../../withRoot';
+import { drawerWidth } from '../withRoot';
 
 const styles = (theme: Theme) => createStyles({
     drawerPaper: {
