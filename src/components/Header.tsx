@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/RefreshOutlined';
 import HelpIcon from '@material-ui/icons/HelpOutline';
 import PlayIcon from '@material-ui/icons/PlayCircleOutline';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
 import CheckIcon from '@material-ui/icons/CheckCircleOutlined';
 import WrongIcon from '@material-ui/icons/ErrorOutline';
 import StepsIcon from '@material-ui/icons/PollOutlined';
@@ -43,7 +43,7 @@ const styles = (theme: Theme) => createStyles({
         float: 'right',
     },
     metric: {
-        fontSize: 24,
+        fontSize: 30,
         color: green[500],
         verticalAlign: 'middle',
         textAlign: 'center',
@@ -68,10 +68,10 @@ interface MetricProps extends WithStyles<typeof styles> {
 
 const Metric = ({ icon, label, metric, classes }: MetricProps) => (
     <div className={classes.metric} style={{ marginLeft: 7 }}>
-        <div style={{ marginTop: 3 }}>
+        <div style={{ marginTop: 0 }}>
             {icon}
         </div>
-        <Typography style={{ fontSize: 14, color: 'grey', marginTop: -8 }}>
+        <Typography style={{ fontSize: 14, color: 'grey', marginTop: -3 }}>
             {label}
         </Typography>
         <Typography style={{ fontSize: 12, color: 'gray', marginTop: -4 }}>
@@ -84,7 +84,7 @@ const CardHeaderActions = (props: Props) => {
     const { classes } = props;
     return (
         <div>
-            <IconButton style={{ padding: 5 }}>
+            <IconButton style={{ padding: 5 }} >
                 <PlayIcon className={classes.metric} />
             </IconButton>
             <IconButton style={{ padding: 5 }}>
@@ -102,7 +102,7 @@ const HeaderTitle = ({ title, success, loading, classes }: Props) => {
         <div style={{ paddingLeft: 5, display: 'flex' }}>
             {success ? <CheckIcon className={classes.metric} /> : <AssignmentIcon className={classes.metric} />}
             {loading && <CircularProgress size={36} className={classes.fabProgress} />}
-            <Typography style={{ fontSize: 15, lineHeight: '24px', color: 'grey', marginLeft: 2 }}>
+            <Typography style={{ fontSize: 15, lineHeight: '30px', color: 'grey', marginLeft: 2 }}>
                 {title.toUpperCase()}
             </Typography>
         </div>
@@ -124,9 +124,9 @@ const GroupB = (props: Props) => {
     const { classes, steps, errors } = props;
     return (
         <div className={classes.groupB}>
-            <Metric icon={<StepsIcon />} label="Steps" metric={steps} {...props} />
-            <Metric icon={<WrongIcon />} label="Errors" metric={errors} {...props} />
-            <Metric icon={<TimerIcon />} label="Time" metric={'00:05'} {...props} />
+            <Metric icon={<StepsIcon className={classes.metric} />} label="Steps" metric={steps} {...props} />
+            <Metric icon={<WrongIcon className={classes.metric} />} label="Errors" metric={errors} {...props} />
+            <Metric icon={<TimerIcon className={classes.metric} />} label="Time" metric={'00:05'} {...props} />
         </div>
     );
 };

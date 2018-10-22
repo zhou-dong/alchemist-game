@@ -31,6 +31,9 @@ const theme = createMuiTheme({
         width: '1%',
         textAlign: 'center',
         borderBottom: 'none',
+        '&:last-child': {
+          paddingRight: 0,
+        }
       },
       body: {
         borderWidth: 2,

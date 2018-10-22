@@ -44,7 +44,7 @@ const update = (value: number, state: State): State => {
     }
 
     if (isLastCell(tableMatrix, currentPoint)) {
-        return { ...state, tableMatrix, tableStyles, success: true };
+        return { ...state, steps, tableMatrix, tableStyles, success: true };
     }
 
     const nextPoint = getNextPoint(tableMatrix, currentPoint);
