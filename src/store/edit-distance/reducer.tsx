@@ -1,12 +1,13 @@
 import { Reducer } from 'redux';
-import { State, ActionTypes } from './types';
+import { ActionTypes } from './types';
+import { State } from '../State';
 import initialState from './initialState';
+import update from '../../algorithms/edit-distance/update';
 
 const reducer: Reducer<State> = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.BUTTON_CLICK:
-            // return updateSteps(state, action);
-            return state;
+            return update(Number(action.payload), state);
         case ActionTypes.OPEN_MODAL_CLICK:
             return { ...state, showModal: true };
         case ActionTypes.CLOSE_MODAL_CLICK:
@@ -14,8 +15,7 @@ const reducer: Reducer<State> = (state = initialState, action) => {
         case ActionTypes.REFRESH_CLICK:
             return initialState;
         case ActionTypes.RECEIVED_RECORD:
-            const count = action.payload || 0;
-            return { ...state, count };
+            return { ...state, loading: false, count: action.payload || 0 };
         default:
             return state;
     }

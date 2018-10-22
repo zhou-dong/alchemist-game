@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
+import { State } from './State';
 
-import { EditDistanceState, EditDistanceReducer, EditDistance, EditDistanceWatchRecord } from './edit-distance';
+import { EditDistanceReducer, EditDistance, EditDistanceWatchRecord } from './edit-distance';
 
 export interface ApplicationState {
-    editDistance: EditDistanceState;
+    editDistance: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({

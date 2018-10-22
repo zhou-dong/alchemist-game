@@ -19,6 +19,11 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
+    MuiAppBar: {
+      colorPrimary: {
+        color: 'white',
+      }
+    },
     MuiTableCell: {
       root: {
         width: '1%',
@@ -32,6 +37,8 @@ const theme = createMuiTheme({
         color: 'white',
         backgroundColor: primary.A700,
         borderRadius: 10,
+        fontSize: 24,
+        height: 40,
       },
     },
     MuiTableRow: {

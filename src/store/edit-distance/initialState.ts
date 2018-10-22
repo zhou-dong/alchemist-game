@@ -1,29 +1,36 @@
-import { State } from './types';
+import { State } from '../State';
+import { Difficulty } from '../State';
+
+import {
+    createTableMatrix,
+    createComparedTable,
+    createTableStyles,
+    createButtons,
+    createButtonsStyles,
+    startPoint,
+} from '../../algorithms/edit-distance';
+
+const stringOne = 'AGGCT';
+const stringTwo = 'GATC';
 
 const state: State = {
-    id: 1,
-    success: true,
+    id: 0,
+    success: false,
     loading: false,
-    steps: 20,
-    errors: 10,
+    steps: 0,
+    errors: 0,
     title: 'Edit Distance',
-    subHeader: 'Hard',
-    tableMatrix: [
-        ['a', 'b', 'c', 'd', 'e'],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-        [3, 4, 5, 6, 7],
-    ],
-    tableStyles: [
-        [{ color: 'yellow' }, { color: 'red' }, { color: 'red' }, { color: 'red' }, { color: 'red' }],
-        [{ color: 'yellow' }, { color: 'yellow' }, { color: 'red' }, { color: 'red' }, { color: 'red' }],
-        [{ color: 'yellow' }, { color: 'red' }, { color: 'yellow' }, { color: 'red' }, { color: 'red' }],
-        [{ color: 'yellow' }, { color: 'yellow' }, { color: 'red' }, { color: 'red' }, { color: 'red' }],
-    ],
-    buttonsArray: ['a', 1, 2, 3, 4],
-    buttonsStyles:
-        [{ color: 'red' }, { color: 'red' }, { color: 'red' }, { color: 'red' }, { color: 'red' }],
-    buttonsHandleClick: (data: number | string) => alert(data),
+    time: 0,
+
+    difficulty: Difficulty.Easy,
+    currentPoint: startPoint,
+
+    comparedTable: createComparedTable(stringOne, stringTwo),
+    tableMatrix: createTableMatrix(stringOne, stringTwo),
+    tableStyles: createTableStyles(stringOne, stringTwo),
+
+    buttons: createButtons(stringOne, stringTwo),
+    buttonsStyles: createButtonsStyles(stringOne, stringTwo),
 };
 
 export default state;

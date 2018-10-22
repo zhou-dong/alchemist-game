@@ -6,3 +6,4 @@ export const closeModal = () => action(ActionTypes.CLOSE_MODAL_CLICK);
 export const openModal = () => action(ActionTypes.OPEN_MODAL_CLICK);
 export const buttonClick = (data: number | string) => action(ActionTypes.BUTTON_CLICK, data);
 export const fetchSuccess = (data: any) => action(ActionTypes.RECEIVED_RECORD, data);
+export const increaseSuccess = () => action(ActionTypes.INCREASE_RECORD);

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import Index from './pages';
-import configureStore from './store/configure-store';
+import configureStore from './store/configureStore';
 import * as serviceWorker from './serviceWorker';
 
 declare global {
