@@ -4,8 +4,10 @@ import primary from '@material-ui/core/colors/green';
 import secondary from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import grey from '@material-ui/core/colors/grey';
+import helperColor from '@material-ui/core/colors/orange';
 
 export const drawerWidth: number = 240;
+export const helperStyle: React.CSSProperties = { backgroundColor: helperColor[300] };
 
 const theme = createMuiTheme({
   typography: {

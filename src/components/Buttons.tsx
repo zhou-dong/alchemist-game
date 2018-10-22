@@ -8,7 +8,15 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-const buttonsStyle = (theme: Theme) => createStyles({});
+const buttonsStyle = (theme: Theme) => createStyles({
+    cell: {
+        '&:hover': {
+            cursor: 'pointer',
+            backgroundColor: theme.palette.primary.dark,
+        },
+        padding: 0,
+    },
+});
 
 interface Props extends WithStyles<typeof buttonsStyle> {
     array: Array<number | string>;
@@ -16,18 +24,14 @@ interface Props extends WithStyles<typeof buttonsStyle> {
     handleClick: (data: number | string) => any;
 }
 
-const createCell = (
-    key: number,
-    data: number | string,
-    style: React.CSSProperties,
-    handleClick: (data: number | string) => any) => (
-        <TableCell padding="none" key={key} style={style} onClick={() => handleClick(data)}>
-            {data}
-        </TableCell>
-    );
+const cell = (key: number, data: number | string, style: React.CSSProperties, { handleClick, classes }: Props) => (
+    <TableCell key={key} style={style} onClick={() => handleClick(data)} className={classes.cell}>
+        {data}
+    </TableCell>
+);
 
 const Buttons = (props: Props) => {
-    const { array, styles, handleClick } = props;
+    const { array, styles } = props;
     if (array.length !== styles.length) {
         throw new Error('Alchemy Buttons errors: array-styles size dont match');
     }
@@ -35,7 +39,7 @@ const Buttons = (props: Props) => {
         <Table>
             <TableBody>
                 <TableRow key={0}>
-                    {array.map((data, i) => createCell(i, data, styles[i], handleClick))}
+                    {array.map((data, index) => cell(index, data, styles[index], { ...props }))}
                 </TableRow>
             </TableBody>
         </Table>

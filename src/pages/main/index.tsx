@@ -54,7 +54,7 @@ interface PathParamsType1 extends RouteComponentProps<PathParamsType> {
 
 const Algorithm = ({ match }: PathParamsType1) => {
     switch (match.params.name) {
-        case Names.EditDistance:
+        case Names.Edit_Distance:
             return (<containers.EditDistance />);
         default:
             return (<div>{match.params.name}</div>);

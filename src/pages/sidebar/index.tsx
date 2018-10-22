@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-
+import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
 import { drawerWidth } from '../withRoot';
@@ -32,10 +32,41 @@ interface Props extends WithStyles<typeof styles> {
     closeDrawer: () => void;
 }
 
+const linkStyle: React.CSSProperties = {
+    textDecoration: 'none',
+    color: 'inherit',
+    width: '100%',
+    textTransform: 'initial',
+    textAlign: 'left',
+};
+
+const listStyle: React.CSSProperties = {
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    width: '100%',
+    textAlign: 'left',
+};
+
+const buttonStyle: React.CSSProperties = {
+    borderRadius: 0,
+    width: '100%',
+    textAlign: 'left',
+};
+
+const getName = (name: string) => name.split('').map(ch => (ch === '_') ? ' ' : ch).join('');
+
 const mailFolderListItems = Object.keys(Names).map(key => {
     const name = Names[key];
     return (
-        <ListItem key={key}><Link to={`/algorithms/${name}`}>{key}</Link></ListItem>
+        <ListItem key={key} style={listStyle}>
+            <Button style={buttonStyle}>
+                <Link to={`/algorithms/${name}`} style={linkStyle}>
+                    {getName(key)}
+                </Link>
+            </Button>
+        </ListItem>
     );
 });
 

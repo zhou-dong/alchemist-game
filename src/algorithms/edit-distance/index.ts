@@ -1,5 +1,11 @@
 import createDPTable from './algorithm';
 import { Point } from '../../store/State';
+import { helperStyle } from '../../pages/withRoot';
+
+const startPoint: Point = {
+    row: 2,
+    col: 2,
+};
 
 const createTableMatrix = (stringOne: string, stringTwo: string): (number | string)[][] => {
     const rows = stringTwo.length + 2;
@@ -37,16 +43,32 @@ const createComparedTable = (stringOne: string, stringTwo: string): (number | st
     return tableMatrix;
 };
 
+const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void => {
+    for (let col = 0; col < styles[0].length && col <= point.col; col++) {
+        styles[0][col] = helperStyle;
+    }
+
+    for (let row = 0; row < styles.length && row <= point.row; row++) {
+        styles[row][0] = helperStyle;
+    }
+};
+
 const createTableStyles = (stringOne: string, stringTwo: string): (React.CSSProperties)[][] => {
     const rows = stringTwo.length + 2;
     const cols = stringOne.length + 2;
-    return new Array(rows).fill(0).map(() => new Array(cols).fill({}));
+    const table = new Array(rows).fill(0).map(() => new Array(cols).fill({}));
+    addHelperStyles(table, startPoint);
+    return table;
 };
 
 const createButtons = (stringOne: string, stringTwo: string): number[] => {
     const dpTable = createDPTable(stringOne, stringTwo);
     const set = new Set<number>();
-    dpTable.forEach(row => row.forEach(cell => set.add(cell)));
+    for (let row = 1; row < dpTable.length; row++) {
+        for (let col = 1; col < dpTable[row].length; col++) {
+            set.add(dpTable[row][col]);
+        }
+    }
     return Array.from(set).sort();
 };
 
@@ -54,12 +76,8 @@ const createButtonsStyles = (stringOne: string, stringTwo: string): (React.CSSPr
     return createButtons(stringOne, stringTwo).map(() => ({ color: 'back' }));
 };
 
-const startPoint: Point = {
-    row: 2,
-    col: 2,
-};
-
 export {
+    addHelperStyles,
     createTableMatrix,
     createComparedTable,
     createTableStyles,

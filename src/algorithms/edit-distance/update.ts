@@ -1,4 +1,6 @@
 import { State, Point } from '../../store/State';
+import { addHelperStyles } from './index';
+
 // import { watchRecord } from '../../store/edit-distance/sagas';
 
 const isMatch = ({ row, col }: Point, r: number, c: number) => (row === r && col === c);
@@ -25,7 +27,11 @@ const getNextPoint = (table: (string | number)[][], { row, col }: Point): Point 
 
 const update = (value: number, state: State): State => {
 
-    const { currentPoint, errors } = state;
+    const { currentPoint, errors, success } = state;
+
+    if (success) {
+        return state;
+    }
 
     const steps = state.steps + 1;
     const tableMatrix = updateTable(state.tableMatrix, currentPoint, value);
@@ -33,23 +39,18 @@ const update = (value: number, state: State): State => {
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
         tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
+        addHelperStyles(tableStyles, currentPoint);
         return { ...state, steps, errors: errors + 1, tableMatrix, tableStyles };
     }
 
     if (isLastCell(tableMatrix, currentPoint)) {
-        console.log('success');
-
-        if (state.increaseSuccessRecord) {
-            state.increaseSuccessRecord();
-
-            console.log('success2');
-        }
-
         return { ...state, tableMatrix, tableStyles, success: true };
     }
 
     const nextPoint = getNextPoint(tableMatrix, currentPoint);
     tableMatrix[nextPoint.row][nextPoint.col] = '?';
+    addHelperStyles(tableStyles, nextPoint);
+
     return { ...state, steps, tableMatrix, tableStyles, currentPoint: nextPoint };
 };
 
