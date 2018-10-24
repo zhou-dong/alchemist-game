@@ -8,10 +8,10 @@ const reducer: Reducer<State> = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.BUTTON_CLICK:
             return update(Number(action.payload), state);
-        case ActionTypes.OPEN_MODAL_CLICK:
-            return { ...state, showModal: true };
-        case ActionTypes.CLOSE_MODAL_CLICK:
-            return { ...state, showModal: false };
+        case ActionTypes.OPEN_DIALOG_CLICK:
+            return { ...state, dialogOpen: true };
+        case ActionTypes.CLOSE_DIALOG_CLICK:
+            return { ...state, dialogOpen: false };
         case ActionTypes.REFRESH_CLICK:
             return initialState;
         case ActionTypes.RECEIVED_RECORD:

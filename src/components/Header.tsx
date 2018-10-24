@@ -20,6 +20,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 // import PauseIcon from '@material-ui/icons/PauseCircleOutline';
 
+import { Header as HeaderProps } from '../store/State';
+
 const styles = (theme: Theme) => createStyles({
     root: {
         flexGrow: 1,
@@ -50,15 +52,7 @@ const styles = (theme: Theme) => createStyles({
     }
 });
 
-interface Props extends WithStyles<typeof styles> {
-    success: boolean;
-    loading: boolean;
-    steps: number;
-    errors: number;
-    title: string;
-    difficulty: string;
-    handleRefreshClick: () => any;
-}
+interface Props extends HeaderProps, WithStyles<typeof styles> { }
 
 interface MetricProps extends WithStyles<typeof styles> {
     icon: React.ReactElement<any>;
@@ -87,7 +81,7 @@ const CardHeaderActions = (props: Props) => {
             <IconButton style={{ padding: 5 }} >
                 <PlayIcon className={classes.metric} />
             </IconButton>
-            <IconButton style={{ padding: 5 }}>
+            <IconButton onClick={props.handleOpenDialogClick}   style={{ padding: 5 }}>
                 <HelpIcon className={classes.metric} />
             </IconButton>
             <IconButton onClick={props.handleRefreshClick} style={{ padding: 5 }}>

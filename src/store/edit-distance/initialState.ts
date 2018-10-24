@@ -1,4 +1,4 @@
-import { State, Modal, DialogScroll } from '../State';
+import { State, Dialog, DialogScroll, Header } from '../State';
 import { Difficulty } from '../State';
 
 import {
@@ -13,33 +13,42 @@ import {
 import {
     buttonClick,
     refresh,
-    closeModal
+    openDialog,
+    closeDialog,
 } from './actions';
 
 const stringOne = 'AGGCT';
 const stringTwo = 'GATC';
 
-const modal: Modal = {
-    open: true,
+const dialog: Dialog = {
+    dialogOpen: false,
     title: 'EDIT DISTANCE',
-    scroll: DialogScroll.Paper,
-    content: 'INTRODUCTION, MODAL',
+    dialogCroll: DialogScroll.Paper,
+    dialogContent: 'INTRODUCTION, MODAL',
     formula: 'formula',
     examples: ['example1', 'example2'],
-    handleClose: closeModal,
+    handleCloseDialogClick: closeDialog,
+    handleDialogOnClose: () => { console.log('close dialog'); },
 };
 
-const state: State = {
-    id: 0,
+const header: Header = {
     success: false,
     loading: false,
     steps: 0,
     errors: 0,
     title: 'Edit Distance',
     time: 0,
-
     difficulty: Difficulty.Easy,
-    modal: modal,
+    handleRefreshClick: refresh,
+    handleOpenDialogClick: openDialog,
+};
+
+const state: State = {
+    id: 0,
+
+    ...header,
+    ...dialog,
+
     currentPoint: startPoint,
 
     comparedTable: createComparedTable(stringOne, stringTwo),
@@ -50,7 +59,6 @@ const state: State = {
     buttonsStyles: createButtonsStyles(stringOne, stringTwo),
 
     handleButtonClick: buttonClick,
-    handleRefreshClick: refresh,
 };
 
 export default state;

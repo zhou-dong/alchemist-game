@@ -10,7 +10,7 @@ import Header from './Header';
 import Table from './Table';
 import Buttons from './Buttons';
 import { State } from '../store/State';
-import Modal from './Modal';
+import Dialog from './Dialog';
 
 const styles = (theme: Theme) => createStyles({});
 interface Props extends State, WithStyles<typeof styles> { }
@@ -24,7 +24,7 @@ const Algorithm = (props: Props) => (
         <CardContent>
             <Buttons array={props.buttons} styles={props.buttonsStyles} handleClick={props.handleButtonClick} />
         </CardContent>
-        <Modal  {...props.modal}/>
+        <Dialog  {...props}/>
     </Card>
 );
 
