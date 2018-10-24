@@ -9,26 +9,13 @@ import Divider from '@material-ui/core/Divider';
 import Header from './Header';
 import Table from './Table';
 import Buttons from './Buttons';
+import { State } from '../store/State';
+import Modal from './Modal';
 
 const styles = (theme: Theme) => createStyles({});
+interface Props extends State, WithStyles<typeof styles> { }
 
-interface Props extends WithStyles<typeof styles> {
-    id: number;
-    success: boolean;
-    loading: boolean;
-    steps: number;
-    errors: number;
-    title: string;
-    difficulty: string;
-    tableMatrix: Array<Array<number | string>>;
-    tableStyles: Array<Array<React.CSSProperties>>;
-    buttons: Array<number | string>;
-    buttonsStyles: Array<React.CSSProperties>;
-    handleButtonClick: (data: number | string) => any;
-    handleRefreshClick: () => any;
-}
-
-const A = (props: Props) => (
+const Algorithm = (props: Props) => (
     <Card>
         <Header {...props} />
         <Divider style={{ marginBottom: 5 }} />
@@ -37,7 +24,8 @@ const A = (props: Props) => (
         <CardContent>
             <Buttons array={props.buttons} styles={props.buttonsStyles} handleClick={props.handleButtonClick} />
         </CardContent>
+        <Modal  {...props.modal}/>
     </Card>
 );
 
-export default withStyles(styles)(A);
+export default withStyles(styles)(Algorithm);

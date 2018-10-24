@@ -1,14 +1,23 @@
+import { Action } from 'redux';
+
 export interface Point {
     readonly row: number;
     readonly col: number;
 }
 
+export enum DialogScroll {
+    Paper = 'paper',
+    Body = 'body',
+}
+
 export interface Modal {
-    show: boolean;
+    open: boolean;
     title: string;
-    introduction: string;
+    scroll: DialogScroll;
+    content: string;
     formula: string;
     examples: Array<string>;
+    handleClose: () => Action;
 }
 
 export enum Difficulty {
@@ -27,7 +36,7 @@ export interface State {
     readonly time: number;
 
     readonly difficulty: Difficulty;
-    readonly modal?: Modal;
+    readonly modal: Modal;
     readonly currentPoint: Point;
 
     readonly comparedTable: Array<Array<number | string>>;
@@ -35,7 +44,7 @@ export interface State {
     readonly tableStyles: Array<Array<React.CSSProperties>>;
     readonly buttons: Array<number | string>;
     readonly buttonsStyles: Array<React.CSSProperties>;
-    readonly handleButtonClick?: (data: number | string) => any;
-    readonly handleRefreshClick?: () => any;
-    readonly increaseSuccessRecord?: () => any;
+    readonly handleButtonClick: (data: number | string) => Action;
+    readonly handleRefreshClick: () => Action;
+    readonly increaseSuccessRecord?: () => Action;
 }
