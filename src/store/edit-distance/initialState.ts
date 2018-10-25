@@ -1,15 +1,7 @@
-import { Dialog, DialogScroll, Header, BasicInfo, State } from '../BasicState';
-import { Difficulty } from '../BasicState';
+import { Dialog, DialogScroll, Header, BasicInfo, State, Difficulty } from '../BasicState';
 import { buttonClick, refresh, openDialog, closeDialog } from './actions';
 import { description, formula, example, useCases } from './contents';
-import {
-    createTableMatrix,
-    createComparedTable,
-    createTableStyles,
-    createButtons,
-    createButtonsStyles,
-    startPoint,
-} from '../../algorithms/edit-distance';
+import * as helper from '../../algorithms/edit-distance';
 
 export const basicInfo: BasicInfo = {
     id: 1,
@@ -49,12 +41,12 @@ export const create = () => {
     return ({
         ...header,
         ...dialog,
-        currentPoint: startPoint,
-        comparedTable: createComparedTable(stringOne, stringTwo),
-        table: createTableMatrix(stringOne, stringTwo),
-        tableStyles: createTableStyles(stringOne, stringTwo),
-        buttons: createButtons(stringOne, stringTwo),
-        buttonsStyles: createButtonsStyles(stringOne, stringTwo),
+        currentPoint: helper.startPoint,
+        comparedTable: helper.createComparedTable(stringOne, stringTwo),
+        table: helper.createTableMatrix(stringOne, stringTwo),
+        tableStyles: helper.createTableStyles(stringOne, stringTwo),
+        buttons: helper.createButtons(stringOne, stringTwo),
+        buttonsStyles: helper.createButtonsStyles(stringOne, stringTwo),
         handleButtonClick: buttonClick,
     });
 };
