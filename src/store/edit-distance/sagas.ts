@@ -3,10 +3,10 @@ import axios from 'axios';
 import { action } from 'typesafe-actions';
 
 import { ActionTypes } from './types';
-import state from './initialState';
+import { basicInfo } from './initialState';
 
 function* getRecord() {
-    const response = yield call(axios.get, `/record/algorithm/${state.id}`);
+    const response = yield call(axios.get, `/record/algorithm/${basicInfo.id}`);
     yield put(action(ActionTypes.RECEIVED_RECORD, response.data));
 }
 

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import { State } from './State';
+import { State } from './BasicState';
 
 import { EditDistanceReducer, EditDistance, EditDistanceWatchRecord } from './edit-distance';
 

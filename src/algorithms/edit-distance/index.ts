@@ -1,5 +1,5 @@
 import createDPTable from './algorithm';
-import { Point } from '../../store/State';
+import { Point } from '../../store/BasicState';
 import { helperStyle } from '../../pages/withRoot';
 
 const startPoint: Point = {

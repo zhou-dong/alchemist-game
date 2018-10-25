@@ -9,7 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import Header from './Header';
 import Table from './Table';
 import Buttons from './Buttons';
-import { State } from '../store/State';
+import { State } from '../store/BasicState';
 import Dialog from './Dialog';
 
 const styles = (theme: Theme) => createStyles({});
@@ -19,12 +19,12 @@ const Algorithm = (props: Props) => (
     <Card>
         <Header {...props} />
         <Divider style={{ marginBottom: 5 }} />
-        <Table matrix={props.tableMatrix} styles={props.tableStyles} />
+        <Table {...props} />
         <Divider style={{ marginTop: 5 }} />
         <CardContent>
-            <Buttons array={props.buttons} styles={props.buttonsStyles} handleClick={props.handleButtonClick} />
+            <Buttons {...props} />
         </CardContent>
-        <Dialog  {...props}/>
+        <Dialog  {...props} />
     </Card>
 );
 

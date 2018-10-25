@@ -1,6 +1,7 @@
-import { State, Dialog, DialogScroll, Header } from '../State';
-import { Difficulty } from '../State';
-
+import { Dialog, DialogScroll, Header, BasicInfo, State } from '../BasicState';
+import { Difficulty } from '../BasicState';
+import { buttonClick, refresh, openDialog, closeDialog } from './actions';
+import { description, formula, example, useCases } from './contents';
 import {
     createTableMatrix,
     createComparedTable,
@@ -10,55 +11,52 @@ import {
     startPoint,
 } from '../../algorithms/edit-distance';
 
-import {
-    buttonClick,
-    refresh,
-    openDialog,
-    closeDialog,
-} from './actions';
-
-const stringOne = 'AGGCT';
-const stringTwo = 'GATC';
-
-const dialog: Dialog = {
-    dialogOpen: false,
+export const basicInfo: BasicInfo = {
+    id: 1,
     title: 'EDIT DISTANCE',
-    dialogCroll: DialogScroll.Paper,
-    dialogContent: 'INTRODUCTION, MODAL',
-    formula: 'formula',
-    examples: ['example1', 'example2'],
-    handleCloseDialogClick: closeDialog,
-    handleDialogOnClose: () => { console.log('close dialog'); },
 };
 
-const header: Header = {
+export const dialog: Dialog = {
+    ...basicInfo,
+    dialogOpen: false,
+    dialogCroll: DialogScroll.Paper,
+    description: description,
+    formula: formula,
+    example: example,
+    useCases: useCases,
+    handleCloseDialogClick: closeDialog,
+};
+
+export const header: Header = {
+    ...basicInfo,
     success: false,
     loading: false,
     steps: 0,
     errors: 0,
-    title: 'Edit Distance',
-    time: 0,
+    startTime: 0,
+    finishTime: 0,
     difficulty: Difficulty.Easy,
     handleRefreshClick: refresh,
     handleOpenDialogClick: openDialog,
 };
 
-const state: State = {
-    id: 0,
+const bases = 'ACGT';
+const random = (max: number) => Math.floor(Math.random() * max);
 
-    ...header,
-    ...dialog,
-
-    currentPoint: startPoint,
-
-    comparedTable: createComparedTable(stringOne, stringTwo),
-    tableMatrix: createTableMatrix(stringOne, stringTwo),
-    tableStyles: createTableStyles(stringOne, stringTwo),
-
-    buttons: createButtons(stringOne, stringTwo),
-    buttonsStyles: createButtonsStyles(stringOne, stringTwo),
-
-    handleButtonClick: buttonClick,
+export const create = () => {
+    const stringOne: string = Array(5).fill(bases.length).map(random).map(i => bases[i]).join('');
+    const stringTwo: string = Array(4).fill(bases.length).map(random).map(i => bases[i]).join('');
+    return ({
+        ...header,
+        ...dialog,
+        currentPoint: startPoint,
+        comparedTable: createComparedTable(stringOne, stringTwo),
+        table: createTableMatrix(stringOne, stringTwo),
+        tableStyles: createTableStyles(stringOne, stringTwo),
+        buttons: createButtons(stringOne, stringTwo),
+        buttonsStyles: createButtonsStyles(stringOne, stringTwo),
+        handleButtonClick: buttonClick,
+    });
 };
 
-export default state;
+export const state: State = create();

@@ -1,10 +1,10 @@
+import update from '../../algorithms/edit-distance/update';
 import { Reducer } from 'redux';
 import { ActionTypes } from './types';
-import { State } from '../State';
-import initialState from './initialState';
-import update from '../../algorithms/edit-distance/update';
+import { create } from './initialState';
+import { State } from '../BasicState';
 
-const reducer: Reducer<State> = (state = initialState, action) => {
+const reducer: Reducer<State> = (state: State = create(), action) => {
     switch (action.type) {
         case ActionTypes.BUTTON_CLICK:
             return update(Number(action.payload), state);
@@ -13,7 +13,7 @@ const reducer: Reducer<State> = (state = initialState, action) => {
         case ActionTypes.CLOSE_DIALOG_CLICK:
             return { ...state, dialogOpen: false };
         case ActionTypes.REFRESH_CLICK:
-            return initialState;
+            return create();
         case ActionTypes.RECEIVED_RECORD:
             return { ...state, loading: false, count: action.payload || 0 };
         default:

@@ -8,6 +8,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
+import { Buttons as ButtonsProps } from '../store/BasicState';
+
 const buttonsStyle = (theme: Theme) => createStyles({
     cell: {
         '&:hover': {
@@ -18,28 +20,28 @@ const buttonsStyle = (theme: Theme) => createStyles({
     },
 });
 
-interface Props extends WithStyles<typeof buttonsStyle> {
-    array: Array<number | string>;
-    styles: Array<React.CSSProperties>;
-    handleClick: (data: number | string) => any;
-}
+interface Props extends ButtonsProps, WithStyles<typeof buttonsStyle> { }
 
-const cell = (key: number, data: number | string, style: React.CSSProperties, { handleClick, classes }: Props) => (
-    <TableCell key={key} style={style} onClick={() => handleClick(data)} className={classes.cell}>
-        {data}
-    </TableCell>
-);
+const cell = (
+    key: number,
+    data: number | string,
+    style: React.CSSProperties,
+    { handleButtonClick, classes }: Props) => (
+        <TableCell key={key} style={style} onClick={() => handleButtonClick(data)} className={classes.cell}>
+            {data}
+        </TableCell>
+    );
 
 const Buttons = (props: Props) => {
-    const { array, styles } = props;
-    if (array.length !== styles.length) {
+    const { buttons, buttonsStyles } = props;
+    if (buttons.length !== buttonsStyles.length) {
         throw new Error('Alchemy Buttons errors: array-styles size dont match');
     }
     return (
         <Table>
             <TableBody>
                 <TableRow key={0}>
-                    {array.map((data, index) => cell(index, data, styles[index], { ...props }))}
+                    {buttons.map((data, index) => cell(index, data, buttonsStyles[index], { ...props }))}
                 </TableRow>
             </TableBody>
         </Table>

@@ -15,12 +15,12 @@ import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
 import CheckIcon from '@material-ui/icons/CheckCircleOutlined';
 import WrongIcon from '@material-ui/icons/ErrorOutline';
 import StepsIcon from '@material-ui/icons/PollOutlined';
-import TimerIcon from '@material-ui/icons/AccessTimeOutlined';
+// import TimerIcon from '@material-ui/icons/AccessTimeOutlined';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 // import PauseIcon from '@material-ui/icons/PauseCircleOutline';
 
-import { Header as HeaderProps } from '../store/State';
+import { Header as HeaderProps } from '../store/BasicState';
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -120,7 +120,7 @@ const GroupB = (props: Props) => {
         <div className={classes.groupB}>
             <Metric icon={<StepsIcon className={classes.metric} />} label="Steps" metric={steps} {...props} />
             <Metric icon={<WrongIcon className={classes.metric} />} label="Errors" metric={errors} {...props} />
-            <Metric icon={<TimerIcon className={classes.metric} />} label="Time" metric={'00:05'} {...props} />
+            {/* <Metric icon={<TimerIcon className={classes.metric} />} label="Time" metric={'00:05'} {...props} /> */}
         </div>
     );
 };

@@ -9,7 +9,7 @@ import { Route, RouteComponentProps } from 'react-router-dom';
 import { drawerWidth } from '../withRoot';
 
 import Welcome from './welcome';
-import { containers } from '../../store/index';
+import { containers } from '../../store';
 import Names from '../../algorithms/Names';
 
 const styles = (theme: Theme) => createStyles({

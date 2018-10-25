@@ -4,10 +4,7 @@ import { WithStyles } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 const styles = (theme: Theme) => createStyles({
@@ -34,7 +31,7 @@ const Section = (props: Props) => {
     return (
         <React.Fragment>
             <div className={classes.sectionDesktop}>
-                <IconButton color="inherit">
+                {/* <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                         <MailIcon />
                     </Badge>
@@ -43,7 +40,7 @@ const Section = (props: Props) => {
                     <Badge badgeContent={17} color="secondary">
                         <NotificationsIcon />
                     </Badge>
-                </IconButton>
+                </IconButton> */}
                 <IconButton
                     // aria-owns={isMenuOpen ? 'material-appbar' : null}
                     aria-haspopup="true"

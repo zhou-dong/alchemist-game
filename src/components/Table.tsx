@@ -7,12 +7,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-const tableStyles = (theme: Theme) => createStyles({});
+import { Table as TableProps } from '../store/BasicState';
 
-interface Props extends WithStyles<typeof tableStyles> {
-    matrix: Array<Array<number | string>>;
-    styles: Array<Array<React.CSSProperties>>;
-}
+const styles = (theme: Theme) => createStyles({});
+
+interface Props extends TableProps, WithStyles<typeof styles> {}
 
 const createCell = (key: number, data: number | string, style: React.CSSProperties) => (
     <TableCell padding="none" key={key} style={style}>
@@ -20,29 +19,29 @@ const createCell = (key: number, data: number | string, style: React.CSSProperti
     </TableCell>
 );
 
-const createRow = (key: number, array: Array<string | number>, styles: Array<React.CSSProperties>) => {
-    if (array.length !== styles.length) {
+const createRow = (key: number, array: Array<string | number>, rowStyles: Array<React.CSSProperties>) => {
+    if (array.length !== rowStyles.length) {
         throw new Error('Alchemy Display table errors: array-styles size dont match');
     }
     return (
         <TableRow key={key}>
-            {array.map((data, index) => createCell(index, data, styles[index]))}
+            {array.map((data, index) => createCell(index, data, rowStyles[index]))}
         </TableRow>
     );
 };
 
 const DisplayTable = (props: Props) => {
-    const { matrix, styles } = props;
-    if (matrix.length !== styles.length) {
+    const { table, tableStyles } = props;
+    if (table.length !== tableStyles.length) {
         throw new Error('Alchemy Display table errors: matrix-styles size dont match');
     }
     return (
         <Table>
             <TableBody>
-                {matrix.map((row, index) => createRow(index, row, styles[index]))}
+                {table.map((row, index) => createRow(index, row, tableStyles[index]))}
             </TableBody>
         </Table>
     );
 };
 
-export default withStyles(tableStyles)(DisplayTable);
+export default withStyles(styles)(DisplayTable);

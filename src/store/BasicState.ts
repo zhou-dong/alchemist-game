@@ -16,41 +16,48 @@ export enum DialogScroll {
     Body = 'body',
 }
 
-export interface Core {
-    // TODO
+export interface BasicInfo {
+    readonly id: number;
+    readonly title: string;
 }
 
-export interface Dialog {
+export interface Dialog extends BasicInfo {
     readonly dialogOpen: boolean;
-    readonly title: string;
     readonly dialogCroll: DialogScroll;
-    readonly dialogContent: string;
     readonly formula: string;
-    readonly examples: Array<string>;
-    readonly handleDialogOnClose: () => any;
+    readonly example: string;
+    readonly useCases: string;
+    readonly description: string;
+    readonly handleDialogOnClose?: () => any;
     readonly handleCloseDialogClick: () => Action;
 }
 
-export interface Header {
+export interface Header extends BasicInfo {
     readonly success: boolean;
     readonly loading: boolean;
     readonly steps: number;
     readonly errors: number;
     readonly title: string;
-    readonly time: number;
+    readonly startTime: number;
+    readonly finishTime: number;
     readonly difficulty: string;
     readonly handleRefreshClick: () => Action;
     readonly handleOpenDialogClick: () => Action;
 }
 
-export interface State extends Dialog, Header {
-    readonly id: number;
-    readonly currentPoint: Point;
-    readonly comparedTable: Array<Array<number | string>>;
-    readonly tableMatrix: Array<Array<number | string>>;
+export interface Table {
+    readonly table: Array<Array<number | string>>;
     readonly tableStyles: Array<Array<React.CSSProperties>>;
+}
+
+export interface Buttons {
     readonly buttons: Array<number | string>;
     readonly buttonsStyles: Array<React.CSSProperties>;
-    readonly handleButtonClick: (data: number | string) => Action; 
+    readonly handleButtonClick: (data: number | string) => Action;
+}
+
+export interface State extends Dialog, Header, Table, Buttons {
+    readonly currentPoint: Point;
+    readonly comparedTable: Array<Array<number | string>>;
     readonly increaseSuccessRecord?: () => Action;
 }

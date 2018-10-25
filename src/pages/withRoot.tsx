@@ -50,6 +50,17 @@ const theme = createMuiTheme({
       root: {
         height: 36,
       },
+    },
+    MuiDialog: {
+      paper: {
+        margin: 4,
+      },
+    },
+    MuiDialogContent: {
+      root: {
+        paddingLeft: 4,
+        paddingRight: 4,
+      }
     }
   },
 });

@@ -1,5 +1,5 @@
-import { State, Point } from '../../store/State';
-import { addHelperStyles } from './index';
+import { State, Point } from '../../store/BasicState';
+import { addHelperStyles } from '.';
 
 // import { watchRecord } from '../../store/edit-distance/sagas';
 
@@ -29,29 +29,32 @@ const update = (value: number, state: State): State => {
 
     const { currentPoint, errors, success } = state;
 
+    const startTime: number = (state.startTime) ? state.startTime : new Date().getTime();
+
     if (success) {
         return state;
     }
 
     const steps = state.steps + 1;
-    const tableMatrix = updateTable(state.tableMatrix, currentPoint, value);
+    const table = updateTable(state.table, currentPoint, value);
     const tableStyles = newTableStyles(state.tableStyles);
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
         tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
         addHelperStyles(tableStyles, currentPoint);
-        return { ...state, steps, errors: errors + 1, tableMatrix, tableStyles };
+        return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
     }
 
-    if (isLastCell(tableMatrix, currentPoint)) {
-        return { ...state, steps, tableMatrix, tableStyles, success: true };
+    if (isLastCell(table, currentPoint)) {
+        const finishTime = new Date().getTime();
+        return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
     }
 
-    const nextPoint = getNextPoint(tableMatrix, currentPoint);
-    tableMatrix[nextPoint.row][nextPoint.col] = '?';
+    const nextPoint = getNextPoint(table, currentPoint);
+    table[nextPoint.row][nextPoint.col] = '?';
     addHelperStyles(tableStyles, nextPoint);
 
-    return { ...state, steps, tableMatrix, tableStyles, currentPoint: nextPoint };
+    return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint };
 };
 
 export default update;
