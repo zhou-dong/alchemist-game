@@ -29,7 +29,7 @@ const Welcome = (props: Props) => {
             </Typography>
             <Typography align="center" color="primary" gutterBottom variant="h4">
                 <Link to="/algorithms" className={classNames(classes.startButton)}>
-                    <Button color="primary" size="large" variant="contained">
+                    <Button color="primary" size="large" variant="contained" style={{ color: 'white' }}>
                         GET STARTED
                     </Button>
                 </Link>
