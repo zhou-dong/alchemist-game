@@ -25,6 +25,14 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: any) => ({
     handleCloseDialogClick: () => {
         dispatch(state.handleCloseDialogClick());
     },
+
+    handleOpenFormulaClick: () => {
+        dispatch(state.handleOpenFormulaClick());
+    },
+
+    handleCloseFormulaClick: () => {
+        dispatch(state.handleCloseFormulaClick());
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

@@ -10,7 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { Dialog as DialogProps } from '../store/BasicState';
-import CodeBlock, { Languares } from './Code';
+import CodeBlock, { Languares } from './CodeBlock';
 
 const styles = (theme: Theme) => createStyles({});
 
@@ -22,8 +22,6 @@ const InfoModal = (props: Props) => (
         <DialogContent>
             <Typography>Description</Typography>
             <CodeBlock code={props.description} language={Languares.Markdown} />
-            <Typography>Formula</Typography>
-            <CodeBlock code={props.formula} language={Languares.Javascript} />
             <Typography>Example</Typography>
             <CodeBlock code={props.example} language={Languares.Markdown} />
             <Typography>Use Cases</Typography>

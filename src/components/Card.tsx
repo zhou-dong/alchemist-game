@@ -11,6 +11,7 @@ import Table from './Table';
 import Buttons from './Buttons';
 import { State } from '../store/BasicState';
 import Dialog from './Dialog';
+import Formula from './Formula';
 
 const styles = (theme: Theme) => createStyles({});
 interface Props extends State, WithStyles<typeof styles> { }
@@ -25,6 +26,7 @@ const Algorithm = (props: Props) => (
             <Buttons {...props} />
         </CardContent>
         <Dialog  {...props} />
+        <Formula {...props} />
     </Card>
 );
 

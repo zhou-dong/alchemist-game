@@ -21,10 +21,17 @@ export interface BasicInfo {
     readonly title: string;
 }
 
+export interface Formula extends BasicInfo {
+    readonly formulaOpen: boolean;
+    readonly formulaCroll: DialogScroll;
+    readonly formula: string;
+    readonly handleFormulaOnClose?: () => any;
+    readonly handleCloseFormulaClick: () => Action;
+}
+
 export interface Dialog extends BasicInfo {
     readonly dialogOpen: boolean;
     readonly dialogCroll: DialogScroll;
-    readonly formula: string;
     readonly example: string;
     readonly useCases: string;
     readonly description: string;
@@ -43,6 +50,7 @@ export interface Header extends BasicInfo {
     readonly difficulty: string;
     readonly handleRefreshClick: () => Action;
     readonly handleOpenDialogClick: () => Action;
+    readonly handleOpenFormulaClick: () => Action;
 }
 
 export interface Table {
@@ -56,7 +64,7 @@ export interface Buttons {
     readonly handleButtonClick: (data: number | string) => Action;
 }
 
-export interface State extends Dialog, Header, Table, Buttons {
+export interface State extends Dialog, Header, Table, Buttons, Formula {
     readonly currentPoint: Point;
     readonly comparedTable: Array<Array<number | string>>;
     readonly increaseSuccessRecord?: () => Action;

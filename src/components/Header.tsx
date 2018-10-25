@@ -9,12 +9,14 @@ import green from '@material-ui/core/colors/green';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/RefreshOutlined';
-import HelpIcon from '@material-ui/icons/HelpOutline';
+import DescriptionIcon from '@material-ui/icons/DescriptionOutlined';
 import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
 import CheckIcon from '@material-ui/icons/CheckCircleOutlined';
 import WrongIcon from '@material-ui/icons/ErrorOutline';
 import StepsIcon from '@material-ui/icons/PollOutlined';
+import CodeIcon from '@material-ui/icons/CodeRounded';
+import HelpIcon from '@material-ui/icons/HelpOutline';
 // import TimerIcon from '@material-ui/icons/AccessTimeOutlined';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -35,7 +37,6 @@ const styles = (theme: Theme) => createStyles({
     groupA: {
         padding: 0,
         paddingTop: 3,
-        maxWidth: 180,
     },
     groupB: {
         padding: 0,
@@ -78,14 +79,20 @@ const CardHeaderActions = (props: Props) => {
     const { classes } = props;
     return (
         <div>
+            <IconButton onClick={props.handleRefreshClick} style={{ padding: 5 }}>
+                <RefreshIcon className={classes.metric} />
+            </IconButton>
             <IconButton style={{ padding: 5 }} >
                 <PlayIcon className={classes.metric} />
             </IconButton>
-            <IconButton onClick={props.handleOpenDialogClick}   style={{ padding: 5 }}>
-                <HelpIcon className={classes.metric} />
+            <IconButton onClick={props.handleOpenDialogClick} style={{ padding: 5 }}>
+                <DescriptionIcon className={classes.metric} />
             </IconButton>
-            <IconButton onClick={props.handleRefreshClick} style={{ padding: 5 }}>
-                <RefreshIcon className={classes.metric} />
+            <IconButton onClick={props.handleOpenFormulaClick} style={{ padding: 5 }}>
+                <CodeIcon className={classes.metric} />
+            </IconButton>
+            <IconButton onClick={props.handleOpenFormulaClick} style={{ padding: 5 }}>
+                <HelpIcon className={classes.metric} />
             </IconButton>
         </div>
     );

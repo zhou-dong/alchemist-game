@@ -12,6 +12,10 @@ const reducer: Reducer<State> = (state: State = create(), action) => {
             return { ...state, dialogOpen: true };
         case ActionTypes.CLOSE_DIALOG_CLICK:
             return { ...state, dialogOpen: false };
+        case ActionTypes.OPEN_FORMULA_CLICK:
+            return { ...state, formulaOpen: true };
+        case ActionTypes.CLOSE_FORMULA_CLICK:
+            return { ...state, formulaOpen: false };
         case ActionTypes.REFRESH_CLICK:
             return create();
         case ActionTypes.RECEIVED_RECORD:
