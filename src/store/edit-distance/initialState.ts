@@ -8,7 +8,7 @@ export const basicInfo: BasicInfo = {
     title: 'EDIT DISTANCE',
 };
 
-export const dialog: Dialog = {
+const dialog: Dialog = {
     ...basicInfo,
     dialogOpen: false,
     dialogCroll: DialogScroll.Paper,
@@ -19,7 +19,7 @@ export const dialog: Dialog = {
     handleCloseDialogClick: closeDialog,
 };
 
-export const header: Header = {
+const header: Header = {
     ...basicInfo,
     success: false,
     loading: false,

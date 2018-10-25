@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { Dialog as DialogProps } from '../store/BasicState';
@@ -18,28 +17,20 @@ const styles = (theme: Theme) => createStyles({});
 interface Props extends DialogProps, WithStyles<typeof styles> { }
 
 const InfoModal = (props: Props) => (
-    <Dialog
-        open={props.dialogOpen}
-        onClose={props.handleDialogOnClose}
-        scroll={props.dialogCroll}
-    >
+    <Dialog open={props.dialogOpen} onClose={props.handleDialogOnClose} scroll={props.dialogCroll} >
         <DialogTitle>{props.title}</DialogTitle>
         <DialogContent>
-            <DialogContentText>
-                <Typography>Description</Typography>
-                <CodeBlock code={props.description} language={Languares.Markdown} />
-                <Typography>Formula</Typography>
-                <CodeBlock code={props.formula} language={Languares.Javascript}/>
-                <Typography>Example</Typography>
-                <CodeBlock code={props.example} language={Languares.Markdown}/>
-                <Typography>Use Cases</Typography>
-                <CodeBlock code={props.useCases} language={Languares.Markdown}/>
-            </DialogContentText>
+            <Typography>Description</Typography>
+            <CodeBlock code={props.description} language={Languares.Markdown} />
+            <Typography>Formula</Typography>
+            <CodeBlock code={props.formula} language={Languares.Javascript} />
+            <Typography>Example</Typography>
+            <CodeBlock code={props.example} language={Languares.Markdown} />
+            <Typography>Use Cases</Typography>
+            <CodeBlock code={props.useCases} language={Languares.Markdown} />
         </DialogContent>
         <DialogActions>
-            <Button onClick={props.handleCloseDialogClick} color="primary">
-                CLOSE
-                </Button>
+            <Button onClick={props.handleCloseDialogClick} color="primary">CLOSE</Button>
         </DialogActions>
     </Dialog>
 );
