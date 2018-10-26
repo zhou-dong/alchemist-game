@@ -6,12 +6,11 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-
 import { Table as TableProps } from '../store/BasicState';
 
 const styles = (theme: Theme) => createStyles({});
 
-interface Props extends TableProps, WithStyles<typeof styles> {}
+interface Props extends TableProps, WithStyles<typeof styles> { }
 
 const createCell = (key: number, data: number | string, style: React.CSSProperties) => (
     <TableCell padding="none" key={key} style={style}>

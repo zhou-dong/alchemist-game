@@ -12,6 +12,3 @@ export const openDialog = () => action(ActionTypes.OPEN_DIALOG_CLICK);
 
 export const closeFormula = () => action(ActionTypes.CLOSE_FORMULA_CLICK);
 export const openFormula = () => action(ActionTypes.OPEN_FORMULA_CLICK);
-
-export const closeHelper = () => action(ActionTypes.CLOSE_HELPER_CLICK);
-export const openHelper = () => action(ActionTypes.OPEN_HELPER_CLICK);

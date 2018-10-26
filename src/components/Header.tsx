@@ -16,11 +16,8 @@ import CheckIcon from '@material-ui/icons/CheckCircleOutlined';
 import WrongIcon from '@material-ui/icons/ErrorOutline';
 import StepsIcon from '@material-ui/icons/PollOutlined';
 import CodeIcon from '@material-ui/icons/CodeRounded';
-import HelpIcon from '@material-ui/icons/HelpOutline';
-// import TimerIcon from '@material-ui/icons/AccessTimeOutlined';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-// import PauseIcon from '@material-ui/icons/PauseCircleOutline';
 
 import { Header as HeaderProps } from '../store/BasicState';
 
@@ -90,9 +87,6 @@ const CardHeaderActions = (props: Props) => {
             </IconButton>
             <IconButton onClick={props.handleOpenFormulaClick} style={{ padding: 5 }}>
                 <CodeIcon className={classes.metric} />
-            </IconButton>
-            <IconButton onClick={props.handleOpenFormulaClick} style={{ padding: 5 }}>
-                <HelpIcon className={classes.metric} />
             </IconButton>
         </div>
     );
