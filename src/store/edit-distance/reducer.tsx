@@ -1,24 +1,25 @@
 import update from '../../algorithms/edit-distance/update';
 import { Reducer } from 'redux';
-import { ActionTypes } from './types';
+import * as Constants from './constants';
 import { create } from './initialState';
 import { State } from '../BasicState';
+import { Action } from './actions';
 
-const reducer: Reducer<State> = (state: State = create(), action) => {
+const reducer: Reducer<State> = (state: State = create(), action: Action) => {
     switch (action.type) {
-        case ActionTypes.BUTTON_CLICK:
+        case Constants.BUTTON_CLICK:
             return update(Number(action.payload), state);
-        case ActionTypes.OPEN_DIALOG_CLICK:
+        case Constants.OPEN_DIALOG_CLICK:
             return { ...state, dialogOpen: true };
-        case ActionTypes.CLOSE_DIALOG_CLICK:
+        case Constants.CLOSE_DIALOG_CLICK:
             return { ...state, dialogOpen: false };
-        case ActionTypes.OPEN_FORMULA_CLICK:
+        case Constants.OPEN_FORMULA_CLICK:
             return { ...state, formulaOpen: true };
-        case ActionTypes.CLOSE_FORMULA_CLICK:
+        case Constants.CLOSE_FORMULA_CLICK:
             return { ...state, formulaOpen: false };
-        case ActionTypes.REFRESH_CLICK:
+        case Constants.REFRESH_CLICK:
             return create();
-        case ActionTypes.RECEIVED_RECORD:
+        case Constants.RECEIVED_RECORD:
             return { ...state, loading: false, count: action.payload || 0 };
         default:
             return state;

@@ -3,35 +3,35 @@ import { connect } from 'react-redux';
 
 import { ApplicationState } from '..';
 import Card from '../../components/Card';
-import { state } from './initialState';
+import * as actions from './actions';
 
 const mapStateToProps = ({ editDistance }: ApplicationState) => ({
     ...editDistance,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch<actions.Action>) => ({
     handleButtonClick: (data: number | string) => {
-        dispatch(state.handleButtonClick(data));
+        dispatch(actions.buttonClick(data));
     },
 
     handleRefreshClick: () => {
-        dispatch(state.handleRefreshClick());
+        dispatch(actions.refresh());
     },
 
     handleOpenDialogClick: () => {
-        dispatch(state.handleOpenDialogClick());
+        dispatch(actions.openDialog());
     },
 
     handleCloseDialogClick: () => {
-        dispatch(state.handleCloseDialogClick());
+        dispatch(actions.closeDialog());
     },
 
     handleOpenFormulaClick: () => {
-        dispatch(state.handleOpenFormulaClick());
+        dispatch(actions.openFormula());
     },
 
     handleCloseFormulaClick: () => {
-        dispatch(state.handleCloseFormulaClick());
+        dispatch(actions.closeFormula());
     },
 });
 
