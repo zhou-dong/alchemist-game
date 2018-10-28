@@ -33,12 +33,15 @@
     "@types/react-highlight": "^0.12.1",
     "@types/react-redux": "^6.0.9",
     "@types/react-router-dom": "^4.3.1",
+    "@types/rimraf": "^2.0.2",
+    "chalk": "^2.4.1",
     "ejs": "^2.6.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "gh-pages": "^2.0.1",
     "react-test-renderer": "^16.6.0",
     "redux-devtools": "^3.4.1",
+    "rimraf": "^2.6.2",
     "typescript": "latest"
   },
   "scripts": {
