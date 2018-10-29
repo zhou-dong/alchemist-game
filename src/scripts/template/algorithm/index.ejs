@@ -7,6 +7,11 @@ const startPoint: Point = {
     col: 2,
 };
 
+interface TableSize {
+    rows: number;
+    cols: number;
+}
+
 const createTableMatrix = (stringOne: string, stringTwo: string): (number | string)[][] => {
     const rows = stringTwo.length + 2;
     const cols = stringOne.length + 2;

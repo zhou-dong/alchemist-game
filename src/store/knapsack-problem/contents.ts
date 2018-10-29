@@ -3,7 +3,7 @@ export const formula = `if (itemWeight > currentWeight) {
 } else {
   table[row][col] = Math.max(
     table[row - 1][col],
-    table[row - 1][currentWeight - itemWeight] + itemValue;
+    table[row - 1][currentWeight - itemWeight] + itemValue
   );
 }`;
 

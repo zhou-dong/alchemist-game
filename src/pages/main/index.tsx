@@ -47,6 +47,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.EditDistance />);
         case Names.Knapsack_Problem:
             return (<containers.KnapsackProblem />);
+        case Names.RodCutting_Problem:
+            return (<containers.RodCuttingProblem />);
         default:
             return (<div>{match.params.name}</div>);
     }
