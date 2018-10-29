@@ -6,7 +6,7 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 import { Route, RouteComponentProps } from 'react-router-dom';
 
-import { drawerWidth } from '../withRoot';
+// import { drawerWidth } from '../withRoot';
 
 import Welcome from './welcome';
 import { containers } from '../../store';
@@ -29,15 +29,15 @@ const styles = (theme: Theme) => createStyles({
             duration: theme.transitions.duration.leavingScreen,
         }),
     },
-    contentShift: {
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    contentShiftLeft: {
-        marginLeft: drawerWidth,
-    },
+    // contentShift: {
+    //     transition: theme.transitions.create('margin', {
+    //         easing: theme.transitions.easing.easeOut,
+    //         duration: theme.transitions.duration.enteringScreen,
+    //     }),
+    // },
+    // contentShiftLeft: {
+    //     marginLeft: drawerWidth,
+    // },
 });
 
 interface Props extends WithStyles<typeof styles> {
@@ -69,12 +69,12 @@ const Algorithms = ({ match }: PathParamsType1) => (
 );
 
 const Content = (props: Props) => {
-    const { classes, open } = props;
+    const { classes } = props;
     return (
         <main
             className={classNames(classes.content, {
-                [classes.contentShift]: open,
-                [classes.contentShiftLeft]: open,
+                // [classes.contentShift]: open,
+                // [classes.contentShiftLeft]: open,
             })}
         >
             <div className={classes.drawerHeader} />

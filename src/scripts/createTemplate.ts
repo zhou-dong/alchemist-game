@@ -9,16 +9,16 @@ import { mkdir, touch, cp, write } from './fileHelpers';
 const inputName = process.argv[2];
 if (!inputName) {
     throw 'Please type in algorithm name';
-};
+}
 
-const id = parseInt(process.argv[3]);
+const id = parseInt(process.argv[3], 10);
 if (!id) {
     throw 'Please type in algorithm id';
-};
+}
 
 const fileLoader = (basePath: string, fileName: string): string => {
     const filePath = path.join(basePath, fileName);
-    return ejs.fileLoader(filePath).toString()
+    return ejs.fileLoader(filePath).toString();
 };
 
 // hyphen-case
@@ -41,7 +41,7 @@ if (process.argv[4] === 'force') {
     const toBeRemovedStore = path.join(srcPath, 'store', hyphenCase);
     rimraf.sync(toBeRemovedStore, fs);
     console.log(chalk.bold.red(`removed directory: ${toBeRemovedStore}`));
-};
+}
 
 const findHyphens = (array: string[]): number[] => {
     return array.map((ch, index) => (ch === '-') ? index : -1).filter(i => i !== -1);

@@ -81,13 +81,21 @@ const Sidebar = (props: Props) => {
                 paper: classes.drawerPaper,
             }}
         >
-            <div className={classes.drawerHeader}>
-                <IconButton onClick={closeDrawer}>
-                    <ChevronLeftIcon />
-                </IconButton>
+            <div
+                tabIndex={0}
+                role="button"
+                onClick={closeDrawer}
+                onKeyDown={closeDrawer}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={closeDrawer}>
+                        <ChevronLeftIcon />
+                    </IconButton>
+                </div>
+                <Divider />
+                <List>{mailFolderListItems}</List>
+
             </div>
-            <Divider />
-            <List>{mailFolderListItems}</List>
         </Drawer>
     );
 };

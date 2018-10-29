@@ -10,12 +10,12 @@ var inputName = process.argv[2];
 if (!inputName) {
     throw 'Please type in algorithm name';
 }
-;
+
 var id = parseInt(process.argv[3]);
 if (!id) {
     throw 'Please type in algorithm id';
 }
-;
+
 var fileLoader = function (basePath, fileName) {
     var filePath = path.join(basePath, fileName);
     return ejs.fileLoader(filePath).toString();
