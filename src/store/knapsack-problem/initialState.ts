@@ -42,10 +42,10 @@ const header: Header = {
 };
 
 const random = (max: number) => Math.floor(Math.random() * max) + 1;
-const totalWeight = 7;
+const totalWeight = 6;
 
 export const create = () => {
-    const items: KnapSackItem[] = Array(5).fill(0).map(() => ({ weight: random(6), value: random(10) }));
+    const items: KnapSackItem[] = Array(4).fill(0).map(() => ({ weight: random(5), value: random(10) }));
     return ({
         ...header,
         ...dialog,

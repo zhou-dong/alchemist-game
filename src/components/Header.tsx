@@ -128,10 +128,10 @@ const GroupB = (props: Props) => {
 
 const Header = (props: Props) => (
     <Grid container className={props.classes.root} >
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={8} sm={8}>
             <GroupA {...props} />
         </Grid>
-        <Grid item xs={6} sm={6}>
+        <Grid item xs={4} sm={4}>
             <GroupB {...props} />
         </Grid>
     </Grid>
