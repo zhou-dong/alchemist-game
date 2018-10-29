@@ -7,6 +7,7 @@ import withRoot from './withRoot';
 import Header from './header';
 import Sidebar from './sidebar';
 import Main from './main';
+import Footer from './footer';
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -40,9 +41,10 @@ class Index extends React.Component<WithStyles<typeof styles>, State> {
     const { open } = this.state;
     return (
       <React.Fragment>
-          <Header open={open} openDrawer={this.handleOpen} />
-          <Sidebar open={open} closeDrawer={this.handleClose} />
-          <Main open={open} />
+        <Header open={open} openDrawer={this.handleOpen} />
+        <Sidebar open={open} closeDrawer={this.handleClose} />
+        <Main open={open} />
+        <Footer />
       </React.Fragment>
     );
   }
