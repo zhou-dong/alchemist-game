@@ -10,7 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/RefreshOutlined';
 import DescriptionIcon from '@material-ui/icons/DescriptionOutlined';
-import PlayIcon from '@material-ui/icons/PlayCircleOutline';
+// import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
 import CheckIcon from '@material-ui/icons/CheckCircleOutlined';
 import WrongIcon from '@material-ui/icons/ErrorOutline';
@@ -79,9 +79,9 @@ const CardHeaderActions = (props: Props) => {
             <IconButton onClick={props.handleRefreshClick} style={{ padding: 5 }}>
                 <RefreshIcon className={classes.metric} />
             </IconButton>
-            <IconButton style={{ padding: 5 }} >
+            {/* <IconButton style={{ padding: 5 }} >
                 <PlayIcon className={classes.metric} />
-            </IconButton>
+            </IconButton> */}
             <IconButton onClick={props.handleOpenDialogClick} style={{ padding: 5 }}>
                 <DescriptionIcon className={classes.metric} />
             </IconButton>

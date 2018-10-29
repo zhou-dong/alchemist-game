@@ -7,8 +7,8 @@ import { WithStyles } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import MenuButton from './MenuButton';
 import Title from './Title';
-import Search from './Search';
-import Section from './Section';
+// import Search from './Search';
+// import Section from './Section';
 
 import { drawerWidth } from '../withRoot';
 
@@ -65,9 +65,9 @@ const Header = (props: Props) => {
                 <Toolbar>
                     <MenuButton open={open} openDrawer={openDrawer} />
                     <Title />
-                    <Search />
+                    {/* <Search /> */}
                     <div className={classes.grow} />
-                    <Section />
+                    {/* <Section /> */}
                 </Toolbar>
             </AppBar>
         </div>
