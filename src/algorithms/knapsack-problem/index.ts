@@ -1,79 +1,90 @@
 import createDPTable from './algorithm';
 import { Point } from '../../store/BasicState';
-import { helperStyle } from '../../pages/withRoot';
+import { helperStyle, helperStyleSecondary, helperStyleThird } from '../../pages/withRoot';
+import { KnapSackItem } from './KnapsackItem';
 
-const startPoint: Point = {
-    row: 2,
-    col: 2,
+const startPoint: Point = { row: 2, col: 3 };
+
+interface TableSize {
+    rows: number;
+    cols: number;
+}
+
+const getTableSize = (items: KnapSackItem[], totalWeight: number): TableSize => {
+    const rows = items.length + 2;
+    const cols = totalWeight + 3;
+    return { rows, cols };
 };
 
-const createTableMatrix = (stringOne: string, stringTwo: string): (number | string)[][] => {
-    const rows = stringTwo.length + 2;
-    const cols = stringOne.length + 2;
+const createTableMatrix = (items: KnapSackItem[], totalWeight: number): (number | string)[][] => {
+    const { rows, cols } = getTableSize(items, totalWeight);
 
     const table = new Array(rows).fill('').map(() => new Array(cols).fill(''));
-
+    table[0][0] = 'V';
+    table[0][1] = 'W';
     for (let col = 2; col < cols; col++) {
-        table[0][col] = stringOne.charAt(col - 2);
-        table[1][col] = col - 1;
+        table[0][col] = col - 2;
+    }
+
+    for (let col = 0; col < cols; col++) {
+        table[1][col] = 0;
     }
 
     for (let row = 2; row < rows; row++) {
-        table[row][0] = stringTwo.charAt(row - 2);
-        table[row][1] = row - 1;
+        const item = items[row - 2];
+        table[row][0] = item.value;
+        table[row][1] = item.weight;
+        table[row][2] = 0;
     }
 
-    table[1][1] = 0;
-    table[2][2] = '?';
+    table[startPoint.row][startPoint.col] = '?';
     return table;
 };
 
-const createComparedTable = (stringOne: string, stringTwo: string): (number | string)[][] => {
-    const rows = stringTwo.length + 2;
-    const cols = stringOne.length + 2;
+const createComparedTable = (items: KnapSackItem[], totalWeight: number): (number | string)[][] => {
+    const { rows, cols } = getTableSize(items, totalWeight);
 
-    const dpTable = createDPTable(stringOne, stringTwo);
-    const tableMatrix = createTableMatrix(stringOne, stringTwo);
+    const dpTable = createDPTable(items, totalWeight);
+    const tableMatrix = createTableMatrix(items, totalWeight);
 
-    for (let row = 1; row < rows; row++) {
-        for (let col = 1; col < cols; col++) {
-            tableMatrix[row][col] = dpTable[row - 1][col - 1];
+    for (let row = 2; row < rows; row++) {
+        for (let col = 3; col < cols; col++) {
+            tableMatrix[row][col] = dpTable[row - 1][col - 2];
         }
     }
     return tableMatrix;
 };
 
 const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void => {
-    for (let col = 0; col < styles[0].length && col <= point.col; col++) {
-        styles[0][col] = helperStyle;
-    }
-
-    for (let row = 0; row < styles.length && row <= point.row; row++) {
-        styles[row][0] = helperStyle;
-    }
+    styles[1][3] = helperStyleSecondary;
+    styles[0][3] = helperStyleThird;
+    styles[2][0] = helperStyle;
+    styles[2][1] = helperStyleThird;
 };
 
-const createTableStyles = (stringOne: string, stringTwo: string): (React.CSSProperties)[][] => {
-    const rows = stringTwo.length + 2;
-    const cols = stringOne.length + 2;
+const createTableStyles = (items: KnapSackItem[], totalWeight: number): (React.CSSProperties)[][] => {
+    const { rows, cols } = getTableSize(items, totalWeight);
     const table = new Array(rows).fill(0).map(() => new Array(cols).fill({}));
     addHelperStyles(table, startPoint);
+    if (items[0].weight === 1) {
+        table[1][2] = helperStyle;
+    }
     return table;
 };
 
-const createButtons = (stringOne: string, stringTwo: string): number[] => {
-    const dpTable = createDPTable(stringOne, stringTwo);
+const createButtons = (items: KnapSackItem[], totalWeight: number): number[] => {
+    const dpTable = createDPTable(items, totalWeight);
     const set = new Set<number>();
     for (let row = 1; row < dpTable.length; row++) {
         for (let col = 1; col < dpTable[row].length; col++) {
             set.add(dpTable[row][col]);
         }
     }
-    return Array.from(set).sort();
+    return Array.from(set).sort(function (a: number, b: number) { return a - b; });
 };
 
-const createButtonsStyles = (stringOne: string, stringTwo: string): (React.CSSProperties)[] => {
-    return createButtons(stringOne, stringTwo).map(() => ({ color: 'back' }));
+const createButtonsStyles = (items: KnapSackItem[], totalWeight: number): (React.CSSProperties)[] => {
+    return createButtons(items, totalWeight).map(() => ({ color: 'back' }));
 };
 
 export {

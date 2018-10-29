@@ -16,16 +16,34 @@ const styles = (theme: Theme) => createStyles({});
 
 interface Props extends DialogProps, WithStyles<typeof styles> { }
 
+const description = (props: Props) => (
+    <React.Fragment>
+        <Typography>Description</Typography>
+        <CodeBlock code={props.description} language={Languares.Markdown} />
+    </React.Fragment>
+);
+
+const useCases = (props: Props) => (
+    <React.Fragment>
+        <Typography>Use Cases</Typography>
+        <CodeBlock code={props.useCases} language={Languares.Markdown} />
+    </React.Fragment>
+);
+
+const example = (props: Props) => (
+    <React.Fragment>
+        <Typography>Example</Typography>
+        <CodeBlock code={props.example} language={Languares.Markdown} />
+    </React.Fragment>
+);
+
 const InfoModal = (props: Props) => (
     <Dialog open={props.dialogOpen} onClose={props.handleDialogOnClose} scroll={props.dialogCroll} >
         <DialogTitle>{props.title}</DialogTitle>
         <DialogContent>
-            <Typography>Description</Typography>
-            <CodeBlock code={props.description} language={Languares.Markdown} />
-            <Typography>Example</Typography>
-            <CodeBlock code={props.example} language={Languares.Markdown} />
-            <Typography>Use Cases</Typography>
-            <CodeBlock code={props.useCases} language={Languares.Markdown} />
+            {props.description && description(props)}
+            {props.useCases && useCases(props)}
+            {props.example && example(props)}
         </DialogContent>
         <DialogActions>
             <Button onClick={props.handleCloseDialogClick} color="primary">CLOSE</Button>

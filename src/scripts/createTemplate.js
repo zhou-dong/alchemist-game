@@ -10,12 +10,10 @@ var inputName = process.argv[2];
 if (!inputName) {
     throw 'Please type in algorithm name';
 }
-
-var id = parseInt(process.argv[3]);
+var id = parseInt(process.argv[3], 10);
 if (!id) {
     throw 'Please type in algorithm id';
 }
-
 var fileLoader = function (basePath, fileName) {
     var filePath = path.join(basePath, fileName);
     return ejs.fileLoader(filePath).toString();
@@ -37,16 +35,20 @@ if (process.argv[4] === 'force') {
     rimraf.sync(toBeRemovedStore, fs);
     console.log(chalk_1["default"].bold.red("removed directory: " + toBeRemovedStore));
 }
-;
 var findHyphens = function (array) {
     return array.map(function (ch, index) { return (ch === '-') ? index : -1; }).filter(function (i) { return i !== -1; });
 };
-// PascalCase
-var getPascalCaseName = function () {
+var getCamelCaseName = function () {
     var array = inputName.split('');
     findHyphens(array).forEach(function (i) {
         array[i + 1] = array[i + 1].toUpperCase();
     });
+    return array.filter(function (ch) { return ch !== '-'; }).join('');
+};
+// PascalCase
+var getPascalCaseName = function () {
+    var array = getCamelCaseName().split('');
+    array[0] = array[0].toUpperCase();
     return array.filter(function (ch) { return ch !== '-'; }).join('');
 };
 // UPPER_SNAKE_CASE
@@ -93,10 +95,10 @@ var renderConstantsTs = function () {
     var render = ejs.render(ejsTemplate, { UPPER_SNAKE_CASE: getUpperSnakeCaseName() });
     fileHelpers_1.write(path.join(destStoreDir, 'constants.ts'), render);
 };
-var cpContainerTs = function () {
-    var source = path.join(templateStore, 'container.ejs');
-    var target = path.join(destStoreDir, 'container.ts');
-    fileHelpers_1.cp(source, target);
+var renderContainerTs = function () {
+    var ejsTemplate = fileLoader(templateStore, 'container.ejs');
+    var render = ejs.render(ejsTemplate, { camelCase: getCamelCaseName() });
+    fileHelpers_1.write(path.join(destStoreDir, 'container.ts'), render);
 };
 var cpContentsTs = function () {
     var source = path.join(templateStore, 'contents.ejs');
@@ -132,7 +134,7 @@ cpIndexTs();
 cpUpdateTs();
 cpActionsTs();
 renderConstantsTs();
-cpContainerTs();
+renderContainerTs();
 cpContentsTs();
 renderIndexTs();
 renderInitialStateTs();

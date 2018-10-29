@@ -1,6 +1,7 @@
 import { Dialog, DialogScroll, Header, BasicInfo, State, Difficulty, Formula } from '../BasicState';
 import { buttonClick, refresh, openDialog, closeDialog, closeFormula, openFormula } from './actions';
 import { description, formula, example, useCases } from './contents';
+import { KnapSackItem } from '../../algorithms/knapsack-problem/KnapsackItem';
 import * as helper from '../../algorithms/knapsack-problem';
 
 export const basicInfo: BasicInfo = {
@@ -40,22 +41,21 @@ const header: Header = {
     handleOpenFormulaClick: openFormula,
 };
 
-const bases = 'ACGT';
-const random = (max: number) => Math.floor(Math.random() * max);
+const random = (max: number) => Math.floor(Math.random() * max) + 1;
+const totalWeight = 7;
 
 export const create = () => {
-    const stringOne: string = Array(5).fill(bases.length).map(random).map(i => bases[i]).join('');
-    const stringTwo: string = Array(5).fill(bases.length).map(random).map(i => bases[i]).join('');
+    const items: KnapSackItem[] = Array(5).fill(0).map(() => ({ weight: random(6), value: random(10) }));
     return ({
         ...header,
         ...dialog,
         ...codeFormula,
         currentPoint: helper.startPoint,
-        comparedTable: helper.createComparedTable(stringOne, stringTwo),
-        table: helper.createTableMatrix(stringOne, stringTwo),
-        tableStyles: helper.createTableStyles(stringOne, stringTwo),
-        buttons: helper.createButtons(stringOne, stringTwo),
-        buttonsStyles: helper.createButtonsStyles(stringOne, stringTwo),
+        comparedTable: helper.createComparedTable(items, totalWeight),
+        table: helper.createTableMatrix(items, totalWeight),
+        tableStyles: helper.createTableStyles(items, totalWeight),
+        buttons: helper.createButtons(items, totalWeight),
+        buttonsStyles: helper.createButtonsStyles(items, totalWeight),
         handleButtonClick: buttonClick,
     });
 };

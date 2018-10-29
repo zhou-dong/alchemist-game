@@ -45,6 +45,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
     switch (match.params.name) {
         case Names.Edit_Distance:
             return (<containers.EditDistance />);
+        case Names.Knapsack_Problem:
+            return (<containers.KnapsackProblem />);
         default:
             return (<div>{match.params.name}</div>);
     }

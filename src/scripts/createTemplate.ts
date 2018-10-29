@@ -47,12 +47,18 @@ const findHyphens = (array: string[]): number[] => {
     return array.map((ch, index) => (ch === '-') ? index : -1).filter(i => i !== -1);
 };
 
-// PascalCase
-const getPascalCaseName = (): string => {
+const getCamelCaseName = (): string => {
     const array = inputName.split('');
     findHyphens(array).forEach(i => {
         array[i + 1] = array[i + 1].toUpperCase();
     });
+    return array.filter(ch => ch !== '-').join('');
+};
+
+// PascalCase
+const getPascalCaseName = (): string => {
+    const array = getCamelCaseName().split('');
+    array[0] = array[0].toUpperCase();
     return array.filter(ch => ch !== '-').join('');
 };
 
@@ -110,10 +116,10 @@ const renderConstantsTs = () => {
     write(path.join(destStoreDir, 'constants.ts'), render);
 };
 
-const cpContainerTs = () => {
-    const source = path.join(templateStore, 'container.ejs');
-    const target = path.join(destStoreDir, 'container.ts');
-    cp(source, target);
+const renderContainerTs = () => {
+    const ejsTemplate = fileLoader(templateStore, 'container.ejs');
+    const render = ejs.render(ejsTemplate, { camelCase: getCamelCaseName() });
+    write(path.join(destStoreDir, 'container.ts'), render);
 };
 
 const cpContentsTs = () => {
@@ -156,7 +162,7 @@ cpUpdateTs();
 
 cpActionsTs();
 renderConstantsTs();
-cpContainerTs();
+renderContainerTs();
 cpContentsTs();
 renderIndexTs();
 renderInitialStateTs();

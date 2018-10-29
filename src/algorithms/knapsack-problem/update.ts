@@ -1,5 +1,20 @@
 import { State, Point } from '../../store/BasicState';
-import { addHelperStyles } from '.';
+import { helperStyle, helperStyleSecondary, helperStyleThird } from '../../pages/withRoot';
+
+const addHelperStyles = (styles: React.CSSProperties[][], { row, col }: Point, state: State) => {
+    const { comparedTable } = state;
+    const itemWeight: number = Number(comparedTable[row][1]);
+    const currentWeight: number = col - 2;
+
+    styles[0][col] = helperStyleThird;
+    styles[row][1] = helperStyleThird;
+
+    styles[row - 1][col] = helperStyleSecondary;
+    styles[row][0] = helperStyle;
+    if (itemWeight <= currentWeight) {
+        styles[row - 1][col - itemWeight] = helperStyle;
+    }
+};
 
 const isMatch = ({ row, col }: Point, r: number, c: number) => (row === r && col === c);
 
@@ -21,10 +36,9 @@ const isLastCell = (table: (string | number)[][], point: Point): boolean => {
 };
 
 const getNextPoint = (table: (string | number)[][], { row, col }: Point): Point =>
-    (col === table[row].length - 1) ? { row: row + 1, col: 2 } : { row, col: col + 1 };
+    (col === table[row].length - 1) ? { row: row + 1, col: 3 } : { row, col: col + 1 };
 
 const update = (value: number, state: State): State => {
-
     const { currentPoint, errors, success } = state;
 
     const startTime: number = (state.startTime) ? state.startTime : new Date().getTime();
@@ -39,7 +53,7 @@ const update = (value: number, state: State): State => {
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
         tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
-        addHelperStyles(tableStyles, currentPoint);
+        addHelperStyles(tableStyles, currentPoint, state);
         return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
     }
 
@@ -50,7 +64,7 @@ const update = (value: number, state: State): State => {
 
     const nextPoint = getNextPoint(table, currentPoint);
     table[nextPoint.row][nextPoint.col] = '?';
-    addHelperStyles(tableStyles, nextPoint);
+    addHelperStyles(tableStyles, nextPoint, state);
 
     return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint };
 };

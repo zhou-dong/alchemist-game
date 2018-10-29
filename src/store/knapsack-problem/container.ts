@@ -5,8 +5,8 @@ import { ApplicationState } from '..';
 import Card from '../../components/Card';
 import * as actions from './actions';
 
-const mapStateToProps = ({ editDistance }: ApplicationState) => ({
-    ...editDistance,
+const mapStateToProps = ({ knapsackProblem }: ApplicationState) => ({
+    ...knapsackProblem,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<actions.Action>) => ({
