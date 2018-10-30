@@ -54,18 +54,18 @@ export interface Header extends BasicInfo {
 }
 
 export interface Table {
-    readonly table: Array<Array<number | string>>;
+    readonly table: Array<Array<any>>;
     readonly tableStyles: Array<Array<React.CSSProperties>>;
 }
 
 export interface Buttons {
-    readonly buttons: Array<number | string>;
+    readonly buttons: Array<number | string | boolean>;
     readonly buttonsStyles: Array<React.CSSProperties>;
-    readonly handleButtonClick: (data: number | string) => Action;
+    readonly handleButtonClick: (data: number | string | boolean) => Action;
 }
 
 export interface State extends Dialog, Header, Table, Buttons, Formula {
     readonly currentPoint: Point;
-    readonly comparedTable: Array<Array<number | string>>;
+    readonly comparedTable: Array<Array<any>>;
     readonly increaseSuccessRecord?: () => Action;
 }

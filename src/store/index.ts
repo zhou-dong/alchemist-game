@@ -5,23 +5,27 @@ import { State } from './BasicState';
 import { EditDistance, EditDistanceReducer, EditDistanceWatchRecord } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer, KnapsackProblemWatchRecord } from './knapsack-problem';
 import { RodCuttingProblem, RodCuttingProblemReducer, RodCuttingProblemWatchRecord } from './rod-cutting-problem';
+import { WildcardMatching, WildcardMatchingReducer, WildcardMatchingWatchRecord } from './wildcard-matching';
 
 export interface ApplicationState {
     editDistance: State;
     knapsackProblem: State;
     rodCuttingProblem: State;
+    wildcardMatching: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
     editDistance: EditDistanceReducer,
     knapsackProblem: KnapsackProblemReducer,
     rodCuttingProblem: RodCuttingProblemReducer,
+    wildcardMatching: WildcardMatchingReducer,
 });
 
 export const containers = {
     EditDistance,
     KnapsackProblem,
     RodCuttingProblem,
+    WildcardMatching,
 };
 
 export function* rootSaga() {
@@ -29,5 +33,6 @@ export function* rootSaga() {
         EditDistanceWatchRecord(),
         KnapsackProblemWatchRecord(),
         RodCuttingProblemWatchRecord(),
+        WildcardMatchingWatchRecord(),
     ]);
 }

@@ -22,13 +22,19 @@ const buttonsStyle = (theme: Theme) => createStyles({
 
 interface Props extends ButtonsProps, WithStyles<typeof buttonsStyle> { }
 
+const booleanToString = (data: boolean): string => data ? 'TRUE' : 'FALSE';
+
+const cellContent = (data: number | string | boolean) => {
+    return (typeof data === 'boolean') ? booleanToString(data) : data;
+};
+
 const cell = (
     key: number,
-    data: number | string,
+    data: number | string | boolean,
     style: React.CSSProperties,
     { handleButtonClick, classes }: Props) => (
         <TableCell key={key} style={style} onClick={() => handleButtonClick(data)} className={classes.cell}>
-            {data}
+            {cellContent(data)}
         </TableCell>
     );
 

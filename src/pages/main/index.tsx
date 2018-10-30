@@ -49,6 +49,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.KnapsackProblem />);
         case Names.RodCutting_Problem:
             return (<containers.RodCuttingProblem />);
+        case Names.Wildcard_Matching:
+            return (<containers.WildcardMatching />);
         default:
             return (<div>{match.params.name}</div>);
     }
