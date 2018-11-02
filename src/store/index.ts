@@ -7,6 +7,11 @@ import { KnapsackProblem, KnapsackProblemReducer, KnapsackProblemWatchRecord } f
 import { RodCuttingProblem, RodCuttingProblemReducer, RodCuttingProblemWatchRecord } from './rod-cutting-problem';
 import { WildcardMatching, WildcardMatchingReducer, WildcardMatchingWatchRecord } from './wildcard-matching';
 import { RegularExpression, RegularExpressionReducer, RegularExpressionWatchRecord } from './regular-expression';
+import { 
+    CoinChangeFewestNumber, 
+    CoinChangeFewestNumberReducer, 
+    CoinChangeFewestNumberWatchRecord 
+} from './coin-change-fewest-number';
 
 export interface ApplicationState {
     editDistance: State;
@@ -14,6 +19,7 @@ export interface ApplicationState {
     rodCuttingProblem: State;
     wildcardMatching: State;
     regularExpression: State;
+    coinChangeFewestNumber: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -22,6 +28,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     rodCuttingProblem: RodCuttingProblemReducer,
     wildcardMatching: WildcardMatchingReducer,
     regularExpression: RegularExpressionReducer,
+    coinChangeFewestNumber: CoinChangeFewestNumberReducer,
 });
 
 export const containers = {
@@ -30,6 +37,7 @@ export const containers = {
     RodCuttingProblem,
     WildcardMatching,
     RegularExpression,
+    CoinChangeFewestNumber,
 };
 
 export function* rootSaga() {
@@ -39,5 +47,6 @@ export function* rootSaga() {
         RodCuttingProblemWatchRecord(),
         WildcardMatchingWatchRecord(),
         RegularExpressionWatchRecord(),
+        CoinChangeFewestNumberWatchRecord(),
     ]);
 }

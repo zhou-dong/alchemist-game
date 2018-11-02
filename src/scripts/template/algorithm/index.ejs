@@ -29,7 +29,7 @@ const createTableMatrix = (stringOne: string, stringTwo: string): (number | stri
     }
 
     table[1][1] = 0;
-    table[2][2] = '?';
+    table[startPoint.row][startPoint.col] = '?';
     return table;
 };
 

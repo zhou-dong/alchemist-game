@@ -51,8 +51,10 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.RodCuttingProblem />);
         case Names.Wildcard_Matching:
             return (<containers.WildcardMatching />);
-        case Names.Regular_Expression_Matching:
+        case Names.Regular_Expression:
             return (<containers.RegularExpression />);
+        case Names.Coin_Change_Fewest_Number:
+            return (<containers.CoinChangeFewestNumber />);
         default:
             return (<div>{match.params.name}</div>);
     }
