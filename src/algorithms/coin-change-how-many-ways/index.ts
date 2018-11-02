@@ -1,6 +1,6 @@
 import createDPTable from './algorithm';
 import { Point } from '../../store/BasicState';
-import { helperStyle, helperStyleSecondary, helperStyleThird } from '../../pages/withRoot';
+import { helperStyle, helperStyleSecondary } from '../../pages/withRoot';
 
 const startPoint: Point = {
     row: 2,
@@ -25,14 +25,15 @@ const createTableMatrix = (coins: number[], total: number): (number | string)[][
 
     for (let col = 2; col < cols; col++) {
         table[0][col] = col - 1;
-        table[1][col] = - 1;
+        table[1][col] = 0;
     }
 
     for (let row = 2; row < rows; row++) {
         table[row][0] = coins[row - 2];
-        table[row][1] = 0;
+        table[row][1] = 1;
     }
 
+    table[1][1] = 0;
     table[startPoint.row][startPoint.col] = '?';
     return table;
 };
@@ -57,7 +58,7 @@ const addHelperStyles = (styles: React.CSSProperties[][], point: Point, table: (
     styles[point.row - 1][point.col] = helperStyleSecondary;
     const coin = Number(table[point.row][0]);
     if (point.col - coin - 1 >= 0) {
-        styles[point.row][point.col - coin] = helperStyleThird;
+        styles[point.row][point.col - coin] = helperStyleSecondary;
     }
 };
 
@@ -74,12 +75,7 @@ const createButtons = (coins: number[], total: number): number[] => {
     const set = new Set<number>();
     for (let row = 1; row < dpTable.length; row++) {
         for (let col = 1; col < dpTable[row].length; col++) {
-            const value = dpTable[row][col];
-            if (value === Infinity) {
-                set.add(-1);
-            } else {
-                set.add(value);
-            }
+            set.add(dpTable[row][col]);
         }
     }
     return Array.from(set).sort();

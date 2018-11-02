@@ -10,8 +10,13 @@ import { RegularExpression, RegularExpressionReducer, RegularExpressionWatchReco
 import { 
     CoinChangeFewestNumber, 
     CoinChangeFewestNumberReducer, 
-    CoinChangeFewestNumberWatchRecord 
+    CoinChangeFewestNumberWatchRecord
 } from './coin-change-fewest-number';
+import {
+    CoinChangeHowManyWays,
+    CoinChangeHowManyWaysReducer,
+    CoinChangeHowManyWaysWatchRecord
+} from './coin-change-how-many-ways';
 
 export interface ApplicationState {
     editDistance: State;
@@ -20,6 +25,7 @@ export interface ApplicationState {
     wildcardMatching: State;
     regularExpression: State;
     coinChangeFewestNumber: State;
+    coinChangeHowManyWays: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -29,6 +35,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     wildcardMatching: WildcardMatchingReducer,
     regularExpression: RegularExpressionReducer,
     coinChangeFewestNumber: CoinChangeFewestNumberReducer,
+    coinChangeHowManyWays: CoinChangeHowManyWaysReducer,
 });
 
 export const containers = {
@@ -38,6 +45,7 @@ export const containers = {
     WildcardMatching,
     RegularExpression,
     CoinChangeFewestNumber,
+    CoinChangeHowManyWays,
 };
 
 export function* rootSaga() {
@@ -48,5 +56,6 @@ export function* rootSaga() {
         WildcardMatchingWatchRecord(),
         RegularExpressionWatchRecord(),
         CoinChangeFewestNumberWatchRecord(),
+        CoinChangeHowManyWaysWatchRecord(),
     ]);
 }

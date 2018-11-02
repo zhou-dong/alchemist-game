@@ -55,6 +55,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.RegularExpression />);
         case Names.Coin_Change_Fewest_Number:
             return (<containers.CoinChangeFewestNumber />);
+        case Names.Coin_Change_How_Many_Ways:
+            return (<containers.CoinChangeHowManyWays />);
         default:
             return (<div>{match.params.name}</div>);
     }
