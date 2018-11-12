@@ -63,6 +63,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.LongestCommonSubsequence />);
         case Names.Longest_Common_Substring:
             return (<containers.LongestCommonSubstring />);
+        case Names.Subset_Sum_Problem:
+            return (<containers.SubsetSumProblem />);
         default:
             return (<div>{match.params.name}</div>);
     }

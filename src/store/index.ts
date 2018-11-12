@@ -8,6 +8,7 @@ import { RodCuttingProblem, RodCuttingProblemReducer, RodCuttingProblemWatchReco
 import { WildcardMatching, WildcardMatchingReducer, WildcardMatchingWatchRecord } from './wildcard-matching';
 import { RegularExpression, RegularExpressionReducer, RegularExpressionWatchRecord } from './regular-expression';
 import { IsSubsequence, IsSubsequenceReducer, IsSubsequenceWatchRecord } from './is-subsequence';
+import { SubsetSumProblem, SubsetSumProblemReducer, SubsetSumProblemWatchRecord } from './subset-sum-problem';
 import {
     CoinChangeFewestNumber,
     CoinChangeFewestNumberReducer,
@@ -40,6 +41,7 @@ export interface ApplicationState {
     isSubsequence: State;
     longestCommonSubsequence: State;
     longestCommonSubstring: State;
+    subsetSumProblem: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -53,6 +55,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     isSubsequence: IsSubsequenceReducer,
     longestCommonSubsequence: LongestCommonSubsequenceReducer,
     longestCommonSubstring: LongestCommonSubstringReducer,
+    subsetSumProblem: SubsetSumProblemReducer,
 });
 
 export const containers = {
@@ -66,6 +69,7 @@ export const containers = {
     IsSubsequence,
     LongestCommonSubsequence,
     LongestCommonSubstring,
+    SubsetSumProblem,
 };
 
 export function* rootSaga() {
@@ -80,5 +84,6 @@ export function* rootSaga() {
         IsSubsequenceWatchRecord(),
         LongestCommonSubsequenceWatchRecord(),
         LongestCommonSubstringWatchRecord(),
+        SubsetSumProblemWatchRecord(),
     ]);
 }
