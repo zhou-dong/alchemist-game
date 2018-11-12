@@ -7,6 +7,7 @@ import { KnapsackProblem, KnapsackProblemReducer, KnapsackProblemWatchRecord } f
 import { RodCuttingProblem, RodCuttingProblemReducer, RodCuttingProblemWatchRecord } from './rod-cutting-problem';
 import { WildcardMatching, WildcardMatchingReducer, WildcardMatchingWatchRecord } from './wildcard-matching';
 import { RegularExpression, RegularExpressionReducer, RegularExpressionWatchRecord } from './regular-expression';
+import { IsSubsequence, IsSubsequenceReducer, IsSubsequenceWatchRecord } from './is-subsequence';
 import { 
     CoinChangeFewestNumber, 
     CoinChangeFewestNumberReducer, 
@@ -26,6 +27,7 @@ export interface ApplicationState {
     regularExpression: State;
     coinChangeFewestNumber: State;
     coinChangeHowManyWays: State;
+    isSubsequence: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -36,6 +38,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     regularExpression: RegularExpressionReducer,
     coinChangeFewestNumber: CoinChangeFewestNumberReducer,
     coinChangeHowManyWays: CoinChangeHowManyWaysReducer,
+    isSubsequence: IsSubsequenceReducer,
 });
 
 export const containers = {
@@ -46,6 +49,7 @@ export const containers = {
     RegularExpression,
     CoinChangeFewestNumber,
     CoinChangeHowManyWays,
+    IsSubsequence,
 };
 
 export function* rootSaga() {
@@ -57,5 +61,6 @@ export function* rootSaga() {
         RegularExpressionWatchRecord(),
         CoinChangeFewestNumberWatchRecord(),
         CoinChangeHowManyWaysWatchRecord(),
+        IsSubsequenceWatchRecord(),
     ]);
 }
