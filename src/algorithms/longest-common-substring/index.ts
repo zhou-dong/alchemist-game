@@ -25,12 +25,12 @@ const createTableMatrix = (stringOne: string, stringTwo: string): (number | stri
 
     for (let col = 2; col < cols; col++) {
         table[0][col] = stringOne.charAt(col - 2);
-        table[1][col] = col - 1;
+        table[1][col] = 0;
     }
 
     for (let row = 2; row < rows; row++) {
         table[row][0] = stringTwo.charAt(row - 2);
-        table[row][1] = row - 1;
+        table[row][1] = 0;
     }
 
     table[1][1] = 0;

@@ -61,6 +61,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.IsSubsequence />);
         case Names.Longest_Common_Subsequence:
             return (<containers.LongestCommonSubsequence />);
+        case Names.Longest_Common_Substring:
+            return (<containers.LongestCommonSubstring />);
         default:
             return (<div>{match.params.name}</div>);
     }

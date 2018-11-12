@@ -23,6 +23,11 @@ import {
     LongestCommonSubsequenceReducer,
     LongestCommonSubsequenceWatchRecord
 } from './longest-common-subsequence';
+import {
+    LongestCommonSubstring,
+    LongestCommonSubstringReducer,
+    LongestCommonSubstringWatchRecord
+} from './longest-common-substring';
 
 export interface ApplicationState {
     editDistance: State;
@@ -34,6 +39,7 @@ export interface ApplicationState {
     coinChangeHowManyWays: State;
     isSubsequence: State;
     longestCommonSubsequence: State;
+    longestCommonSubstring: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -46,6 +52,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     coinChangeHowManyWays: CoinChangeHowManyWaysReducer,
     isSubsequence: IsSubsequenceReducer,
     longestCommonSubsequence: LongestCommonSubsequenceReducer,
+    longestCommonSubstring: LongestCommonSubstringReducer,
 });
 
 export const containers = {
@@ -58,6 +65,7 @@ export const containers = {
     CoinChangeHowManyWays,
     IsSubsequence,
     LongestCommonSubsequence,
+    LongestCommonSubstring,
 };
 
 export function* rootSaga() {
@@ -71,5 +79,6 @@ export function* rootSaga() {
         CoinChangeHowManyWaysWatchRecord(),
         IsSubsequenceWatchRecord(),
         LongestCommonSubsequenceWatchRecord(),
+        LongestCommonSubstringWatchRecord(),
     ]);
 }
