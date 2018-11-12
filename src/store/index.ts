@@ -8,9 +8,9 @@ import { RodCuttingProblem, RodCuttingProblemReducer, RodCuttingProblemWatchReco
 import { WildcardMatching, WildcardMatchingReducer, WildcardMatchingWatchRecord } from './wildcard-matching';
 import { RegularExpression, RegularExpressionReducer, RegularExpressionWatchRecord } from './regular-expression';
 import { IsSubsequence, IsSubsequenceReducer, IsSubsequenceWatchRecord } from './is-subsequence';
-import { 
-    CoinChangeFewestNumber, 
-    CoinChangeFewestNumberReducer, 
+import {
+    CoinChangeFewestNumber,
+    CoinChangeFewestNumberReducer,
     CoinChangeFewestNumberWatchRecord
 } from './coin-change-fewest-number';
 import {
@@ -18,6 +18,11 @@ import {
     CoinChangeHowManyWaysReducer,
     CoinChangeHowManyWaysWatchRecord
 } from './coin-change-how-many-ways';
+import {
+    LongestCommonSubsequence,
+    LongestCommonSubsequenceReducer,
+    LongestCommonSubsequenceWatchRecord
+} from './longest-common-subsequence';
 
 export interface ApplicationState {
     editDistance: State;
@@ -28,6 +33,7 @@ export interface ApplicationState {
     coinChangeFewestNumber: State;
     coinChangeHowManyWays: State;
     isSubsequence: State;
+    longestCommonSubsequence: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -39,6 +45,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     coinChangeFewestNumber: CoinChangeFewestNumberReducer,
     coinChangeHowManyWays: CoinChangeHowManyWaysReducer,
     isSubsequence: IsSubsequenceReducer,
+    longestCommonSubsequence: LongestCommonSubsequenceReducer,
 });
 
 export const containers = {
@@ -50,6 +57,7 @@ export const containers = {
     CoinChangeFewestNumber,
     CoinChangeHowManyWays,
     IsSubsequence,
+    LongestCommonSubsequence,
 };
 
 export function* rootSaga() {
@@ -62,5 +70,6 @@ export function* rootSaga() {
         CoinChangeFewestNumberWatchRecord(),
         CoinChangeHowManyWaysWatchRecord(),
         IsSubsequenceWatchRecord(),
+        LongestCommonSubsequenceWatchRecord(),
     ]);
 }
