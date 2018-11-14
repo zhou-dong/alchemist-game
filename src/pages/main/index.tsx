@@ -65,6 +65,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.LongestCommonSubstring />);
         case Names.Subset_Sum_Problem:
             return (<containers.SubsetSumProblem />);
+        case Names.Minimum_Jumps_To_End:
+            return (<containers.MinimumNumberOfJumpsToReachEnd />);
         default:
             return (<div>{match.params.name}</div>);
     }

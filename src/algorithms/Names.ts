@@ -10,6 +10,7 @@ enum Names {
     Longest_Common_Subsequence = 'longest-common-subsequence',
     Longest_Common_Substring = 'longest-common-substring',
     Subset_Sum_Problem = 'subset-sum-problem',
+    Minimum_Jumps_To_End = 'minimum-number-of-jumps-to-reach-end',
     EggDropping_Problem = 'egg-dropping-problem',
     Word_Break = 'word-break-one',
     Minimum_Path_Sum = 'minimum-path-sum',
@@ -19,7 +20,6 @@ enum Names {
     Palindrome_Partitioning = 'palindrome-partitioning',
     Longest_Increasing_Subsequence = 'longest-increasing-subsequence',
     Longest_Increasing_Subsequence_II = 'longest-increasing-subsequence-two',
-    Minimum_Number_Jumps_To_End = 'minimum-number-of-jumps-to-reach-end',
 }
 
 export default Names;

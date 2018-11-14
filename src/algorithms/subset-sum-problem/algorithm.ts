@@ -19,7 +19,6 @@ const createDPTable = (total: number, array: number[]): boolean[][] => {
         }
     }
 
-    console.log(table);
     return table;
 };
 

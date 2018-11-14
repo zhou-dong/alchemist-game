@@ -29,6 +29,11 @@ import {
     LongestCommonSubstringReducer,
     LongestCommonSubstringWatchRecord
 } from './longest-common-substring';
+import {
+    MinimumNumberOfJumpsToReachEnd,
+    MinimumNumberOfJumpsToReachEndReducer,
+    MinimumNumberOfJumpsToReachEndWatchRecord
+} from './minimum-number-of-jumps-to-reach-end';
 
 export interface ApplicationState {
     editDistance: State;
@@ -42,6 +47,7 @@ export interface ApplicationState {
     longestCommonSubsequence: State;
     longestCommonSubstring: State;
     subsetSumProblem: State;
+    minimumNumberOfJumpsToReachEnd: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -56,6 +62,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     longestCommonSubsequence: LongestCommonSubsequenceReducer,
     longestCommonSubstring: LongestCommonSubstringReducer,
     subsetSumProblem: SubsetSumProblemReducer,
+    minimumNumberOfJumpsToReachEnd: MinimumNumberOfJumpsToReachEndReducer,
 });
 
 export const containers = {
@@ -70,6 +77,7 @@ export const containers = {
     LongestCommonSubsequence,
     LongestCommonSubstring,
     SubsetSumProblem,
+    MinimumNumberOfJumpsToReachEnd,
 };
 
 export function* rootSaga() {
@@ -85,5 +93,6 @@ export function* rootSaga() {
         LongestCommonSubsequenceWatchRecord(),
         LongestCommonSubstringWatchRecord(),
         SubsetSumProblemWatchRecord(),
+        MinimumNumberOfJumpsToReachEndWatchRecord(),
     ]);
 }
