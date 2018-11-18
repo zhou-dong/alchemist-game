@@ -24,8 +24,6 @@ const createDPTable = (array: number[]): number[][] => {
         }
     }
 
-    console.log(table);
-
     return table;
 };
 

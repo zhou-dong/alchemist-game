@@ -11,6 +11,7 @@ enum Names {
     Longest_Common_Substring = 'longest-common-substring',
     Subset_Sum_Problem = 'subset-sum-problem',
     Minimum_Jumps_To_End = 'minimum-number-of-jumps-to-reach-end',
+    Longest_Increasing_Subsequence = 'longest-increasing-subsequence',
     EggDropping_Problem = 'egg-dropping-problem',
     Word_Break = 'word-break-one',
     Minimum_Path_Sum = 'minimum-path-sum',
@@ -18,8 +19,6 @@ enum Names {
     Longest_Palindromic_Subsequence = 'longest-palindromic-subsequence',
     Longest_Palindromic_Substring = 'longest-palindromic-substring',
     Palindrome_Partitioning = 'palindrome-partitioning',
-    Longest_Increasing_Subsequence = 'longest-increasing-subsequence',
-    Longest_Increasing_Subsequence_II = 'longest-increasing-subsequence-two',
 }
 
 export default Names;
