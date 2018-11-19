@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import { State } from './BasicState';
+import { State as WordBreakState } from './word-break/state';
 
 import { EditDistance, EditDistanceReducer, EditDistanceWatchRecord } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer, KnapsackProblemWatchRecord } from './knapsack-problem';
@@ -10,6 +11,7 @@ import { RegularExpression, RegularExpressionReducer, RegularExpressionWatchReco
 import { IsSubsequence, IsSubsequenceReducer, IsSubsequenceWatchRecord } from './is-subsequence';
 import { SubsetSumProblem, SubsetSumProblemReducer, SubsetSumProblemWatchRecord } from './subset-sum-problem';
 import { MinimumPathSum, MinimumPathSumReducer, MinimumPathSumWatchRecord } from './minimum-path-sum';
+import { WordBreak, WordBreakReducer, WordBreakWatchRecord } from './word-break';
 import {
     CoinChangeFewestNumber,
     CoinChangeFewestNumberReducer,
@@ -56,6 +58,7 @@ export interface ApplicationState {
     minimumNumberOfJumpsToReachEnd: State;
     longestIncreasingSubsequence: State;
     minimumPathSum: State;
+    wordBreak: WordBreakState;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -73,6 +76,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     minimumNumberOfJumpsToReachEnd: MinimumNumberOfJumpsToReachEndReducer,
     longestIncreasingSubsequence: LongestIncreasingSubsequenceReducer,
     minimumPathSum: MinimumPathSumReducer,
+    wordBreak: WordBreakReducer,
 });
 
 export const containers = {
@@ -90,6 +94,7 @@ export const containers = {
     MinimumNumberOfJumpsToReachEnd,
     LongestIncreasingSubsequence,
     MinimumPathSum,
+    WordBreak,
 };
 
 export function* rootSaga() {
@@ -108,5 +113,6 @@ export function* rootSaga() {
         MinimumNumberOfJumpsToReachEndWatchRecord(),
         LongestIncreasingSubsequenceWatchRecord(),
         MinimumPathSumWatchRecord(),
+        WordBreakWatchRecord(),
     ]);
 }
