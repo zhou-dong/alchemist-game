@@ -1,5 +1,6 @@
 enum Names {
     Edit_Distance = 'edit-distance',
+    Minimum_Path_Sum = 'minimum-path-sum',
     Knapsack_Problem = 'knapsack-problem',
     RodCutting_Problem = 'rod-cutting-problem',
     Wildcard_Matching = 'wildcard-matching',
@@ -14,7 +15,6 @@ enum Names {
     Longest_Increasing_Subsequence = 'longest-increasing-subsequence',
     EggDropping_Problem = 'egg-dropping-problem',
     Word_Break = 'word-break-one',
-    Minimum_Path_Sum = 'minimum-path-sum',
     Maximum_Subarray_Problem = 'maximum-subarray-problem',
     Longest_Palindromic_Subsequence = 'longest-palindromic-subsequence',
     Longest_Palindromic_Substring = 'longest-palindromic-substring',

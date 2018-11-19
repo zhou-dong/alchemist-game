@@ -69,6 +69,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.MinimumNumberOfJumpsToReachEnd />);
         case Names.Longest_Increasing_Subsequence:
             return (<containers.LongestIncreasingSubsequence />);
+        case Names.Minimum_Path_Sum:
+            return (<containers.MinimumPathSum />);
         default:
             return (<div>{match.params.name}</div>);
     }

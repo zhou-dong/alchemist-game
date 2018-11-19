@@ -9,6 +9,7 @@ import { WildcardMatching, WildcardMatchingReducer, WildcardMatchingWatchRecord 
 import { RegularExpression, RegularExpressionReducer, RegularExpressionWatchRecord } from './regular-expression';
 import { IsSubsequence, IsSubsequenceReducer, IsSubsequenceWatchRecord } from './is-subsequence';
 import { SubsetSumProblem, SubsetSumProblemReducer, SubsetSumProblemWatchRecord } from './subset-sum-problem';
+import { MinimumPathSum, MinimumPathSumReducer, MinimumPathSumWatchRecord } from './minimum-path-sum';
 import {
     CoinChangeFewestNumber,
     CoinChangeFewestNumberReducer,
@@ -54,6 +55,7 @@ export interface ApplicationState {
     subsetSumProblem: State;
     minimumNumberOfJumpsToReachEnd: State;
     longestIncreasingSubsequence: State;
+    minimumPathSum: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -70,6 +72,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     subsetSumProblem: SubsetSumProblemReducer,
     minimumNumberOfJumpsToReachEnd: MinimumNumberOfJumpsToReachEndReducer,
     longestIncreasingSubsequence: LongestIncreasingSubsequenceReducer,
+    minimumPathSum: MinimumPathSumReducer,
 });
 
 export const containers = {
@@ -86,6 +89,7 @@ export const containers = {
     SubsetSumProblem,
     MinimumNumberOfJumpsToReachEnd,
     LongestIncreasingSubsequence,
+    MinimumPathSum,
 };
 
 export function* rootSaga() {
@@ -103,5 +107,6 @@ export function* rootSaga() {
         SubsetSumProblemWatchRecord(),
         MinimumNumberOfJumpsToReachEndWatchRecord(),
         LongestIncreasingSubsequenceWatchRecord(),
+        MinimumPathSumWatchRecord(),
     ]);
 }
