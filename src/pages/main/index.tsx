@@ -73,6 +73,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.MinimumPathSum />);
         case Names.Word_Break:
             return (<containers.WordBreak />);
+        case Names.Maximum_Subarray_Problem:
+            return (<containers.MaximumSubarrayProblem />);
         default:
             return (<div>{match.params.name}</div>);
     }

@@ -13,6 +13,11 @@ import { SubsetSumProblem, SubsetSumProblemReducer, SubsetSumProblemWatchRecord 
 import { MinimumPathSum, MinimumPathSumReducer, MinimumPathSumWatchRecord } from './minimum-path-sum';
 import { WordBreak, WordBreakReducer, WordBreakWatchRecord } from './word-break';
 import {
+    MaximumSubarrayProblem,
+    MaximumSubarrayProblemReducer,
+    MaximumSubarrayProblemWatchRecord
+} from './maximum-subarray-problem';
+import {
     CoinChangeFewestNumber,
     CoinChangeFewestNumberReducer,
     CoinChangeFewestNumberWatchRecord
@@ -59,6 +64,7 @@ export interface ApplicationState {
     longestIncreasingSubsequence: State;
     minimumPathSum: State;
     wordBreak: WordBreakState;
+    maximumSubarrayProblem: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -77,6 +83,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     longestIncreasingSubsequence: LongestIncreasingSubsequenceReducer,
     minimumPathSum: MinimumPathSumReducer,
     wordBreak: WordBreakReducer,
+    maximumSubarrayProblem: MaximumSubarrayProblemReducer,
 });
 
 export const containers = {
@@ -95,6 +102,7 @@ export const containers = {
     LongestIncreasingSubsequence,
     MinimumPathSum,
     WordBreak,
+    MaximumSubarrayProblem,
 };
 
 export function* rootSaga() {
@@ -114,5 +122,6 @@ export function* rootSaga() {
         LongestIncreasingSubsequenceWatchRecord(),
         MinimumPathSumWatchRecord(),
         WordBreakWatchRecord(),
+        MaximumSubarrayProblemWatchRecord(),
     ]);
 }
