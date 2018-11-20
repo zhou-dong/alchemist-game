@@ -1,6 +1,6 @@
 import createDPTable from './algorithm';
 import { Point } from '../../store/BasicState';
-import { helperStyle, helperStyleSecondary } from '../../pages/withRoot';
+import { helperStyle } from '../../pages/withRoot';
 
 const startPoint: Point = { row: 2, col: 2 };
 
@@ -45,13 +45,6 @@ const createComparedTable = (eggs: number, floors: number): (number | string)[][
 };
 
 const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void => {
-    for (let col = 0; col < styles[0].length; col++) {
-        styles[0][col] = helperStyleSecondary;
-    }
-    for (let row = 0; row < styles.length; row++) {
-        styles[row][0] = helperStyleSecondary;
-        styles[row][1] = helperStyleSecondary;
-    }
     styles[point.row][point.col] = helperStyle;
 };
 

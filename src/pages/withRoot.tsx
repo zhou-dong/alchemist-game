@@ -8,7 +8,7 @@ import helperColor from '@material-ui/core/colors/orange';
 import helperColorSecondary from '@material-ui/core/colors/purple';
 import helperColorThird from '@material-ui/core/colors/pink';
 
-export const drawerWidth: number = 240;
+export const drawerWidth: number = 260;
 export const helperStyle: React.CSSProperties = { backgroundColor: helperColor[300] };
 export const helperStyleSecondary: React.CSSProperties = { backgroundColor: helperColorSecondary[300] };
 export const helperStyleThird: React.CSSProperties = { backgroundColor: helperColorThird[200] };
