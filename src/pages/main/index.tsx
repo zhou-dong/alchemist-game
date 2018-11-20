@@ -75,6 +75,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.WordBreak />);
         case Names.Maximum_Subarray_Problem:
             return (<containers.MaximumSubarrayProblem />);
+        case Names.EggDropping_Problem:
+            return (<containers.EggDroppingProblem />);
         default:
             return (<div>{match.params.name}</div>);
     }
