@@ -4,6 +4,7 @@ import { State } from './BasicState';
 import { State as WordBreakState } from './word-break/state';
 import { State as LongestPalindromicSubstringState } from './longest-palindromic-substring/state';
 import { State as LongestPalindromicSubsequenceState } from './longest-palindromic-subsequence/state';
+import { State as PalindromePartitioningState } from './palindrome-partitioning/state';
 
 import { EditDistance, EditDistanceReducer, EditDistanceWatchRecord } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer, KnapsackProblemWatchRecord } from './knapsack-problem';
@@ -15,6 +16,9 @@ import { SubsetSumProblem, SubsetSumProblemReducer, SubsetSumProblemWatchRecord 
 import { MinimumPathSum, MinimumPathSumReducer, MinimumPathSumWatchRecord } from './minimum-path-sum';
 import { WordBreak, WordBreakReducer, WordBreakWatchRecord } from './word-break';
 import { EggDroppingProblem, EggDroppingProblemReducer, EggDroppingProblemWatchRecord } from './egg-dropping-problem';
+import {
+    PalindromePartitioning, PalindromePartitioningReducer, PalindromePartitioningWatchRecord
+} from './palindrome-partitioning';
 import {
     MaximumSubarrayProblem, MaximumSubarrayProblemReducer, MaximumSubarrayProblemWatchRecord
 } from './maximum-subarray-problem';
@@ -62,6 +66,7 @@ export interface ApplicationState {
     eggDroppingProblem: State;
     longestPalindromicSubstring: LongestPalindromicSubstringState;
     longestPalindromicSubsequence: LongestPalindromicSubsequenceState;
+    palindromePartitioning: PalindromePartitioningState;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -84,6 +89,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     eggDroppingProblem: EggDroppingProblemReducer,
     longestPalindromicSubstring: LongestPalindromicSubstringReducer,
     longestPalindromicSubsequence: LongestPalindromicSubsequenceReducer,
+    palindromePartitioning: PalindromePartitioningReducer,
 });
 
 export const containers = {
@@ -106,6 +112,7 @@ export const containers = {
     EggDroppingProblem,
     LongestPalindromicSubstring,
     LongestPalindromicSubsequence,
+    PalindromePartitioning,
 };
 
 export function* rootSaga() {
@@ -129,5 +136,6 @@ export function* rootSaga() {
         EggDroppingProblemWatchRecord(),
         LongestPalindromicSubstringWatchRecord(),
         LongestPalindromicSubsequenceWatchRecord(),
+        PalindromePartitioningWatchRecord(),
     ]);
 }

@@ -79,6 +79,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.LongestPalindromicSubstring />);
         case Names.Longest_Palindromic_Subsequence:
             return (<containers.LongestPalindromicSubsequence />);
+        case Names.Palindrome_Partitioning:
+            return (<containers.PalindromePartitioning />);
         default:
             return (<div>{match.params.name}</div>);
     }
