@@ -16,8 +16,8 @@ enum Names {
     Longest_Increasing_Subsequence = 'longest-increasing-subsequence',
     Maximum_Subarray_Problem = 'maximum-subarray-problem',
     EggDropping_Problem = 'egg-dropping-problem',
-    Longest_Palindromic_Subsequence = 'longest-palindromic-subsequence',
     Longest_Palindromic_Substring = 'longest-palindromic-substring',
+    Longest_Palindromic_Subsequence = 'longest-palindromic-subsequence',
     Palindrome_Partitioning = 'palindrome-partitioning',
 }
 

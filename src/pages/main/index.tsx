@@ -77,6 +77,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.MaximumSubarrayProblem />);
         case Names.EggDropping_Problem:
             return (<containers.EggDroppingProblem />);
+        case Names.Longest_Palindromic_Substring:
+            return (<containers.LongestPalindromicSubstring />);
         default:
             return (<div>{match.params.name}</div>);
     }

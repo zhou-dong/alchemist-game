@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import { State } from './BasicState';
 import { State as WordBreakState } from './word-break/state';
+import { State as LongestPalindromicSubstringState } from './longest-palindromic-substring/state';
 
 import { EditDistance, EditDistanceReducer, EditDistanceWatchRecord } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer, KnapsackProblemWatchRecord } from './knapsack-problem';
@@ -14,41 +15,29 @@ import { MinimumPathSum, MinimumPathSumReducer, MinimumPathSumWatchRecord } from
 import { WordBreak, WordBreakReducer, WordBreakWatchRecord } from './word-break';
 import { EggDroppingProblem, EggDroppingProblemReducer, EggDroppingProblemWatchRecord } from './egg-dropping-problem';
 import {
-    MaximumSubarrayProblem,
-    MaximumSubarrayProblemReducer,
-    MaximumSubarrayProblemWatchRecord
+    MaximumSubarrayProblem, MaximumSubarrayProblemReducer, MaximumSubarrayProblemWatchRecord
 } from './maximum-subarray-problem';
 import {
-    CoinChangeFewestNumber,
-    CoinChangeFewestNumberReducer,
-    CoinChangeFewestNumberWatchRecord
+    CoinChangeFewestNumber, CoinChangeFewestNumberReducer, CoinChangeFewestNumberWatchRecord
 } from './coin-change-fewest-number';
 import {
-    CoinChangeHowManyWays,
-    CoinChangeHowManyWaysReducer,
-    CoinChangeHowManyWaysWatchRecord
+    CoinChangeHowManyWays, CoinChangeHowManyWaysReducer, CoinChangeHowManyWaysWatchRecord
 } from './coin-change-how-many-ways';
 import {
-    LongestCommonSubsequence,
-    LongestCommonSubsequenceReducer,
-    LongestCommonSubsequenceWatchRecord
+    LongestCommonSubsequence, LongestCommonSubsequenceReducer, LongestCommonSubsequenceWatchRecord
 } from './longest-common-subsequence';
 import {
-    LongestCommonSubstring,
-    LongestCommonSubstringReducer,
-    LongestCommonSubstringWatchRecord
+    LongestCommonSubstring, LongestCommonSubstringReducer, LongestCommonSubstringWatchRecord
 } from './longest-common-substring';
 import {
-    MinimumNumberOfJumpsToReachEnd,
-    MinimumNumberOfJumpsToReachEndReducer,
-    MinimumNumberOfJumpsToReachEndWatchRecord
+    MinimumNumberOfJumpsToReachEnd, MinimumNumberOfJumpsToReachEndReducer, MinimumNumberOfJumpsToReachEndWatchRecord
 } from './minimum-number-of-jumps-to-reach-end';
 import {
-    LongestIncreasingSubsequence,
-    LongestIncreasingSubsequenceReducer,
-    LongestIncreasingSubsequenceWatchRecord
+    LongestIncreasingSubsequence, LongestIncreasingSubsequenceReducer, LongestIncreasingSubsequenceWatchRecord
 } from './longest-increasing-subsequence';
-
+import {
+    LongestPalindromicSubstring, LongestPalindromicSubstringReducer, LongestPalindromicSubstringWatchRecord
+} from './longest-palindromic-substring';
 export interface ApplicationState {
     editDistance: State;
     knapsackProblem: State;
@@ -67,6 +56,7 @@ export interface ApplicationState {
     wordBreak: WordBreakState;
     maximumSubarrayProblem: State;
     eggDroppingProblem: State;
+    longestPalindromicSubstring: LongestPalindromicSubstringState;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -87,6 +77,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     wordBreak: WordBreakReducer,
     maximumSubarrayProblem: MaximumSubarrayProblemReducer,
     eggDroppingProblem: EggDroppingProblemReducer,
+    longestPalindromicSubstring: LongestPalindromicSubstringReducer,
 });
 
 export const containers = {
@@ -107,6 +98,7 @@ export const containers = {
     WordBreak,
     MaximumSubarrayProblem,
     EggDroppingProblem,
+    LongestPalindromicSubstring,
 };
 
 export function* rootSaga() {
@@ -128,5 +120,6 @@ export function* rootSaga() {
         WordBreakWatchRecord(),
         MaximumSubarrayProblemWatchRecord(),
         EggDroppingProblemWatchRecord(),
+        LongestPalindromicSubstringWatchRecord(),
     ]);
 }
