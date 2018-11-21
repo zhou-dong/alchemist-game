@@ -1,4 +1,4 @@
-import { createDPTable, createMarksTable } from './algorithm';
+import createDPTable from './algorithm';
 import { Point } from '../../store/BasicState';
 import { helperStyle, helperStyleSecondary, helperStyleThird } from '../../pages/withRoot';
 
@@ -18,7 +18,7 @@ const getTableSize = (sequence: string): TableSize => {
     return { rows, cols };
 };
 
-const createTableMatrix = (sequence: string): (boolean | string)[][] => {
+const createTableMatrix = (sequence: string): (number | string)[][] => {
     const { rows, cols } = getTableSize(sequence);
 
     const table = new Array(rows).fill('').map(() => new Array(cols).fill(''));
@@ -33,25 +33,11 @@ const createTableMatrix = (sequence: string): (boolean | string)[][] => {
         table[row][1] = sequence.charAt(row - 2);
     }
 
-    table[0][0] = '1';
     table[startPoint.row][startPoint.col] = '?';
     return table;
 };
 
-const createComparedMarksTable = (sequence: string): number[][] => {
-    const dpTable = createDPTable(sequence);
-    const marksTable = createMarksTable(sequence, dpTable);
-    const { rows, cols } = getTableSize(sequence);
-    const table: number[][] = Array(rows).fill(1).map(() => Array(cols).fill(1));
-    for (let row = 2; row < rows; row++) {
-        for (let col = 2; col < cols; col++) {
-            table[row][col] = marksTable[row - 2][col - 2];
-        }
-    }
-    return table;
-};
-
-const createComparedTable = (sequence: string): (boolean | string)[][] => {
+const createComparedTable = (sequence: string): (number | string)[][] => {
     const { rows, cols } = getTableSize(sequence);
 
     const dpTable = createDPTable(sequence);
@@ -70,8 +56,7 @@ const addHelperStyles = (
     styles: React.CSSProperties[][],
     { row, col }: Point,
     nextLength: number,
-    table: (string | boolean)[][]
-): void => {
+    table: (string | number)[][]): void => {
     for (let i = row; i <= col; i++) {
         styles[0][i] = helperStyleSecondary;
         styles[1][i] = helperStyle;
@@ -80,13 +65,16 @@ const addHelperStyles = (
         styles[i][1] = helperStyle;
     }
 
-    styles[0][0] = helperStyle;
+    if (nextLength > 2) {
+        if (table[1][row] === table[1][row + nextLength - 1]) {
+            styles[1][col] = helperStyleThird;
+            styles[1][row] = helperStyleThird;
 
-    if (nextLength > 2 && table[1][row] === table[1][row + nextLength - 1]) {
-        styles[1][col] = helperStyleThird;
-        styles[1][row] = helperStyleThird;
-
-        styles[row + 1][row + nextLength - 2] = helperStyleThird;
+            styles[row + 1][row + nextLength - 2] = helperStyleThird;
+        } else {
+            styles[row][row + nextLength - 2] = helperStyleThird;
+            styles[row + 1][row + nextLength - 1] = helperStyleThird;
+        }
     }
 
     if (nextLength === 2 && table[1][row] === table[1][row + nextLength - 1]) {
@@ -105,9 +93,21 @@ const createTableStyles = (sequence: string): (React.CSSProperties)[][] => {
     return table;
 };
 
-const createButtons = (): boolean[] => [true, false];
+const createButtons = (sequence: string): number[] => {
+    const dpTable = createDPTable(sequence);
+    const set = new Set<number>();
+    for (let row = 0; row < dpTable.length; row++) {
+        for (let col = 0; col < dpTable[row].length; col++) {
+            set.add(dpTable[row][col]);
+        }
+    }
+    set.delete(0);
+    return Array.from(set).sort();
+};
 
-const createButtonsStyles = (): (React.CSSProperties)[] => createButtons().map(() => ({ color: 'back' }));
+const createButtonsStyles = (sequence: string): (React.CSSProperties)[] => {
+    return createButtons(sequence).map(() => ({ color: 'back' }));
+};
 
 export {
     addHelperStyles,
@@ -117,5 +117,4 @@ export {
     createButtons,
     createButtonsStyles,
     startPoint,
-    createComparedMarksTable,
 };

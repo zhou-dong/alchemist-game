@@ -3,6 +3,7 @@ import { all } from 'redux-saga/effects';
 import { State } from './BasicState';
 import { State as WordBreakState } from './word-break/state';
 import { State as LongestPalindromicSubstringState } from './longest-palindromic-substring/state';
+import { State as LongestPalindromicSubsequenceState } from './longest-palindromic-subsequence/state';
 
 import { EditDistance, EditDistanceReducer, EditDistanceWatchRecord } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer, KnapsackProblemWatchRecord } from './knapsack-problem';
@@ -38,6 +39,9 @@ import {
 import {
     LongestPalindromicSubstring, LongestPalindromicSubstringReducer, LongestPalindromicSubstringWatchRecord
 } from './longest-palindromic-substring';
+import {
+    LongestPalindromicSubsequence, LongestPalindromicSubsequenceReducer, LongestPalindromicSubsequenceWatchRecord
+} from './longest-palindromic-subsequence';
 export interface ApplicationState {
     editDistance: State;
     knapsackProblem: State;
@@ -57,6 +61,7 @@ export interface ApplicationState {
     maximumSubarrayProblem: State;
     eggDroppingProblem: State;
     longestPalindromicSubstring: LongestPalindromicSubstringState;
+    longestPalindromicSubsequence: LongestPalindromicSubsequenceState;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -78,6 +83,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     maximumSubarrayProblem: MaximumSubarrayProblemReducer,
     eggDroppingProblem: EggDroppingProblemReducer,
     longestPalindromicSubstring: LongestPalindromicSubstringReducer,
+    longestPalindromicSubsequence: LongestPalindromicSubsequenceReducer,
 });
 
 export const containers = {
@@ -99,6 +105,7 @@ export const containers = {
     MaximumSubarrayProblem,
     EggDroppingProblem,
     LongestPalindromicSubstring,
+    LongestPalindromicSubsequence,
 };
 
 export function* rootSaga() {
@@ -121,5 +128,6 @@ export function* rootSaga() {
         MaximumSubarrayProblemWatchRecord(),
         EggDroppingProblemWatchRecord(),
         LongestPalindromicSubstringWatchRecord(),
+        LongestPalindromicSubsequenceWatchRecord(),
     ]);
 }

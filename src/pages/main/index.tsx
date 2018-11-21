@@ -37,9 +37,7 @@ interface PathParamsType {
     name: string;
 }
 
-interface PathParamsType1 extends RouteComponentProps<PathParamsType> {
-
-}
+interface PathParamsType1 extends RouteComponentProps<PathParamsType> { }
 
 const Algorithm = ({ match }: PathParamsType1) => {
     switch (match.params.name) {
@@ -79,6 +77,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.EggDroppingProblem />);
         case Names.Longest_Palindromic_Substring:
             return (<containers.LongestPalindromicSubstring />);
+        case Names.Longest_Palindromic_Subsequence:
+            return (<containers.LongestPalindromicSubsequence />);
         default:
             return (<div>{match.params.name}</div>);
     }
