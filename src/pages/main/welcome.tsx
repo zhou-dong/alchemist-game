@@ -1,11 +1,8 @@
 import * as React from 'react';
-import classNames from 'classnames';
-import Typography from '@material-ui/core/Typography';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import { WithStyles } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { containers } from '../../store';
 
 const styles = (theme: Theme) => createStyles({
     startButton: {
@@ -17,23 +14,18 @@ interface Props extends WithStyles<typeof styles> {
 
 }
 
+const getRandomAlgorithm = () => {
+    const keys: string[] = Object.keys(containers);
+    const index = Math.floor(Math.random() * keys.length);
+    const key = keys[index];
+    return containers[key];
+};
+
 const Welcome = (props: Props) => {
-    const { classes } = props;
+    const Algorithm = getRandomAlgorithm();
     return (
         <React.Fragment>
-            <Typography align="center" color="primary" variant="h3" gutterBottom >
-                ALCHEMIST
-            </Typography>
-            <Typography align="center" color="primary" variant="h6" gutterBottom >
-                Learn, practise and play Dynamic Programming algorithms.
-            </Typography>
-            <Typography align="center" color="primary" gutterBottom variant="h4">
-                <Link to="/algorithms" className={classNames(classes.startButton)}>
-                    <Button color="primary" size="large" variant="contained" style={{ color: 'white' }}>
-                        GET STARTED
-                    </Button>
-                </Link>
-            </Typography>
+            <Algorithm />
         </React.Fragment>
     );
 };
