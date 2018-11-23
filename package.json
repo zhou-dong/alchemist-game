@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "src/index.tsx",
-  "homepage": "https://zhou-dong.github.io/alchemy-web",
+  "homepage": "https://alchemist-al.com",
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^3.0.1",
