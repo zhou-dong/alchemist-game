@@ -1,5 +1,12 @@
 import { State, Point } from '../../store/BasicState';
 import { addHelperStyles } from '.';
+import { helperStyle } from '../../pages/withRoot';
+
+const getLastCell = (table: (string | number)[][]): Point => {
+    const row = table.length - 1;
+    const col = table[row].length - 1;
+    return { row, col };
+};
 
 const isMatch = ({ row, col }: Point, r: number, c: number) => (row === r && col === c);
 
@@ -15,8 +22,7 @@ const nonCorrect = (comparedTable: (string | number)[][], { row, col }: Point, v
     (comparedTable[row][col] !== value);
 
 const isLastCell = (table: (string | number)[][], point: Point): boolean => {
-    const row = table.length - 1;
-    const col = table[row].length - 1;
+    const { row, col } = getLastCell(table);
     return isMatch(point, row, col);
 };
 
@@ -45,6 +51,8 @@ const update = (value: number, state: State): State => {
 
     if (isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
+        const lastCell = getLastCell(table);
+        tableStyles[lastCell.row][lastCell.col] = helperStyle;
         return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
     }
 

@@ -1,5 +1,12 @@
 import { State, Point } from '../../store/BasicState';
 import { addHelperStyles } from '.';
+import { helperStyle } from '../../pages/withRoot';
+
+const getLastCell = (table: (string | boolean)[][]): Point => {
+    const row = table.length - 1;
+    const col = table[row].length - 1;
+    return { row, col };
+};
 
 const booleanToString = (value: boolean): string => (value ? 'T' : 'F');
 
@@ -10,15 +17,14 @@ const newTableStyles = (table: React.CSSProperties[][]): React.CSSProperties[][]
 
 const updateTable = (table: (string | boolean)[][], point: Point, value: boolean): (string | boolean)[][] =>
     table.map((row, rowIndex) => {
-        return row.map((cell, colIndex) => isMatch(point, rowIndex, colIndex) ?  booleanToString(value) : cell);
+        return row.map((cell, colIndex) => isMatch(point, rowIndex, colIndex) ? booleanToString(value) : cell);
     });
 
 const nonCorrect = (comparedTable: (string | boolean)[][], { row, col }: Point, value: boolean): boolean =>
     (comparedTable[row][col] !== value);
 
 const isLastCell = (table: (string | boolean)[][], point: Point): boolean => {
-    const row = table.length - 1;
-    const col = table[row].length - 1;
+    const { row, col } = getLastCell(table);
     return isMatch(point, row, col);
 };
 
@@ -47,6 +53,8 @@ const update = (value: boolean, state: State): State => {
 
     if (isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
+        const lastCell = getLastCell(table);
+        tableStyles[lastCell.row][lastCell.col] = helperStyle;
         return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
     }
 
