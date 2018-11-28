@@ -1,5 +1,6 @@
 import { State, Point } from '../../store/BasicState';
 import { addHelperStyles } from '.';
+import { helperStyle } from '../../pages/withRoot';
 
 // import { watchRecord } from '../../store/edit-distance/sagas';
 
@@ -16,9 +17,14 @@ const updateTable = (table: (string | number)[][], point: Point, value: number):
 const nonCorrect = (comparedTable: (string | number)[][], { row, col }: Point, value: number): boolean =>
     (comparedTable[row][col] !== value);
 
-const isLastCell = (table: (string | number)[][], point: Point): boolean => {
+const getLastCell = (table: (string | number)[][]): Point => {
     const row = table.length - 1;
     const col = table[row].length - 1;
+    return { row, col };
+};
+
+const isLastCell = (table: (string | number)[][], point: Point): boolean => {
+    const { row, col } = getLastCell(table);
     return isMatch(point, row, col);
 };
 
@@ -47,6 +53,8 @@ const update = (value: number, state: State): State => {
 
     if (isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
+        const lastCell = getLastCell(table);
+        tableStyles[lastCell.row][lastCell.col] = helperStyle;
         return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
     }
 
