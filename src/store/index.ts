@@ -16,6 +16,7 @@ import { SubsetSumProblem, SubsetSumProblemReducer, SubsetSumProblemWatchRecord 
 import { MinimumPathSum, MinimumPathSumReducer, MinimumPathSumWatchRecord } from './minimum-path-sum';
 import { WordBreak, WordBreakReducer, WordBreakWatchRecord } from './word-break';
 import { EggDroppingProblem, EggDroppingProblemReducer, EggDroppingProblemWatchRecord } from './egg-dropping-problem';
+import { HouseRobber, HouseRobberReducer, HouseRobberWatchRecord } from './house-robber';
 import {
     PalindromePartitioning, PalindromePartitioningReducer, PalindromePartitioningWatchRecord
 } from './palindrome-partitioning';
@@ -67,6 +68,7 @@ export interface ApplicationState {
     longestPalindromicSubstring: LongestPalindromicSubstringState;
     longestPalindromicSubsequence: LongestPalindromicSubsequenceState;
     palindromePartitioning: PalindromePartitioningState;
+    houseRobber: State;
 }
 
 export const rootReducer = combineReducers<ApplicationState>({
@@ -90,6 +92,7 @@ export const rootReducer = combineReducers<ApplicationState>({
     longestPalindromicSubstring: LongestPalindromicSubstringReducer,
     longestPalindromicSubsequence: LongestPalindromicSubsequenceReducer,
     palindromePartitioning: PalindromePartitioningReducer,
+    houseRobber: HouseRobberReducer,
 });
 
 export const containers = {
@@ -113,6 +116,7 @@ export const containers = {
     LongestPalindromicSubstring,
     LongestPalindromicSubsequence,
     PalindromePartitioning,
+    HouseRobber,
 };
 
 export function* rootSaga() {
@@ -137,5 +141,6 @@ export function* rootSaga() {
         LongestPalindromicSubstringWatchRecord(),
         LongestPalindromicSubsequenceWatchRecord(),
         PalindromePartitioningWatchRecord(),
+        HouseRobberWatchRecord(),
     ]);
 }

@@ -40,14 +40,15 @@ const update = (value: number, state: State): State => {
     }
 
     const steps = state.steps + 1;
-    const table = updateTable(state.table, currentPoint, value);
     const tableStyles = newTableStyles(state.tableStyles);
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
         tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
         addHelperStyles(tableStyles, currentPoint);
-        return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
+        return { ...state, startTime, steps, errors: errors + 1, tableStyles };
     }
+
+    const table = updateTable(state.table, currentPoint, value);
 
     if (isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
@@ -57,7 +58,6 @@ const update = (value: number, state: State): State => {
     }
 
     const nextPoint = getNextPoint(table, currentPoint);
-    table[nextPoint.row][nextPoint.col] = '?';
     addHelperStyles(tableStyles, nextPoint);
 
     return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint };

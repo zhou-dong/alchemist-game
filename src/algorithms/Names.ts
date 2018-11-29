@@ -19,6 +19,7 @@ enum Names {
     Longest_Palindromic_Substring = 'longest-palindromic-substring',
     Longest_Palindromic_Subsequence = 'longest-palindromic-subsequence',
     Palindrome_Partitioning = 'palindrome-partitioning',
+    House_Robber = 'house-robber',
 }
 
 export default Names;
