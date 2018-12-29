@@ -58,7 +58,8 @@ const buttonStyle: React.CSSProperties = {
 const getName = (name: string) => name.split('').map(ch => (ch === '_') ? ' ' : ch).join('');
 
 const mailFolderListItems = Object.keys(Names).map(key => {
-    const name = Names[key];
+    // const name = Names[key];
+    const name = (Names as any)[key];
     return (
         <ListItem key={key} style={listStyle}>
             <Button style={buttonStyle}>

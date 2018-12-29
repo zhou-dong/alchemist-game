@@ -18,7 +18,8 @@ const getRandomAlgorithm = () => {
     const keys: string[] = Object.keys(containers);
     const index = Math.floor(Math.random() * keys.length);
     const key = keys[index];
-    return containers[key];
+    // return containers[key];
+    return (containers as any)[key];
 };
 
 const Welcome = (props: Props) => {
