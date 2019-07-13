@@ -6,7 +6,7 @@ import * as helper from '../../algorithms/knapsack-problem';
 
 export const basicInfo: BasicInfo = {
     id: 6,
-    title: 'Knapsack Problem',
+    title: '0/1 Knapsack Problem',
 };
 
 const codeFormula: Formula = {
