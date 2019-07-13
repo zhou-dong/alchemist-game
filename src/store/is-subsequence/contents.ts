@@ -7,5 +7,5 @@ export const formula = `if (ch1 === ch2 && table[row - 1][col - 1]) {
 export const description = `Given a string s and a string t, 
 check if s is subsequence of t.`;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

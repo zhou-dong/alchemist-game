@@ -10,7 +10,7 @@ export const formula = `if (toCompare < target) {
 export const description = `Given an unsorted array of integers, find the 
 length of longest increasing subsequence. `;
 
-export const useCases = '';
+export const alUsecases = '';
 
 export const example = `Given [10, 9, 2, 5, 3, 7, 101, 18],
 The longest increasing subsequence is 

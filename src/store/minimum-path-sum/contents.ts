@@ -12,5 +12,5 @@ Note: You can only move either down or right
 at any point in time. 
 `;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

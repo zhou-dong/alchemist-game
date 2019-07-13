@@ -10,7 +10,7 @@ export const description = `'?' Matches any single character.
 The matching should cover the entire input string (not partial). 
 `;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = `"aa","a" → false
 "aa","aa" → true
 "aa", "*" → true

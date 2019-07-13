@@ -13,7 +13,7 @@ substring of the partition is a palindrome. Return
 the minimum cuts needed for a palindrome 
 partitioning of s.`;
 
-export const useCases = '';
+export const alUsecases = '';
 
 export const example = `Input: "abbab"
 Output: 1 // "abba", "b"`;

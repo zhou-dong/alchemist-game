@@ -33,7 +33,7 @@ export interface Dialog extends BasicInfo {
     readonly dialogOpen: boolean;
     readonly dialogCroll: DialogScroll;
     readonly example: string;
-    readonly useCases: string;
+    readonly alUsecases: string;
     readonly description: string;
     readonly handleDialogOnClose?: () => any;
     readonly handleCloseDialogClick: () => Action;

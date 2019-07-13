@@ -9,7 +9,7 @@ export const description = `Given a set of non-negative integers, and a
 value sum, determine if there is a subset of
 the given set with sum equal to given sum. `;
 
-export const useCases = '';
+export const alUsecases = '';
 
 export const example = `set = [3, 34, 4, 12, 5, 2], sum = 9
 output: True

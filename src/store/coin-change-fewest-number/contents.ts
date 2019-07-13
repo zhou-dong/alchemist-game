@@ -11,5 +11,5 @@ of money amount. Find the fewest number of coins that you need to
 make up that amount. If that amount of money cannot be made up by 
 any combination of the coins, return -1.`;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

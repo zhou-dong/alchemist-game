@@ -7,7 +7,7 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 const styles = (theme: Theme) => createStyles({
     footer: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing.unit * 6,
+        padding: theme.spacing(6),
     },
 });
 

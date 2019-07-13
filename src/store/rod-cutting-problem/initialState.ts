@@ -1,6 +1,6 @@
 import { Dialog, DialogScroll, Header, BasicInfo, State, Difficulty, Formula } from '../BasicState';
 import { buttonClick, refresh, openDialog, closeDialog, closeFormula, openFormula } from './actions';
-import { description, formula, example, useCases } from './contents';
+import { description, formula, example, alUsecases } from './contents';
 import * as helper from '../../algorithms/rod-cutting-problem';
 import { RodCuttingItem } from '../../algorithms/rod-cutting-problem/RodCuttingItem';
 
@@ -23,7 +23,7 @@ const dialog: Dialog = {
     dialogCroll: DialogScroll.Paper,
     description: description,
     example: example,
-    useCases: useCases,
+    alUsecases: alUsecases,
     handleCloseDialogClick: closeDialog,
 };
 

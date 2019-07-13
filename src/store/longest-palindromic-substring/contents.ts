@@ -28,7 +28,7 @@ for (let len = 3; len <= table.length; len++) {
 export const description = `Given a string, find the length of longest 
 palindromic substring.`;
 
-export const useCases = '';
+export const alUsecases = '';
 
 export const example = `Input: "dbcdcd"
 Output: 3

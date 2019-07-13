@@ -7,5 +7,5 @@ value at the current position in the array.
 Optimum result is when you reach the goal in
 minimum number of jumps.`;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

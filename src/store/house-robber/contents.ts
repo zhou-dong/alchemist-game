@@ -21,7 +21,7 @@ Given a list of non-negative integers representing the amount
 of money of each house, determine the maximum amount of money 
 you can rob tonight without alerting the police.`;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = `Input: [1,2,3,1]
 Output: 4
 Explanation: 

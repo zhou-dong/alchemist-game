@@ -1,4 +1,7 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router'
+import { History } from 'history'
+
 import { all } from 'redux-saga/effects';
 import { State } from './BasicState';
 import { State as WordBreakState } from './word-break/state';
@@ -71,7 +74,8 @@ export interface ApplicationState {
     houseRobber: State;
 }
 
-export const rootReducer = combineReducers<ApplicationState>({
+export const rootReducer = (history: History) => combineReducers({
+    router: connectRouter(history),
     editDistance: EditDistanceReducer,
     knapsackProblem: KnapsackProblemReducer,
     rodCuttingProblem: RodCuttingProblemReducer,

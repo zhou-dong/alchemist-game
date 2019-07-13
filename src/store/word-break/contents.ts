@@ -5,5 +5,5 @@ find out if the input string can be segmented
 into a space-separated sequence of dictionary 
 words.`;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

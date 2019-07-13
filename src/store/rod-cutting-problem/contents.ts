@@ -15,7 +15,7 @@ how to best cut the original rods to maximize the revenue.
 P: price, L: length
 `;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = `If length of the rod is 8 and the values of different pieces are 
 given as following, then the maximum obtainable value is 22 (by 
 cutting in two pieces of lengths 2 and 6).

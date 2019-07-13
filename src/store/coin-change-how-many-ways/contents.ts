@@ -9,5 +9,5 @@ where the value of each coin is given in the array. Can you
 determine the number of ways of making change for units using 
 the given types of coins? `;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

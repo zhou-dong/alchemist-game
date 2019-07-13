@@ -13,5 +13,5 @@ of capacity W to get the maximum total value in the knapsack.
 V: value, W: Weight
 `;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

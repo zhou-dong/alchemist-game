@@ -15,7 +15,7 @@ export const helperStyleThird: React.CSSProperties = { backgroundColor: helperCo
 
 const theme = createMuiTheme({
   typography: {
-    useNextVariants: true,
+    // useNextVariants: true,
   },
   palette: {
     primary: primary,

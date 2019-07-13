@@ -1,6 +1,6 @@
 import { Dialog, DialogScroll, Header, BasicInfo, State, Difficulty, Formula } from '../BasicState';
 import { buttonClick, refresh, openDialog, closeDialog, closeFormula, openFormula } from './actions';
-import { description, formula, example, useCases } from './contents';
+import { description, formula, example, alUsecases } from './contents';
 import { KnapSackItem } from '../../algorithms/knapsack-problem/KnapsackItem';
 import * as helper from '../../algorithms/knapsack-problem';
 
@@ -23,7 +23,7 @@ const dialog: Dialog = {
     dialogCroll: DialogScroll.Paper,
     description: description,
     example: example,
-    useCases: useCases,
+    alUsecases: alUsecases,
     handleCloseDialogClick: closeDialog,
 };
 

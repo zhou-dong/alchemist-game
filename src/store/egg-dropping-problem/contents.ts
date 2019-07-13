@@ -31,5 +31,5 @@ If egg does not break when dropped from some floor
 then it will not break if dropped from any lower floor
 `;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

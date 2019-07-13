@@ -10,5 +10,5 @@ one-dimensional array of numbers which has the
 largest sum. The list usually contains both 
 positive and negative numbers. `;
 
-export const useCases = '';
+export const alUsecases = '';
 export const example = '';

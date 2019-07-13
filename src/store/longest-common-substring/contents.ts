@@ -7,7 +7,7 @@ export const formula = `if (a === b) {
 export const description = `Given two strings ‘X’ and ‘Y’, find the length 
 of the longest common substring.`;
 
-export const useCases = '';
+export const alUsecases = '';
 
 export const example = `
 Input : X = "abcdxyz", y = "xyzabcd"

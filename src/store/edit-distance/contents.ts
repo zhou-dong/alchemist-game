@@ -16,7 +16,7 @@ transform one string into the other.
                 - From Wikipedia.
 `;
 
-export const useCases = `1. In natural language processing, where automatic spelling 
+export const alUsecases = `1. In natural language processing, where automatic spelling 
 correction can determine candidate corrections for a misspelled 
 word by selecting words from a dictionary that have a low distance 
 to the word in question. 
