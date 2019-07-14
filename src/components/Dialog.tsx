@@ -8,6 +8,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import ReactMarkdown from "react-markdown";
 
 import { Dialog as DialogProps } from '../store/BasicState';
 import CodeBlock, { Languares } from './CodeBlock';
@@ -18,8 +19,9 @@ interface Props extends DialogProps, WithStyles<typeof styles> { }
 
 const description = (props: Props) => (
     <React.Fragment>
-        <Typography>Description</Typography>
-        <CodeBlock code={props.description} language={Languares.Markdown} />
+        <ReactMarkdown source={props.description} />
+        {/* <Typography>Description</Typography> */}
+        {/* <CodeBlock code={props.description} language={Languares.Markdown} /> */}
     </React.Fragment>
 );
 

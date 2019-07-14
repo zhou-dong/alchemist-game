@@ -7,11 +7,14 @@ export const formula = `if (itemWeight > currentWeight) {
   );
 }`;
 
-export const description = `Given weights and values of n items, put these items in a knapsack
-of capacity W to get the maximum total value in the knapsack.
+// npm i -D @types/webpack-env
+export const description = require.context(`!raw-loader!./`, false, /\.md$/, )("./description.zh.cn.md").default;
 
-V: value, W: Weight
-`;
+// export const description = `Given weights and values of n items, put these items in a knapsack
+// of capacity W to get the maximum total value in the knapsack.
+
+// V: value, W: Weight
+// `;
 
 export const alUsecases = '';
 export const example = '';
