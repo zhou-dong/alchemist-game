@@ -5,7 +5,25 @@ export const formula = `if (itemWeight > currentWeight) {
     table[row - 1][col],
     table[row - 1][currentWeight - itemWeight] + itemValue
   );
-}`;
+}
+
+or
+
+if (item.weight > knapsack.weight) {
+  table[row][col] = getPreviousValue(row, col);
+} else {
+  table[row][col] = Math.max(getPreviousValue(row, col), getUpdatedValue(row, knapsack, item));
+}
+
+const getPreviousValue = (row, col) => {
+  return table[row - 1][col];
+};
+
+const getUpdatedValue = (row, knapsack, itemWeight, itemValue) => {
+  return table[row - 1][knapsack.weight - item.weight] + item.value;
+};
+`
+;
 
 // npm i -D @types/webpack-env
 export const description = require.context(`!raw-loader!./`, false, /\.md$/, )("./description.zh.cn.md").default;

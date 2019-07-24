@@ -29,7 +29,7 @@ const getPreviousValue = (row, col) => {
 
 const getUpdatedValue = (row, knapsack, itemWeight, itemValue) => {
   return table[row - 1][knapsack.weight - item.weight] + item.value;
-}
+};
 ```
 
 然后它的计算原理/转移方程的意思是：
