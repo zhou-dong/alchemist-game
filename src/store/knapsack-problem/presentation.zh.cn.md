@@ -6,32 +6,29 @@ PS：背包问题有很多种，我们今天讲的是0/1背包问题，就是说
 
 ## 转移方程：
 ```javascript
-if (itemWeight > currentWeight) {
+if (itemWeight > knapsackWeight) {
   table[row][col] = table[row - 1][col];
 } else {
   table[row][col] = Math.max(
     table[row - 1][col], 
-    table[row - 1][currentWeight - itemWeight] + itemValue
+    table[row - 1][knapsackWeight - itemWeight] + itemValue
   );
 }
 ```
 or
 ```javascript
-if (itemWeight > currentWeight) {
+if (item.weight > knapsack.weight) {
   table[row][col] = getPreviousValue(row, col);
 } else {
-  table[row][col] = Math.max(
-    getPreviousValue(row, col), 
-    getUpdatedValue(row, currentWeight, itemWeight, itemValue)
-  );
+  table[row][col] = Math.max(getPreviousValue(row, col), getUpdatedValue(row, knapsack, item));
 }
 
 const getPreviousValue = (row, col) => {
   return table[row - 1][col];
 };
 
-const getUpdatedValue = (row, currentKnapsackWeight, itemWeight, itemValue) => {
-  return table[row - 1][currentKnapsackWeight - itemWeight] + itemValue;
+const getUpdatedValue = (row, knapsack, itemWeight, itemValue) => {
+  return table[row - 1][knapsack.weight - item.weight] + item.value;
 }
 ```
 
