@@ -11,6 +11,7 @@ if (itemWeight > currentWeight) {ad
 } else {
   const previousValue = table[row - 1][col];
   const updatedValue = table[row - 1][currentWeight - itemWeight] + itemValue;
+  
   table[row][col] = Math.max(previousValue, updatedValue);
 }
 ```
