@@ -9,18 +9,29 @@ PS：背包问题有很多种，我们今天讲的是0/1背包问题，就是说
 if (itemWeight > currentWeight) {
   table[row][col] = table[row - 1][col];
 } else {
-  table[row][col] = Math.max(table[row - 1][col], table[row - 1][currentWeight - itemWeight] + itemValue);
+  table[row][col] = Math.max(
+    table[row - 1][col], 
+    table[row - 1][currentWeight - itemWeight] + itemValue
+  );
 }
 ```
 or
 ```javascript
-const previousValue = table[row - 1][col];
-
 if (itemWeight > currentWeight) {
-  table[row][col] = previousValue;
+  table[row][col] = getPreviousValue(row, col);
 } else {
-  const updatedValue = table[row - 1][currentWeight - itemWeight] + itemValue;
-  table[row][col] = Math.max(previousValue, updatedValue);
+  table[row][col] = Math.max(
+    getPreviousValue(row, col), 
+    getUpdatedValue(row, currentWeight, itemWeight, itemValue)
+  );
+}
+
+const getPreviousValue = (row, col) => {
+  return table[row - 1][col];
+};
+
+const getUpdatedValue = (row, currentKnapsackWeight, itemWeight, itemValue) => {
+  return table[row - 1][currentKnapsackWeight - itemWeight] + itemValue;
 }
 ```
 
