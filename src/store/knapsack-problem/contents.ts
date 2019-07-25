@@ -12,7 +12,10 @@ or
 if (item.weight > knapsack.weight) {
   table[row][col] = getPreviousValue(row, col);
 } else {
-  table[row][col] = Math.max(getPreviousValue(row, col), getUpdatedValue(row, knapsack, item));
+  table[row][col] = Math.max(
+    getPreviousValue(row, col), 
+    getUpdatedValue(row, knapsack, item)
+  );
 }
 
 const getPreviousValue = (row, col) => {
