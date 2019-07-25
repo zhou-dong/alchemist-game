@@ -45,3 +45,6 @@ const getUpdatedValue = (row, knapsack, itemWeight, itemValue) => {
 - 横的一排0是说：当把一个重量为0，价值也为0的的物品装进背包中，背包的中物品的总价值仍然是0.
 
 然后咱们从物品1开始。
+
+keywords:
+- 背包中原先商品的总价值
