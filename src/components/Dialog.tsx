@@ -25,7 +25,7 @@ const description = (props: Props) => (
     </React.Fragment>
 );
 
-const alalUsecases = (props: Props) => (
+const alUsecases = (props: Props) => (
     <React.Fragment>
         <Typography>Use Cases</Typography>
         <CodeBlock code={props.alUsecases} language={Languares.Markdown} />
@@ -44,7 +44,7 @@ const InfoModal = (props: Props) => (
         <DialogTitle>{props.title}</DialogTitle>
         <DialogContent>
             {props.description && description(props)}
-            {props.alUsecases && alalUsecases(props)}
+            {props.alUsecases && alUsecases(props)}
             {props.example && example(props)}
         </DialogContent>
         <DialogActions>
