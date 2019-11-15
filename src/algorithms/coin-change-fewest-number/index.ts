@@ -25,7 +25,7 @@ const createTableMatrix = (coins: number[], total: number): (number | string)[][
 
     for (let col = 2; col < cols; col++) {
         table[0][col] = col - 1;
-        table[1][col] = - 1;
+        table[1][col] = Infinity;
     }
 
     for (let row = 2; row < rows; row++) {
@@ -76,7 +76,7 @@ const createButtons = (coins: number[], total: number): number[] => {
         for (let col = 1; col < dpTable[row].length; col++) {
             const value = dpTable[row][col];
             if (value === Infinity) {
-                set.add(-1);
+                set.add(Infinity);
             } else {
                 set.add(value);
             }
