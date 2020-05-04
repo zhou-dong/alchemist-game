@@ -6,7 +6,7 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 const styles = (theme: Theme) => createStyles({
     footer: {
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
     },
 });
@@ -18,10 +18,10 @@ const Footer = (props: Props) => {
     return (
         <footer className={classes.footer}>
             <Typography variant="h6" align="center" gutterBottom>
-                Alchemist
+                {/* alchemist */}
             </Typography>
             <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                Dynamic programming is cool!
+                {/* Dynamic programming is cool. */}
             </Typography>
         </footer>
     );

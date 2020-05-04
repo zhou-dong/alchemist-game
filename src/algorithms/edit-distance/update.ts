@@ -1,6 +1,6 @@
 import { State, Point } from '../../store/BasicState';
 import { addHelperStyles } from '.';
-import { helperStyle } from '../../pages/withRoot';
+import { helperStyle, warn } from '../../pages/withRoot';
 
 // import { watchRecord } from '../../store/edit-distance/sagas';
 
@@ -46,7 +46,7 @@ const update = (value: number, state: State): State => {
     const tableStyles = newTableStyles(state.tableStyles);
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
-        tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
+        tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: warn };
         addHelperStyles(tableStyles, currentPoint);
         return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
     }

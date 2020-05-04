@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import { WithStyles } from '@material-ui/core';
+import { WithStyles, Fab, ButtonGroup, Button } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,8 +14,11 @@ const buttonsStyle = (theme: Theme) => createStyles({
     cell: {
         '&:hover': {
             cursor: 'pointer',
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: theme.palette.primary.light,
         },
+        minWidth: 70,
+        minHeight: 35,
+        fontSize: 14,
         padding: 0,
     },
 });
@@ -33,9 +36,9 @@ const cell = (
     data: number | string | boolean,
     style: React.CSSProperties,
     { handleButtonClick, classes }: Props) => (
-        <TableCell key={key} style={style} onClick={() => handleButtonClick(data)} className={classes.cell}>
+        <Button size="large" key={key} style={style} onClick={() => handleButtonClick(data)} className={classes.cell}>
             {cellContent(data)}
-        </TableCell>
+        </Button>
     );
 
 const Buttons = (props: Props) => {
@@ -44,13 +47,9 @@ const Buttons = (props: Props) => {
         throw new Error('Alchemy Buttons errors: array-styles size dont match');
     }
     return (
-        <Table>
-            <TableBody>
-                <TableRow key={0}>
-                    {buttons.map((data, index) => cell(index, data, buttonsStyles[index], { ...props }))}
-                </TableRow>
-            </TableBody>
-        </Table>
+        <ButtonGroup size="large" key={0} style={{ marginTop: "20px" }}>
+            {buttons.map((data, index) => cell(index, data, buttonsStyles[index], { ...props }))}
+        </ButtonGroup>
     );
 };
 

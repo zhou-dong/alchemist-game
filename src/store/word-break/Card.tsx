@@ -20,7 +20,7 @@ interface Props extends State, WithStyles<typeof styles> { }
 const helperTable = (props: Props) => {
     const { dictionary } = props;
     const row = ['DICT:'].concat(dictionary);
-   
+
     const rowStyles = row.map(() => helperStyle);
     rowStyles[0] = {};
 
@@ -33,19 +33,18 @@ const helperTable = (props: Props) => {
 };
 
 const Algorithm = (props: Props) => (
-    <Card>
+    <div style={{ margin: "auto", "textAlign": "center" }}>
         <Header {...props} />
-        <Divider style={{ marginBottom: 5 }} />
         {helperTable(props)}
-        <Divider style={{ marginTop: 5 }} />
+        <div style={{ marginBottom: "10px" }} >
+        </div>
         <Table {...props} />
-        <Divider style={{ marginTop: 5 }} />
         <CardContent>
             <Buttons {...props} />
         </CardContent>
         <Dialog  {...props} />
         <Formula {...props} />
-    </Card>
+    </div>
 );
 
 export default withStyles(styles)(Algorithm);
