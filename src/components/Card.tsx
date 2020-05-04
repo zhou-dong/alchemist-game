@@ -17,17 +17,15 @@ const styles = (theme: Theme) => createStyles({});
 interface Props extends State, WithStyles<typeof styles> { }
 
 const Algorithm = (props: Props) => (
-    <Card>
+    <div style={{ margin: "auto", "textAlign": "center" }}>
         <Header {...props} />
-        <Divider style={{ marginBottom: 5 }} />
         <Table {...props} />
-        <Divider style={{ marginTop: 5 }} />
         <CardContent>
             <Buttons {...props} />
         </CardContent>
         <Dialog  {...props} />
         <Formula {...props} />
-    </Card>
+    </div>
 );
 
 export default withStyles(styles)(Algorithm);

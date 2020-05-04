@@ -4,30 +4,52 @@ import primary from '@material-ui/core/colors/green';
 import secondary from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import grey from '@material-ui/core/colors/grey';
-import helperColor from '@material-ui/core/colors/orange';
-import helperColorSecondary from '@material-ui/core/colors/purple';
-import helperColorThird from '@material-ui/core/colors/pink';
+import helperColor from '@material-ui/core/colors/green';
+import helperColorSecondary from '@material-ui/core/colors/blue';
+import helperColorThird from '@material-ui/core/colors/yellow';
+import { blueGrey, lightBlue } from '../../node_modules/@material-ui/core/colors';
+import { fontWeight } from '../../node_modules/@material-ui/system';
 
 export const drawerWidth: number = 270;
-export const helperStyle: React.CSSProperties = { backgroundColor: helperColor[300] };
-export const helperStyleSecondary: React.CSSProperties = { backgroundColor: helperColorSecondary[300] };
+export const helperStyle: React.CSSProperties = { backgroundColor: helperColor[100] };
+export const helperStyleSecondary: React.CSSProperties = { backgroundColor: helperColorSecondary[100] };
 export const helperStyleThird: React.CSSProperties = { backgroundColor: helperColorThird[200] };
+export const warn = "#FF385C"
 
 const theme = createMuiTheme({
   typography: {
+    fontFamily: [
+      "Circular",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "Roboto",
+      "Helvetica Neue",
+      "sans-serif",
+      "monospace"
+    ].join(",")
     // useNextVariants: true,
   },
   palette: {
     primary: primary,
     secondary: secondary,
     background: {
-      default: grey['200'],
+      // default: grey['200'],
+      // default: "#9be5f3!important"
+      default: "white"
     },
   },
   overrides: {
     MuiAppBar: {
       colorPrimary: {
-        color: 'white',
+        color: primary["600"],
+        backgroundColor: "white"
+      }
+    },
+    MuiTable: {
+      root: {
+        width: '0',
+        borderRadius: 12,
+        display: "inline-table"
       }
     },
     MuiTableCell: {
@@ -40,19 +62,20 @@ const theme = createMuiTheme({
         }
       },
       body: {
-        borderWidth: 2,
+        borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: 'white',
-        color: 'white',
-        backgroundColor: primary.A700,
-        borderRadius: 10,
-        fontSize: 24,
-        height: 40,
+        borderColor: "gray",
+        color: "black",
+        borderRadius: 0,
+        fontSize: 14,
+        fontWeight: 400,
+        height: 35,
+        width: 70,
       },
     },
     MuiTableRow: {
       root: {
-        height: 36,
+        // height: 60,
       },
     },
     MuiDialog: {

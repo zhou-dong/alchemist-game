@@ -26,7 +26,7 @@ const Title = (props: Props) => {
     return (
         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
             <Link to="/" className={classes.title}>
-                Alchemist
+                alchemist
             </Link>
         </Typography>
     );

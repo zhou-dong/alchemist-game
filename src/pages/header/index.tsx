@@ -28,7 +28,7 @@ const appBarStyles = (theme: Theme) => createStyles({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        boxShadow: 'none',
+        // boxShadow: 'thin',
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -61,6 +61,7 @@ const Header = (props: Props) => {
                     [classes.appBarShift]: open,
                     [classes.appBarShiftLeft]: open,
                 })}
+                elevation={1} 
             >
                 <Toolbar>
                     <MenuButton open={open} openDrawer={openDrawer} />
