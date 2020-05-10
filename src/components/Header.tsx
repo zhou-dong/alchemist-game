@@ -70,7 +70,7 @@ const Header = (props: Props) => {
                 Code
             </Button>
         </ButtonGroup>
-        <ButtonGroup variant="contained" size="small" style={{ marginLeft: "10px" }}>
+        <ButtonGroup variant="contained" size="small" style={{ marginTop: "10px", marginLeft: "10px" }}>
             <Button
                 variant="outlined"
                 startIcon={<StepsIcon />}
