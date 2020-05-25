@@ -3,12 +3,9 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import primary from '@material-ui/core/colors/green';
 import secondary from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import grey from '@material-ui/core/colors/grey';
 import helperColor from '@material-ui/core/colors/green';
 import helperColorSecondary from '@material-ui/core/colors/blue';
 import helperColorThird from '@material-ui/core/colors/yellow';
-import { blueGrey, lightBlue } from '../../node_modules/@material-ui/core/colors';
-import { fontWeight } from '../../node_modules/@material-ui/system';
 
 export const drawerWidth: number = 270;
 export const helperStyle: React.CSSProperties = { backgroundColor: helperColor[100] };

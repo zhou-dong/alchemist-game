@@ -2,11 +2,7 @@ import * as React from 'react';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import { WithStyles, Fab, ButtonGroup, Button } from '@material-ui/core';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
+import { WithStyles, ButtonGroup, Button } from '@material-ui/core';
 
 import { Buttons as ButtonsProps } from '../store/BasicState';
 

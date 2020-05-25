@@ -2,23 +2,15 @@
 import * as React from 'react';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import { WithStyles, Button, ButtonGroup } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
 import green from '@material-ui/core/colors/green';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/RefreshOutlined';
-import DescriptionIcon from '@material-ui/icons/DescriptionOutlined';
-// import PlayIcon from '@material-ui/icons/PlayCircleOutline';
 import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
 import CheckIcon from '@material-ui/icons/CheckCircleOutlined';
 import WrongIcon from '@material-ui/icons/ErrorOutline';
 import StepsIcon from '@material-ui/icons/PollOutlined';
 import CodeIcon from '@material-ui/icons/CodeRounded';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-
 import { Header as HeaderProps } from '../store/BasicState';
 
 const styles = (theme: Theme) => createStyles({
@@ -48,7 +40,7 @@ const HeaderTitle = ({ title, success, loading, classes, handleOpenDialogClick }
 };
 
 const Header = (props: Props) => {
-    const { classes, steps, errors } = props;
+    const { steps, errors } = props;
     return (<div style={{ marginTop: "50px", marginBottom: "10px" }} >
         <HeaderTitle {...props} />
 
