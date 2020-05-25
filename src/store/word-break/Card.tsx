@@ -2,9 +2,7 @@ import * as React from 'react';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import { WithStyles } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Divider from '@material-ui/core/Divider';
 import Header from '../../components/Header';
 import Buttons from '../../components/Buttons';
 import Dialog from '../../components/Dialog';
@@ -36,8 +34,7 @@ const Algorithm = (props: Props) => (
     <div style={{ margin: "auto", "textAlign": "center" }}>
         <Header {...props} />
         {helperTable(props)}
-        <div style={{ marginBottom: "10px" }} >
-        </div>
+        <div style={{ marginBottom: "10px" }} />
         <Table {...props} />
         <CardContent>
             <Buttons {...props} />

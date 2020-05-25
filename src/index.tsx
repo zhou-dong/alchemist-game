@@ -6,6 +6,9 @@ import { ConnectedRouter } from 'connected-react-router';
 import Index from './pages';
 import configureStore from './store/configureStore';
 import * as serviceWorker from './serviceWorker';
+import { UserContext } from './user/userContext';
+import { getUser } from './user/userUtils';
+import { User } from './user/user';
 
 declare global {
     interface Window { initialReduxState: any; }
@@ -18,13 +21,22 @@ const history = createBrowserHistory();
 
 const store = configureStore(history, initialState);
 
-const Root = () => (
-    <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <Index />
-        </ConnectedRouter>
-    </Provider>
-);
+const Root = () => {
+
+    const [user, setUser] = React.useState<User | null>(null);
+
+    React.useEffect(() => { getUser().then(obj => setUser(obj)); }, []);
+
+    return (
+        <Provider store={store}>
+            <UserContext.Provider value={user}>
+                <ConnectedRouter history={history}>
+                    <Index />
+                </ConnectedRouter>
+            </UserContext.Provider>
+        </Provider>
+    );
+};
 
 ReactDOM.render(<Root />, document.querySelector('#root'));
 
