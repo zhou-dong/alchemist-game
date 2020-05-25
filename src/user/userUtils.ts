@@ -1,12 +1,14 @@
 import { User } from './user';
 
+const userMeUrl = 'https://api.alchemist-ai.com/api/v1/users/me';
+
 const getUrlParam = (name: string): string | null => {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     return params.get(name);
 };
 
-export const getAccessToken = (): string | null => {
+const getAccessToken = (): string | null => {
     const localKey = 'token';
     const accessToken = getUrlParam('access_token');
     if (accessToken) {
@@ -15,18 +17,19 @@ export const getAccessToken = (): string | null => {
     return localStorage.getItem(localKey);
 };
 
-const userMeUrl = 'https://api.alchemist-ai.com/api/v1/users/me';
-
-const createRequestInit = (accessToken: string): RequestInit => {
+const createAuthHeaders = (accessToken: string): Headers => {
     const headers = new Headers();
     headers.set('Content-Type', 'application/json');
     headers.set('Authorization', `Bearer ${accessToken}`);
+    return headers;
+};
 
-    const requestInit: RequestInit = {
-        method: 'GET',
-        headers: headers,
-    };
-    return requestInit;
+export const getAuthHeaders = (): Headers | null => {
+    const accessToken = getAccessToken();
+    if (!accessToken) {
+        return null;
+    }
+    return createAuthHeaders(accessToken);
 };
 
 const createUser = (obj: any): User => ({
@@ -36,12 +39,17 @@ const createUser = (obj: any): User => ({
 });
 
 export const getUser = async (): Promise<User | null> => {
-    const accessToken = getAccessToken();
-    if (!accessToken) {
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders) {
         return null;
     }
 
-    return await fetch(userMeUrl, createRequestInit(accessToken))
+    const requestInit: RequestInit = {
+        method: 'GET',
+        headers: authHeaders
+    };
+
+    return await fetch(userMeUrl, requestInit)
         .then(response => response.json())
         .then(json => createUser(json));
 };
