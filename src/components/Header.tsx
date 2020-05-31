@@ -31,7 +31,7 @@ const HeaderTitle = ({ title, success, loading, classes, handleOpenDialogClick }
     return (
         <div>
             <IconButton onClick={handleOpenDialogClick}>
-                {success ? <CheckIcon style={{ color: "green" }} /> : <AssignmentIcon style={{ color: "black" }} />}
+                {success ? <CheckIcon style={{ color: 'green' }} /> : <AssignmentIcon style={{ color: 'black' }} />}
             </IconButton>
             <strong>{title.toUpperCase()}</strong>
             {/* {loading && <CircularProgress size={36} className={classes.fabProgress} />} */}
@@ -41,11 +41,10 @@ const HeaderTitle = ({ title, success, loading, classes, handleOpenDialogClick }
 
 const Header = (props: Props) => {
     const { steps, errors } = props;
-    return (<div style={{ marginTop: "50px", marginBottom: "10px" }} >
+    return (<div style={{ marginTop: '50px', marginBottom: '10px' }} >
         <HeaderTitle {...props} />
 
-        <ButtonGroup variant="contained" size="small" style={{ marginTop: "25px" }}>
-
+        <ButtonGroup variant="contained" size="small" style={{ marginTop: '25px' }}>
             <Button
                 variant="outlined"
                 startIcon={<RefreshIcon />}
@@ -53,7 +52,6 @@ const Header = (props: Props) => {
             >
                 Refresh
             </Button>
-
             <Button
                 variant="outlined"
                 startIcon={<CodeIcon />}
@@ -62,23 +60,22 @@ const Header = (props: Props) => {
                 Code
             </Button>
         </ButtonGroup>
-        <ButtonGroup variant="contained" size="small" style={{ marginTop: "10px", marginLeft: "10px" }}>
+        <ButtonGroup variant="contained" size="small" style={{ marginTop: '10px', marginLeft: '10px' }}>
             <Button
                 variant="outlined"
                 startIcon={<StepsIcon />}
             >
                 Steps: {steps}
             </Button>
-
             <Button
                 variant="outlined"
-                startIcon={<WrongIcon style={{ color: "#ff1744" }} />}
+                startIcon={<WrongIcon style={{ color: '#ff1744' }} />}
             >
                 Errors: {errors}
             </Button>
         </ButtonGroup>
     </div >
-    )
+    );
 };
 
 export default withStyles(styles)(Header);
