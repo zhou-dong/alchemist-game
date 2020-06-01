@@ -12,6 +12,9 @@ import WrongIcon from '@material-ui/icons/ErrorOutline';
 import StepsIcon from '@material-ui/icons/PollOutlined';
 import CodeIcon from '@material-ui/icons/CodeRounded';
 import { Header as HeaderProps } from '../store/BasicState';
+import { Records } from '../records/records';
+import { RecordsContext } from '../records/recordsContext';
+import { save as saveRecord } from '../records/recordsUtils';
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -27,7 +30,20 @@ const styles = (theme: Theme) => createStyles({
 
 interface Props extends HeaderProps, WithStyles<typeof styles> { }
 
-const HeaderTitle = ({ title, success, loading, classes, handleOpenDialogClick }: Props) => {
+const HeaderTitle = ({ id, title, success, loading, classes, handleOpenDialogClick }: Props) => {
+    const records = React.useContext<Partial<Records>>(RecordsContext);
+    const inSucceedList = (records.records) ? records.records.map(record => record.challengeId).includes(id) : false;
+
+    if (success && records.setRecords && records.records && !inSucceedList) {
+        saveRecord(id).then(record => {
+            if (record && records.setRecords) {
+                const cloneRecords = records.records ? [...records.records] : [];
+                cloneRecords.push(record);
+                records.setRecords(cloneRecords);
+            }
+        });
+    }
+
     return (
         <div>
             <IconButton onClick={handleOpenDialogClick}>
