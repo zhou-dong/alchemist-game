@@ -1,3 +1,25 @@
+import { basicInfo as EditDistance } from '../store/edit-distance/initialState';
+import { basicInfo as KnapsackProblem } from '../store/knapsack-problem/initialState';
+import { basicInfo as RodCuttingProblem } from '../store/rod-cutting-problem/initialState';
+import { basicInfo as WildcardMatching } from '../store/wildcard-matching/initialState';
+import { basicInfo as RegularExpression } from '../store/regular-expression/initialState';
+import { basicInfo as CoinChangeFewestNumber } from '../store/coin-change-fewest-number/initialState';
+import { basicInfo as CoinChangeHowManyWays } from '../store/coin-change-how-many-ways/initialState';
+import { basicInfo as IsSubsequence } from '../store/is-subsequence/initialState';
+import { basicInfo as LongestCommonSubsequence } from '../store/longest-common-subsequence/initialState';
+import { basicInfo as LongestCommonSubstring } from '../store/longest-common-substring/initialState';
+import { basicInfo as SubsetSumProblem } from '../store/subset-sum-problem/initialState';
+import { basicInfo as MinimumOfJumpsToReachEnd } from '../store/minimum-number-of-jumps-to-reach-end/initialState';
+import { basicInfo as LongestIncreasingSubsequence } from '../store/longest-increasing-subsequence/initialState';
+import { basicInfo as MinimumPathSum } from '../store/minimum-path-sum/initialState';
+import { basicInfo as WordBreak } from '../store/word-break/initialState';
+import { basicInfo as MaximumSubarrayProblem } from '../store/maximum-subarray-problem/initialState';
+import { basicInfo as EggDroppingProblem } from '../store/egg-dropping-problem/initialState';
+import { basicInfo as LongestPalindromicSubstring } from '../store/longest-palindromic-substring/initialState';
+import { basicInfo as LongestPalindromicSubsequence } from '../store/longest-palindromic-subsequence/initialState';
+import { basicInfo as PalindromePartitioning } from '../store/palindrome-partitioning/initialState';
+import { basicInfo as HouseRobber } from '../store/house-robber/initialState';
+
 enum Names {
     Edit_Distance = 'edit-distance',
     Word_Break = 'word-break',
@@ -21,5 +43,32 @@ enum Names {
     Palindrome_Partitioning = 'palindrome-partitioning',
     House_Robber = 'house-robber',
 }
+
+export const getId = (name: string): number => {
+    switch (name) {
+        case Names.Edit_Distance: return EditDistance.id;
+        case Names.Knapsack_Problem: return KnapsackProblem.id;
+        case Names.RodCutting_Problem: return RodCuttingProblem.id;
+        case Names.Wildcard_Matching: return WildcardMatching.id;
+        case Names.Regular_Expression: return RegularExpression.id;
+        case Names.Coin_Change_Fewest_Number: return CoinChangeFewestNumber.id;
+        case Names.Coin_Change_How_Many_Ways: return CoinChangeHowManyWays.id;
+        case Names.Is_Subsequence: return IsSubsequence.id;
+        case Names.Longest_Common_Subsequence: return LongestCommonSubsequence.id;
+        case Names.Longest_Common_Substring: return LongestCommonSubstring.id;
+        case Names.Subset_Sum_Problem: return SubsetSumProblem.id;
+        case Names.Minimum_Jumps_To_End: return MinimumOfJumpsToReachEnd.id;
+        case Names.Longest_Increasing_Subsequence: return LongestIncreasingSubsequence.id;
+        case Names.Minimum_Path_Sum: return MinimumPathSum.id;
+        case Names.Word_Break: return WordBreak.id;
+        case Names.Maximum_Subarray_Problem: return MaximumSubarrayProblem.id;
+        case Names.EggDropping_Problem: return EggDroppingProblem.id;
+        case Names.Longest_Palindromic_Substring: return LongestPalindromicSubstring.id;
+        case Names.Longest_Palindromic_Subsequence: return LongestPalindromicSubsequence.id;
+        case Names.Palindrome_Partitioning: return PalindromePartitioning.id;
+        case Names.House_Robber: return HouseRobber.id;
+        default: return -1;
+    }
+};
 
 export default Names;
