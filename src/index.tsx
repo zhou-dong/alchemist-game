@@ -35,7 +35,7 @@ const Root = () => {
     return (
         <Provider store={store}>
             <RecordsContext.Provider value={{ records, setRecords }}>
-                <UserContext.Provider value={user}>
+                <UserContext.Provider value={{ user, setUser }}>
                     <ConnectedRouter history={history}>
                         <Index />
                     </ConnectedRouter>

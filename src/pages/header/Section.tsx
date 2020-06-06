@@ -11,17 +11,20 @@ import {
     DialogActions,
     Divider,
     Popover,
-    ListItemText
+    ListItemText,
+    ListItemIcon
 } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 import { UserContext } from '../../user/userContext';
 import GoogleLogo from './Google__G__Logo.svg';
 import GithubLogo from './mark-github.svg';
 import { User } from '../../user/user';
+import { signOut } from '../../user/userUtils';
 
 const styles = (theme: Theme) => createStyles({
     sectionDesktop: {
@@ -96,6 +99,7 @@ interface LogoutProps extends WithStyles<typeof styles> {
     open: boolean;
     anchorEl: HTMLButtonElement | null;
     handleClose: () => void;
+    handleSignOut: () => void;
 }
 
 const LogoutPopover = (props: LogoutProps) => (
@@ -117,12 +121,21 @@ const LogoutPopover = (props: LogoutProps) => (
                 <ListItemText primary={props.user && ('Hi, ' + props.user.name)} />
             </ListItem>
         </List>
+        <Divider />
+        <List>
+            <ListItem button onClick={props.handleSignOut}>
+                <ListItemIcon>
+                    <ExitToApp />
+                </ListItemIcon>
+                <ListItemText primary="Sign out" />
+            </ListItem>
+        </List>
     </Popover>
 );
 
 const UserIcon = (props: Props) => {
     const { classes } = props;
-    const user = React.useContext(UserContext);
+    const userState = React.useContext(UserContext);
 
     const [loginOpen, setLoginOpen] = React.useState(false);
 
@@ -144,18 +157,30 @@ const UserIcon = (props: Props) => {
         setAnchorEl(null);
     };
 
-    if (user) {
+    const handleSignOut = (): void => {
+        if (userState.setUser) {
+            userState.setUser(null);
+        }
+        signOut();
+    };
+
+    if (userState.user) {
         return (
             <React.Fragment>
                 <IconButton aria-haspopup="true" onClick={handleLogoutOpen} >
-                    <Avatar className={classes.small} alt={user.name} src={user.avatar || undefined} />
+                    <Avatar
+                        className={classes.small}
+                        alt={userState.user.name}
+                        src={userState.user.avatar || undefined}
+                    />
                 </IconButton>
                 <LogoutPopover
                     {...props}
                     open={Boolean(anchorEl)}
                     anchorEl={anchorEl}
                     handleClose={handleLogoutClose}
-                    user={user}
+                    user={userState.user}
+                    handleSignOut={handleSignOut}
                 />
             </React.Fragment>
         );
