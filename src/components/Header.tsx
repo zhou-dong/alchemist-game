@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import { WithStyles, Button, ButtonGroup } from '@material-ui/core';
+import { WithStyles, Button, ButtonGroup, Collapse } from '@material-ui/core';
 import green from '@material-ui/core/colors/green';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/RefreshOutlined';
@@ -15,6 +15,9 @@ import { Header as HeaderProps } from '../store/BasicState';
 import { Records } from '../records/records';
 import { RecordsContext } from '../records/recordsContext';
 import { save as saveRecord } from '../records/recordsUtils';
+import { Alert } from '@material-ui/lab';
+import { UserContext } from '../user/userContext';
+import { UserState } from '../user/user';
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -30,11 +33,32 @@ const styles = (theme: Theme) => createStyles({
 
 interface Props extends HeaderProps, WithStyles<typeof styles> { }
 
-const HeaderTitle = ({ id, title, success, loading, classes, handleOpenDialogClick }: Props) => {
+interface AlertProps {
+    open: boolean;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const PleaseSignIn = ({ open, setOpen }: AlertProps) => (
+    <Collapse in={open}>
+        <Alert severity="success" onClose={() => setOpen(false)}>
+            <strong>Congratulation ! </strong> Also you cloud sign in to save your records.
+        </Alert>
+    </Collapse>
+);
+
+const HeaderTitle = ({ id, title, success, handleOpenDialogClick }: Props) => {
     const records = React.useContext<Partial<Records>>(RecordsContext);
+    const userState = React.useContext<Partial<UserState>>(UserContext);
     const inSucceedList = (records.records) ? records.records.map(record => record.challengeId).includes(id) : false;
 
-    if (success && records.setRecords && records.records && !inSucceedList) {
+    const [alertOpen, setAlertOpen] = React.useState(false);
+
+    // Uncaught Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
+    // if (success && !userState.user) {
+    //     setTimeout(() => { setAlertOpen(true); }, 1000);
+    // }
+
+    if (success && userState.user && records.setRecords && records.records && !inSucceedList) {
         saveRecord(id).then(record => {
             if (record && records.setRecords) {
                 const cloneRecords = records.records ? [...records.records] : [];
@@ -46,6 +70,7 @@ const HeaderTitle = ({ id, title, success, loading, classes, handleOpenDialogCli
 
     return (
         <div>
+            <PleaseSignIn open={alertOpen} setOpen={setAlertOpen} />
             <IconButton onClick={handleOpenDialogClick}>
                 {success ? <CheckIcon style={{ color: 'green' }} /> : <AssignmentIcon style={{ color: 'black' }} />}
             </IconButton>
