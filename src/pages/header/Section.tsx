@@ -26,6 +26,11 @@ import GithubLogo from './mark-github.svg';
 import { User } from '../../user/user';
 import { signOut } from '../../user/userUtils';
 
+const apiHost = 'api.alchemist-ai.com';
+const baseApiUrl = `https://${apiHost}`;
+const googleLoginUrl = `${baseApiUrl}/oauth/google/login`;
+const githubLoginUrl = `${baseApiUrl}/oauth/github/login`;
+
 const styles = (theme: Theme) => createStyles({
     sectionDesktop: {
         display: 'none',
@@ -52,19 +57,12 @@ const styles = (theme: Theme) => createStyles({
     }
 });
 
-interface Props extends WithStyles<typeof styles> {
-
-}
+interface Props extends WithStyles<typeof styles> { }
 
 interface LoginProps extends WithStyles<typeof styles> {
     open: boolean;
     handleClose: () => void;
 }
-
-const apiHost = 'api.alchemist-ai.com';
-const baseApiUrl = `https://${apiHost}`;
-const googleLoginUrl = `${baseApiUrl}/oauth/google/login`;
-const githubLoginUrl = `${baseApiUrl}/oauth/github/login`;
 
 const LoginDialog = (props: LoginProps) => (
     <Dialog onClose={props.handleClose} open={props.open}>
