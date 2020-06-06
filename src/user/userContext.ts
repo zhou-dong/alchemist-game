@@ -1,4 +1,4 @@
 import { createContext } from 'react';
-import { User } from './user';
+import { UserState } from './user';
 
-export const UserContext = createContext<User | null>(null);
+export const UserContext = createContext<Partial<UserState>>({});
