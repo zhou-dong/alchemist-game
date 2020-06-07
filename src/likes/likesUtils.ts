@@ -19,7 +19,7 @@ export const getLikes = async (): Promise<Like[]> => {
         .then(json => json as Like[]);
 };
 
-export const save = async (challengeId: number): Promise<Like | null> => {
+export const save = async (challengeId: number): Promise<any> => {
     const authHeaders = getAuthHeaders();
     if (!authHeaders) {
         return null;
@@ -33,7 +33,21 @@ export const save = async (challengeId: number): Promise<Like | null> => {
         body: JSON.stringify(postBody),
     };
 
+    return await fetch(likesUrl, requestInit).then(response => response.json());
+};
+
+export const update = async (like: Like): Promise<any> => {
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders) {
+        return null;
+    }
+
+    const requestInit: RequestInit = {
+        method: 'PUT',
+        headers: authHeaders,
+        body: JSON.stringify(like),
+    };
+
     return await fetch(likesUrl, requestInit)
-        .then(response => response.json())
-        .then(json => json as Like);
+        .then(response => response.json());
 };

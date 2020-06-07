@@ -11,6 +11,8 @@ import CheckIcon from '@material-ui/icons/CheckCircleOutlined';
 import WrongIcon from '@material-ui/icons/ErrorOutline';
 import StepsIcon from '@material-ui/icons/PollOutlined';
 import CodeIcon from '@material-ui/icons/CodeRounded';
+import LikeIcon from '@material-ui/icons/Favorite';
+import DislikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import { Header as HeaderProps } from '../store/BasicState';
 import { Records } from '../records/records';
 import { RecordsContext } from '../records/recordsContext';
@@ -18,6 +20,10 @@ import { save as saveRecord } from '../records/recordsUtils';
 import { Alert } from '@material-ui/lab';
 import { UserContext } from '../user/userContext';
 import { UserState } from '../user/user';
+import { LikesContext } from '../likes/likesContext';
+import { LikesState } from '../likes/likesState';
+import { getLikes, save as saveLike, update as updateLike } from '../likes/likesUtils';
+import { Like } from '../likes/like';
 
 const styles = (theme: Theme) => createStyles({
     root: {
@@ -46,24 +52,87 @@ const PleaseSignIn = ({ open, setOpen }: AlertProps) => (
     </Collapse>
 );
 
-const HeaderTitle = ({ id, title, success, handleOpenDialogClick }: Props) => {
-    const records = React.useContext<Partial<Records>>(RecordsContext);
-    const userState = React.useContext<Partial<UserState>>(UserContext);
-    const inSucceedList = (records.records) ? records.records.map(record => record.challengeId).includes(id) : false;
+interface DoesLikeParams {
+    enabled: boolean;
+    handleEnableLike: () => void;
+    handleDisableLike: () => void;
+}
 
+const DoesLike = ({ enabled, handleEnableLike, handleDisableLike }: DoesLikeParams) => {
+    if (enabled) {
+        return (
+            <IconButton onClick={handleDisableLike}>
+                <LikeIcon style={{ color: 'rgb(255, 23, 68)' }} />
+            </IconButton>
+        );
+    } else {
+        return (
+            <IconButton onClick={handleEnableLike}>
+                <DislikeIcon />
+            </IconButton>
+        );
+    }
+};
+
+const HeaderTitle = ({ id, title, success, handleOpenDialogClick }: Props) => {
+    const { records, setRecords } = React.useContext<Partial<Records>>(RecordsContext);
+    const { user } = React.useContext<Partial<UserState>>(UserContext);
+    const { likes, setLikes } = React.useContext<Partial<LikesState>>(LikesContext);
+
+    const inSucceedList = records ? records.map(record => record.challengeId).includes(id) : false;
+    const like: Like | null = likes ? likes.filter(item => item.challengeId === id)[0] : null;
+    const enabledLike: boolean = like ? like.enabled : false;
     const [alertOpen, setAlertOpen] = React.useState(false);
 
     // Uncaught Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
     // if (success && !userState.user) {
     //     setTimeout(() => { setAlertOpen(true); }, 1000);
     // }
+    const updateLocalLikes = (toUpdate: Like): Like[] => {
+        const clonedLikes: Like[] = likes ? likes.filter(item => item.id !== toUpdate.id) : [];
+        clonedLikes.push(toUpdate);
+        return clonedLikes;
+    };
 
-    if (success && userState.user && records.setRecords && records.records && !inSucceedList) {
+    const handleEnableLike = () => {
+        if (like) {
+            const clonedLike: Like = { ...like, enabled: true };
+            updateLike(clonedLike).then(enabled => {
+                if (enabled && setLikes) {
+                    setLikes(updateLocalLikes(clonedLike));
+                }
+            });
+        } else {
+            saveLike(id).then(saved => {
+                if (saved && setLikes) {
+                    getLikes().then(responseLikes => {
+                        if (setLikes) {
+                            setLikes(responseLikes);
+                        }
+                    });
+                }
+            });
+        }
+
+    };
+
+    const handleDisableLike = () => {
+        if (like) {
+            const clonedLike: Like = { ...like, enabled: false };
+            updateLike(clonedLike).then(disabled => {
+                if (disabled && setLikes) {
+                    setLikes(updateLocalLikes(clonedLike));
+                }
+            });
+        }
+    };
+
+    if (success && user && setRecords && records && !inSucceedList) {
         saveRecord(id).then(record => {
-            if (record && records.setRecords) {
-                const cloneRecords = records.records ? [...records.records] : [];
+            if (record && setRecords) {
+                const cloneRecords = records ? [...records] : [];
                 cloneRecords.push(record);
-                records.setRecords(cloneRecords);
+                setRecords(cloneRecords);
             }
         });
     }
@@ -75,7 +144,7 @@ const HeaderTitle = ({ id, title, success, handleOpenDialogClick }: Props) => {
                 {success ? <CheckIcon style={{ color: 'green' }} /> : <AssignmentIcon style={{ color: 'black' }} />}
             </IconButton>
             <strong>{title.toUpperCase()}</strong>
-            {/* {loading && <CircularProgress size={36} className={classes.fabProgress} />} */}
+            <DoesLike enabled={enabledLike} handleEnableLike={handleEnableLike} handleDisableLike={handleDisableLike} />
         </div>
     );
 };

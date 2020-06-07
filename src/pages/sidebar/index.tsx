@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Done from '@material-ui/icons/Done';
-import Favorite from '@material-ui/icons/Favorite';
+import Star from '@material-ui/icons/Star';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { drawerWidth } from '../withRoot';
@@ -68,7 +68,7 @@ const doneStyle: React.CSSProperties = {
 };
 
 const likeStyle: React.CSSProperties = {
-    color: 'rgb(255, 23, 68)',
+    color: 'gold',
     paddingRight: 5,
 };
 
@@ -87,7 +87,7 @@ interface LikeParams {
 }
 
 const LikeComponent = ({ enabled }: LikeParams) => {
-    return enabled ? <Favorite style={likeStyle} /> : <React.Fragment />;
+    return enabled ? <Star style={likeStyle} /> : <React.Fragment />;
 };
 
 const Challenges = (records: Record[], likes: Like[]) => Object.keys(Names).map(key => {
@@ -100,10 +100,10 @@ const Challenges = (records: Record[], likes: Like[]) => Object.keys(Names).map(
         <ListItem key={key} style={listStyle}>
             <Button style={buttonStyle}>
                 <DoneComponent done={done} />
-                <LikeComponent enabled={doesLike} />
                 <Link to={`/algorithms/${name}`} style={linkStyle}>
                     {getName(key)}
                 </Link>
+                <LikeComponent enabled={doesLike} />
             </Button>
         </ListItem>
     );
@@ -114,25 +114,7 @@ const Sidebar = (props: Props) => {
     const recordsState = React.useContext<Partial<Records>>(RecordsContext);
     const records = recordsState.records || [];
     const likesState = React.useContext<Partial<LikesState>>(LikesContext);
-    const fakeLike1: Like = {
-        id: 0,
-        userId: 1,
-        challengeId: 1,
-        enabled: true,
-        createdTime: new Date(),
-        updatedTime: null
-    };
-
-    const fakeLike2: Like = {
-        id: 0,
-        userId: 1,
-        challengeId: 2,
-        enabled: true,
-        createdTime: new Date(),
-        updatedTime: null
-    };
-    // const likes = likesState.likes || [];
-    const likes = [fakeLike1, fakeLike2];
+    const likes = likesState.likes || [];
     return (
         <Drawer
             variant="persistent"

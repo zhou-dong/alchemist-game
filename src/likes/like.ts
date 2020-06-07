@@ -2,7 +2,7 @@ export interface Like {
     id: number;
     userId: number;
     challengeId: number;
-    enabled: Boolean;
+    enabled: boolean;
     createdTime: Date;
     updatedTime: Date | null;
 }
