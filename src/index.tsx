@@ -12,6 +12,9 @@ import { User } from './user/user';
 import { RecordsContext } from './records/recordsContext';
 import { Record } from './records/record';
 import { getRecords } from './records/recordsUtils';
+import { Like } from './likes/like';
+import { getLikes } from './likes/likesUtils';
+import { LikesContext } from './likes/likesContext';
 
 declare global {
     interface Window { initialReduxState: any; }
@@ -32,15 +35,20 @@ const Root = () => {
     const [records, setRecords] = React.useState<Record[]>([]);
     React.useEffect(() => { getRecords().then(objs => setRecords(objs)); }, []);
 
+    const [likes, setLikes] = React.useState<Like[]>([]);
+    React.useEffect(() => { getLikes().then(objs => setLikes(objs)); }, []);
+
     return (
         <Provider store={store}>
-            <RecordsContext.Provider value={{ records, setRecords }}>
-                <UserContext.Provider value={{ user, setUser }}>
-                    <ConnectedRouter history={history}>
-                        <Index />
-                    </ConnectedRouter>
-                </UserContext.Provider>
-            </RecordsContext.Provider>
+            <UserContext.Provider value={{ user, setUser }}>
+                <RecordsContext.Provider value={{ records, setRecords }}>
+                    <LikesContext.Provider value={{ likes, setLikes }}>
+                        <ConnectedRouter history={history}>
+                            <Index />
+                        </ConnectedRouter>
+                    </LikesContext.Provider>
+                </RecordsContext.Provider>
+            </UserContext.Provider>
         </Provider>
     );
 };
