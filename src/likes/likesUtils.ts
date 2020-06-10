@@ -1,7 +1,7 @@
 import { getAuthHeaders } from '../user/userUtils';
 import { Like } from './like';
 
-const likesUrl = 'https://api.alchemist-ai.com/api/v1/likes/challenges';
+const likesUrl = 'https://api.alchemist-ai.com/api/v1/favorites/challenges';
 
 export const getLikes = async (): Promise<Like[]> => {
     const authHeaders = getAuthHeaders();
