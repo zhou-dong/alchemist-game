@@ -2,16 +2,16 @@
 import * as React from 'react';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import { WithStyles, Button, ButtonGroup, Collapse } from '@material-ui/core';
+import { WithStyles, Collapse } from '@material-ui/core';
 import green from '@material-ui/core/colors/green';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/RefreshOutlined';
 import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
 import CheckIcon from '@material-ui/icons/CheckCircleOutlined';
-import WrongIcon from '@material-ui/icons/ErrorOutline';
-import StepsIcon from '@material-ui/icons/PollOutlined';
 import CodeIcon from '@material-ui/icons/CodeRounded';
 import LikeIcon from '@material-ui/icons/Favorite';
+import Tooltip from '@material-ui/core/Tooltip';
+
 import DislikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import { Header as HeaderProps } from '../store/BasicState';
 import { Records } from '../records/records';
@@ -34,6 +34,9 @@ const styles = (theme: Theme) => createStyles({
         color: green[500],
         position: 'absolute',
         zIndex: 1,
+    },
+    margin: {
+        margin: theme.spacing(1),
     },
 });
 
@@ -74,7 +77,7 @@ const DoesLike = ({ enabled, handleEnableLike, handleDisableLike }: DoesLikePara
     }
 };
 
-const HeaderTitle = ({ id, title, success, handleOpenDialogClick }: Props) => {
+const HeaderTitle = ({ id, success }: Props) => {
     const { records, setRecords } = React.useContext<Partial<Records>>(RecordsContext);
     const { user } = React.useContext<Partial<UserState>>(UserContext);
     const { likes, setLikes } = React.useContext<Partial<LikesState>>(LikesContext);
@@ -136,55 +139,30 @@ const HeaderTitle = ({ id, title, success, handleOpenDialogClick }: Props) => {
             }
         });
     }
-
-    return (
-        <div>
-            <PleaseSignIn open={alertOpen} setOpen={setAlertOpen} />
-            <IconButton onClick={handleOpenDialogClick}>
-                {success ? <CheckIcon style={{ color: 'green' }} /> : <AssignmentIcon style={{ color: 'black' }} />}
-            </IconButton>
-            <strong>{title.toUpperCase()}</strong>
-            <DoesLike enabled={enabledLike} handleEnableLike={handleEnableLike} handleDisableLike={handleDisableLike} />
-        </div>
-    );
 };
 
 const Header = (props: Props) => {
-    const { steps, errors } = props;
-    return (<div style={{ marginTop: '50px', marginBottom: '10px' }} >
-        <HeaderTitle {...props} />
+    const { title, success, handleOpenDialogClick, handleOpenFormulaClick, handleRefreshClick } = props;
+    return (
+        <div style={{ marginTop: '20px', marginBottom: '10px', fontSize: '18px' }} >
+            {title.toUpperCase()}
+            <Tooltip title="DESCRIPTION" placement="top">
+                <IconButton onClick={handleOpenDialogClick}>
+                    {success ? <CheckIcon style={{ color: 'green' }} /> : <AssignmentIcon style={{ color: '' }} />}
+                </IconButton>
+            </Tooltip>
+            <Tooltip title="CODE" placement="top">
+                <IconButton onClick={handleOpenFormulaClick}>
+                    <CodeIcon />
+                </IconButton>
+            </Tooltip>
 
-        <ButtonGroup variant="contained" size="small" style={{ marginTop: '25px' }}>
-            <Button
-                variant="outlined"
-                startIcon={<RefreshIcon />}
-                onClick={props.handleRefreshClick}
-            >
-                Refresh
-            </Button>
-            <Button
-                variant="outlined"
-                startIcon={<CodeIcon />}
-                onClick={props.handleOpenFormulaClick}
-            >
-                Code
-            </Button>
-        </ButtonGroup>
-        <ButtonGroup variant="contained" size="small" style={{ marginTop: '10px', marginLeft: '10px' }}>
-            <Button
-                variant="outlined"
-                startIcon={<StepsIcon />}
-            >
-                Steps: {steps}
-            </Button>
-            <Button
-                variant="outlined"
-                startIcon={<WrongIcon style={{ color: '#ff1744' }} />}
-            >
-                Errors: {errors}
-            </Button>
-        </ButtonGroup>
-    </div >
+            <Tooltip title="REFRESH" placement="top">
+                <IconButton onClick={handleRefreshClick}>
+                    <RefreshIcon />
+                </IconButton>
+            </Tooltip>
+        </div >
     );
 };
 
