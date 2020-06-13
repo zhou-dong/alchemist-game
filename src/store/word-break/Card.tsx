@@ -3,7 +3,7 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles, createStyles } from '@material-ui/core/styles';
 import { WithStyles } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
-import Header from '../../components/Header';
+import Header from '../../components/MainHeader';
 import Buttons from '../../components/Buttons';
 import Dialog from '../../components/Dialog';
 import Formula from '../../components/Formula';

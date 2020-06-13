@@ -4,13 +4,13 @@ import { withStyles, createStyles } from '@material-ui/core/styles';
 import { WithStyles } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
 
-import Header from './Header';
+import Header from './MainHeader';
 import Table from './Table';
 import Buttons from './Buttons';
 import { State } from '../store/BasicState';
 import Dialog from './Dialog';
 import Formula from './Formula';
-import Comments from './Comments';
+import Comments from './MainFooter';
 
 const styles = (theme: Theme) => createStyles({});
 interface Props extends State, WithStyles<typeof styles> { }
