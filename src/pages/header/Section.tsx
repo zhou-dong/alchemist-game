@@ -18,7 +18,6 @@ import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import ExitToApp from '@material-ui/icons/ExitToApp';
-import MoreIcon from '@material-ui/icons/MoreVert';
 
 import { UserContext } from '../../user/userContext';
 import GoogleLogo from './Google__G__Logo.svg';
@@ -214,9 +213,10 @@ const Section = (props: Props) => {
                 <UserIcon {...props} />
             </div>
             <div className={classes.sectionMobile}>
-                <IconButton aria-haspopup="true" color="inherit">
+                {/* <IconButton aria-haspopup="true" color="inherit">
                     <MoreIcon />
-                </IconButton>
+                </IconButton> */}
+                <UserIcon {...props} />
             </div>
         </React.Fragment>
     );

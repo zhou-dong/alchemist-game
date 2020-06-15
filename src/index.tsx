@@ -7,7 +7,7 @@ import Index from './pages';
 import configureStore from './store/configureStore';
 import * as serviceWorker from './serviceWorker';
 import { UserContext } from './user/userContext';
-import { getUser } from './user/userUtils';
+import { getMe } from './user/userUtils';
 import { User } from './user/user';
 import { RecordsContext } from './records/recordsContext';
 import { Record } from './records/record';
@@ -30,7 +30,7 @@ const store = configureStore(history, initialState);
 const Root = () => {
 
     const [user, setUser] = React.useState<User | null>(null);
-    React.useEffect(() => { getUser().then(obj => setUser(obj)); }, []);
+    React.useEffect(() => { getMe().then(obj => setUser(obj)); }, []);
 
     const [records, setRecords] = React.useState<Record[]>([]);
     React.useEffect(() => { getRecords().then(objs => setRecords(objs)); }, []);

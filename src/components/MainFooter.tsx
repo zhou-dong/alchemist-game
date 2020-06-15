@@ -7,18 +7,19 @@ import { WithStyles, Divider, Grid } from '@material-ui/core';
 import { State as BasicState } from '../store/BasicState';
 import Favorite from './Favorite';
 import Thumbs from './Thumbs';
+import Comments from './Comments';
 
 const styles = (theme: Theme) => createStyles({
     sectionDesktop: {
         display: 'none',
-        width: "50%",
+        width: "55%",
         [theme.breakpoints.up('md')]: {
             display: 'block',
         },
     },
     sectionMobile: {
         display: 'block',
-        width: "70%",
+        width: "96%",
         [theme.breakpoints.up('md')]: {
             display: 'none',
         },
@@ -46,11 +47,12 @@ const Content = (props: Props) => (
                 </Grid>
             </Grid>
         </Grid>
-        <Divider style={{ marginBottom: "20px" }} />
+        <Divider />
+        <Comments challengeId={props.id} />
     </React.Fragment>
 );
 
-const Comments = (props: Props) => (
+const Footer = (props: Props) => (
     <React.Fragment>
         <div className={`${props.classes.root} ${props.classes.sectionDesktop}`}>
             <Content {...props} />
@@ -59,7 +61,6 @@ const Comments = (props: Props) => (
             <Content {...props} />
         </div>
     </React.Fragment>
-
 );
 
-export default withStyles(styles)(Comments);
+export default withStyles(styles)(Footer);

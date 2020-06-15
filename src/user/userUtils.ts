@@ -1,6 +1,6 @@
 import { User } from './user';
 
-const userMeUrl = 'https://api.alchemist-ai.com/api/v1/users/me';
+const userUrl = 'https://api.alchemist-ai.com/api/v1/users';
 
 const localStorageKey = 'token';
 const ACCESS_TOKEN = 'access_token';
@@ -55,7 +55,7 @@ export const signOut = (): void => {
     window.location.href = window.location.href.split('?')[0];
 };
 
-export const getUser = async (): Promise<User | null> => {
+export const getMe = async (): Promise<User | null> => {
     const authHeaders = getAuthHeaders();
     if (!authHeaders) {
         return null;
@@ -66,7 +66,14 @@ export const getUser = async (): Promise<User | null> => {
         headers: authHeaders
     };
 
-    return await fetch(userMeUrl, requestInit)
+    return await fetch(`${userUrl}/me`, requestInit)
+        .then(response => response.json())
+        .then(json => createUser(json));
+};
+
+export const getUser = async (userId: number): Promise<User | null> => {
+    const requestInit: RequestInit = { method: 'GET' };
+    return await fetch(`${userUrl}/${userId}`, requestInit)
         .then(response => response.json())
         .then(json => createUser(json));
 };
