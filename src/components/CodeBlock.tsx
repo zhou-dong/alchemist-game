@@ -5,9 +5,13 @@ import { withStyles, createStyles } from '@material-ui/core/styles';
 import { WithStyles } from '@material-ui/core';
 import Highlight from 'react-highlight';
 
-import "../../node_modules/highlight.js/styles/atom-one-dark.css"
+import "../../node_modules/highlight.js/styles/atom-one-light.css"
 
-const styles = (theme: Theme) => createStyles({});
+const styles = (theme: Theme) => createStyles({
+    code: {
+        fontSize: "16px",
+    },
+});
 
 export enum Languares {
     Javascript = 'javascript',
@@ -20,7 +24,7 @@ interface Props extends WithStyles<typeof styles> {
 }
 
 const Code = (props: Props) => (
-    <Highlight className={props.language}>
+    <Highlight className={`${props.language} ${props.classes.code}`}>
         {props.code}
     </Highlight>
 );
