@@ -8,34 +8,35 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-// import ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 
 import { Dialog as DialogProps } from '../store/BasicState';
-import CodeBlock, { Languares } from './CodeBlock';
 
-const styles = (theme: Theme) => createStyles({});
+const styles = (theme: Theme) => createStyles({
+    description: {
+        fontSize: "16px",
+    }
+});
 
 interface Props extends DialogProps, WithStyles<typeof styles> { }
 
 const description = (props: Props) => (
-    <React.Fragment>
-        {/* <ReactMarkdown source={props.description} /> */}
-        {/* <Typography>Description</Typography> */}
-        <CodeBlock code={props.description} language={Languares.Markdown} />
-    </React.Fragment>
+    <ReactMarkdown source={props.description} className={props.classes.description} />
 );
 
 const alUsecases = (props: Props) => (
     <React.Fragment>
         <Typography>Use Cases</Typography>
-        <CodeBlock code={props.alUsecases} language={Languares.Markdown} />
+        <Divider />
+        <ReactMarkdown source={props.alUsecases} className={props.classes.description} />
     </React.Fragment>
 );
 
 const example = (props: Props) => (
     <React.Fragment>
         <Typography>Example</Typography>
-        <CodeBlock code={props.example} language={Languares.Markdown} />
+        <Divider />
+        <ReactMarkdown source={props.example} className={props.classes.description} />
     </React.Fragment>
 );
 
