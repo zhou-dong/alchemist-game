@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { ApplicationState } from '..';
-import Card from '../../components/Card';
+import Main from './Main';
 import * as actions from './actions';
 
 const mapStateToProps = ({ knapsackProblem }: ApplicationState) => ({
@@ -35,4 +35,4 @@ const mapDispatchToProps = (dispatch: Dispatch<actions.Action>) => ({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
