@@ -12,4 +12,16 @@ make up that amount. If that amount of money cannot be made up by
 any combination of the coins, return -1.`;
 
 export const alUsecases = '';
-export const example = '';
+export const example = `
+Greedy Algorithm Does not Always Give Optimal Solution. For instance:
+
+1. Non optimal solution using Greedy Algorithm:
+    - Given: Coins = {1, 8, 13}, 16 cents = ?
+    - Greedy solution: **4 coins: 13 + 1 + 1 + 1**
+    - Optimal solution: **2 coins: 8 + 8**
+
+2. Can not result a solution using Greedy Algorithm:
+    - Given: Coins = {2, 8, 15}, 24 cents = ?
+    - Greedy solution: **no solution: coins: 15 + 8 + ? **
+    - Optimal solution: **3 coins: 8 + 8 + 8**
+`;
