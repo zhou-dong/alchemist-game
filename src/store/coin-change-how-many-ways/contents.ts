@@ -4,10 +4,9 @@ export const formula = `if (coin > col) {
   table[row][col] = table[row][col - coin] + table[row - 1][col];
 }`;
 
-export const description = `You have some types of coins available in infinite quantities 
-where the value of each coin is given in the array. Can you 
-determine the number of ways of making change for units using 
-the given types of coins? `;
+export const description = `​You are given coins of different denominations and a total amount of money. 
+Write a function to compute the number of combinations that make up that amount. 
+You may assume that you have infinite number of each kind of coin. `;
 
 export const alUsecases = '';
 export const example = '';

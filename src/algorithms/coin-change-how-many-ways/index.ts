@@ -33,7 +33,7 @@ const createTableMatrix = (coins: number[], total: number): (number | string)[][
         table[row][1] = 1;
     }
 
-    table[1][1] = 0;
+    // table[1][1] = 0;
     table[startPoint.row][startPoint.col] = '?';
     return table;
 };
