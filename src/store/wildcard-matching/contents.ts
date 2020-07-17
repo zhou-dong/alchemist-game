@@ -2,6 +2,8 @@ export const formula = `if (p === '?' || p === t) {
   table[row][col] = table[row - 1][col - 1];
 } else if (p === '*') {
   table[row][col] = table[row][col - 1] || table[row - 1][col];
+} else {
+  table[row][col] = false;
 }`;
 
 export const description = `
@@ -38,8 +40,8 @@ Two Characters:
 |  "ab"  |   "?"   | False |
 |  "ab"  |   "??"  |  True |
 |  "ab"  |   "**"  |  True |
-|  "ab"  |   "*a"  | False |
-|  "ab"  |   "*b"  | False |
+|  "ab"  |   "?a"  | False |
+|  "ab"  |   "?b"  |  True |
 |  "ab"  |  "???"  | False |
 |  "ab"  |  "***"  |  True |
 |  "ab"  |  "a*b"  |  True |
