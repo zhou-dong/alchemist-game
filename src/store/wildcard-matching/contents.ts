@@ -1,20 +1,47 @@
 export const formula = `if (p === '?' || p === t) {
   table[row][col] = table[row - 1][col - 1];
 } else if (p === '*') {
-  table[row][col] = 
-    table[row][col - 1] || table[row - 1][col];
+  table[row][col] = table[row][col - 1] || table[row - 1][col];
 }`;
 
-export const description = `'?' Matches any single character. 
-'*' Matches any sequence of characters (including the empty sequence). 
-The matching should cover the entire input string (not partial). 
+export const description = `
+Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
+
+- '?' Matches any single character. 
+- '*' Matches any sequence of characters (including the empty sequence).
+
+The matching should cover the ***entire*** input string (not partial). 
 `;
 
 export const alUsecases = '';
-export const example = `"aa","a" → false
-"aa","aa" → true
-"aa", "*" → true
-"aa", "a*" → true
-"ab", "?*" → true
-"aab", "c*a*b" → false
+
+export const example = `
+Empty string:
+
+| STRING | PATTERN | MATCH |
+|:------:|:-------:|:-----:|
+|   ""   |   "*"   |  True |
+|   ""   |   "?"   | False |
+
+One Character:
+
+| STRING | PATTERN | MATCH |
+|:------:|:-------:|:-----:|
+|   "a"  |   "?"   |  True |
+|   "a"  |   "*"   |  True |
+
+Two Characters:
+
+| STRING | PATTERN | MATCH |
+|:------:|:-------:|:-----:|
+|  "ab"  |   "*"   |  True |
+|  "ab"  |   "?"   | False |
+|  "ab"  |   "??"  |  True |
+|  "ab"  |   "**"  |  True |
+|  "ab"  |   "*a"  | False |
+|  "ab"  |   "*b"  | False |
+|  "ab"  |  "???"  | False |
+|  "ab"  |  "***"  |  True |
+|  "ab"  |  "a*b"  |  True |
+|  "ab"  |  "a?b"  | False |
 `;

@@ -15,7 +15,17 @@ import { Dialog as DialogProps } from '../store/BasicState';
 const styles = (theme: Theme) => createStyles({
     description: {
         fontSize: "16px",
-    }
+        "& table": {
+            borderCollapse: "collapse",
+            border: "1px solid black",
+        },
+        "& th": {
+            border: "1px solid black",
+        },
+        "& td": {
+            border: "1px solid black",
+        },
+    },
 });
 
 interface Props extends DialogProps, WithStyles<typeof styles> { }

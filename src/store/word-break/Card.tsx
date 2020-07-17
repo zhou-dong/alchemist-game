@@ -8,6 +8,7 @@ import Buttons from '../../components/Buttons';
 import Dialog from '../../components/Dialog';
 import Formula from '../../components/Formula';
 import Table from '../../components/Table';
+import Comments from '../../components/MainFooter';
 import { helperStyle } from '../../pages/withRoot';
 
 import { State } from './state';
@@ -39,6 +40,7 @@ const Algorithm = (props: Props) => (
         <CardContent>
             <Buttons {...props} />
         </CardContent>
+        <Comments {...props} />
         <Dialog  {...props} />
         <Formula {...props} />
     </div>
