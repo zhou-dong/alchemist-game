@@ -49,6 +49,10 @@ export const create = () => {
     arrayOne[random(6 - 1) + 1] = '.';
     const stringOne: string = arrayOne.join('');
     const stringTwo: string = Array(6).fill(bases.length).map(random).map(i => bases[i]).join('');
+
+    // stringTwo = "AAABCAAB"
+    // stringOne = "A*B.A*B"
+
     return ({
         ...header,
         ...dialog,

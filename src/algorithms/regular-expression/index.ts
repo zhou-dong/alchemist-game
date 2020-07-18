@@ -13,8 +13,8 @@ interface TableSize {
 }
 
 const getTableSize = (pattern: string, text: string): TableSize => {
-    const rows = text.length + 1;
-    const cols = pattern.length + 1;
+    const rows = text.length + 2;
+    const cols = pattern.length + 2;
     return { rows, cols };
 };
 
