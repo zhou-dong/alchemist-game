@@ -42,9 +42,9 @@ const header: Header = {
 
 const random = (max: number) => Math.floor(Math.random() * max) + 1;
 
-const maxNumber = 5;
+const maxNumber = 9;
 const rows = 4;
-const cols = 4;
+const cols = 6;
 
 const createRow = (len: number, max: number): number[] => {
     return Array(len).fill(max).map(random);
