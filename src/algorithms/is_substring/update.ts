@@ -2,6 +2,12 @@ import { State, Point } from '../../store/BasicState';
 import { addHelperStyles } from '.';
 import { helperStyle } from '../../pages/withRoot';
 
+const getLastCell = (table: (string | boolean)[][]): Point => {
+    const row = table.length - 1;
+    const col = table[row].length - 1;
+    return { row, col };
+};
+
 const booleanToString = (value: boolean): string => (value ? 'T' : 'F');
 
 const isMatch = ({ row, col }: Point, r: number, c: number) => (row === r && col === c);
@@ -23,12 +29,17 @@ const isLastRow = (table: (string | boolean)[][], point: Point): boolean => {
     return point.row === table.length - 1;
 };
 
-const isLastCell = (table: (string | boolean)[][], point: Point): boolean => {
+const isSuccessCell = (table: (string | boolean)[][], point: Point): boolean => {
     if (!isLastRow(table, point)) {
         return false;
     }
 
     return table[point.row][point.col] === true || table[point.row][point.col] === 'T';
+};
+
+const isLastCell = (table: (string | boolean)[][], point: Point): boolean => {
+    const { row, col } = getLastCell(table);
+    return isMatch(point, row, col);
 };
 
 const getNextPoint = (table: (string | boolean)[][], { row, col }: Point): Point => {
@@ -55,7 +66,7 @@ const update = (value: boolean, state: State): State => {
         return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
     }
 
-    if (isLastCell(table, currentPoint)) {
+    if (isSuccessCell(table, currentPoint) || isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
         tableStyles[currentPoint.row][currentPoint.col] = helperStyle;
         return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
