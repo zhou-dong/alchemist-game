@@ -1,11 +1,11 @@
 import { Dialog, DialogScroll, Header, BasicInfo, State, Difficulty, Formula } from '../BasicState';
 import { buttonClick, refresh, openDialog, closeDialog, closeFormula, openFormula } from './actions';
 import { description, formula, example, alUsecases } from './contents';
-import * as helper from '../../algorithms/is-subsequence';
+import * as helper from '../../algorithms/is_substring';
 
 export const basicInfo: BasicInfo = {
-    id: 2,
-    title: 'Is Subsequence',
+    id: 22,
+    title: 'Is Substring',
 };
 
 const codeFormula: Formula = {
@@ -45,15 +45,16 @@ const random = (max: number) => Math.floor(Math.random() * max);
 
 export const create = () => {
     const stringOne: string = Array(8).fill(bases.length).map(random).map(i => bases[i]).join('');
-    const stringTwo: string = Array(4).fill(bases.length).map(random).map(i => bases[i]).join('');
+    const stringTwo: string = Array(3).fill(bases.length).map(random).map(i => bases[i]).join('');
+    const table = helper.createTableMatrix(stringOne, stringTwo);
     return ({
         ...header,
         ...dialog,
         ...codeFormula,
         currentPoint: helper.startPoint,
         comparedTable: helper.createComparedTable(stringOne, stringTwo),
-        table: helper.createTableMatrix(stringOne, stringTwo),
-        tableStyles: helper.createTableStyles(stringOne, stringTwo),
+        table,
+        tableStyles: helper.createTableStyles(stringOne, stringTwo, table),
         buttons: helper.createButtons(stringOne, stringTwo),
         buttonsStyles: helper.createButtonsStyles(stringOne, stringTwo),
         handleButtonClick: buttonClick,

@@ -57,6 +57,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.CoinChangeHowManyWays />);
         case Names.Is_Subsequence:
             return (<containers.IsSubsequence />);
+        case Names.Is_Substring:
+            return (<containers.IsSubstring />);
         case Names.Longest_Common_Subsequence:
             return (<containers.LongestCommonSubsequence />);
         case Names.Longest_Common_Substring:

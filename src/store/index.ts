@@ -15,6 +15,7 @@ import { RodCuttingProblem, RodCuttingProblemReducer, RodCuttingProblemWatchReco
 import { WildcardMatching, WildcardMatchingReducer, WildcardMatchingWatchRecord } from './wildcard-matching';
 import { RegularExpression, RegularExpressionReducer, RegularExpressionWatchRecord } from './regular-expression';
 import { IsSubsequence, IsSubsequenceReducer, IsSubsequenceWatchRecord } from './is-subsequence';
+import { IsSubstring, IsSubstringReducer, IsSubstringWatchRecord } from './is_substring';
 import { SubsetSumProblem, SubsetSumProblemReducer, SubsetSumProblemWatchRecord } from './subset-sum-problem';
 import { MinimumPathSum, MinimumPathSumReducer, MinimumPathSumWatchRecord } from './minimum-path-sum';
 import { WordBreak, WordBreakReducer, WordBreakWatchRecord } from './word-break';
@@ -59,6 +60,7 @@ export interface ApplicationState {
     coinChangeFewestNumber: State;
     coinChangeHowManyWays: State;
     isSubsequence: State;
+    isSubstring: State;
     longestCommonSubsequence: State;
     longestCommonSubstring: State;
     subsetSumProblem: State;
@@ -84,6 +86,7 @@ export const rootReducer = (history: History) => combineReducers({
     coinChangeFewestNumber: CoinChangeFewestNumberReducer,
     coinChangeHowManyWays: CoinChangeHowManyWaysReducer,
     isSubsequence: IsSubsequenceReducer,
+    isSubstring: IsSubstringReducer,
     longestCommonSubsequence: LongestCommonSubsequenceReducer,
     longestCommonSubstring: LongestCommonSubstringReducer,
     subsetSumProblem: SubsetSumProblemReducer,
@@ -108,6 +111,7 @@ export const containers = {
     CoinChangeFewestNumber,
     CoinChangeHowManyWays,
     IsSubsequence,
+    IsSubstring,
     LongestCommonSubsequence,
     LongestCommonSubstring,
     SubsetSumProblem,
@@ -133,6 +137,7 @@ export function* rootSaga() {
         CoinChangeFewestNumberWatchRecord(),
         CoinChangeHowManyWaysWatchRecord(),
         IsSubsequenceWatchRecord(),
+        IsSubstringWatchRecord(),
         LongestCommonSubsequenceWatchRecord(),
         LongestCommonSubstringWatchRecord(),
         SubsetSumProblemWatchRecord(),

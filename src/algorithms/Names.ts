@@ -6,6 +6,7 @@ import { basicInfo as RegularExpression } from '../store/regular-expression/init
 import { basicInfo as CoinChangeFewestNumber } from '../store/coin-change-fewest-number/initialState';
 import { basicInfo as CoinChangeHowManyWays } from '../store/coin-change-how-many-ways/initialState';
 import { basicInfo as IsSubsequence } from '../store/is-subsequence/initialState';
+import { basicInfo as IsSubstring } from '../store/is_substring/initialState';
 import { basicInfo as LongestCommonSubsequence } from '../store/longest-common-subsequence/initialState';
 import { basicInfo as LongestCommonSubstring } from '../store/longest-common-substring/initialState';
 import { basicInfo as SubsetSumProblem } from '../store/subset-sum-problem/initialState';
@@ -31,6 +32,7 @@ enum Names {
     Coin_Change_Fewest_Number = 'coin-change-fewest-number',
     Coin_Change_How_Many_Ways = 'coin-change-how-many-ways',
     Is_Subsequence = 'is-subsequence',
+    Is_Substring = 'is-substring',
     Longest_Common_Subsequence = 'longest-common-subsequence',
     Longest_Common_Substring = 'longest-common-substring',
     Subset_Sum_Problem = 'subset-sum-problem',
@@ -54,6 +56,7 @@ export const getId = (name: string): number => {
         case Names.Coin_Change_Fewest_Number: return CoinChangeFewestNumber.id;
         case Names.Coin_Change_How_Many_Ways: return CoinChangeHowManyWays.id;
         case Names.Is_Subsequence: return IsSubsequence.id;
+        case Names.Is_Substring: return IsSubstring.id;
         case Names.Longest_Common_Subsequence: return LongestCommonSubsequence.id;
         case Names.Longest_Common_Substring: return LongestCommonSubstring.id;
         case Names.Subset_Sum_Problem: return SubsetSumProblem.id;
