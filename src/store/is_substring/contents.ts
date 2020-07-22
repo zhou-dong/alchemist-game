@@ -13,11 +13,11 @@ export const alUsecases = "";
 export const example = `
 Example 1:
 
-- Input: s1 = "che", s2 = "alchemist
+- Input: s1 = che, s2 = alchemist
 - Output: ***true***
 
 Example 2:
 
-- Input: s1 = "chm", s2 = "alchemist
+- Input: s1 = chm, s2 = alchemist
 - Output: ***false***
 `;
