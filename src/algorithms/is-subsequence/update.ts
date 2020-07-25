@@ -31,6 +31,18 @@ const isLastCell = (table: (string | boolean)[][], point: Point): boolean => {
 const getNextPoint = (table: (string | boolean)[][], { row, col }: Point): Point =>
     (col === table[row].length - 1) ? { row: row + 1, col: 2 } : { row, col: col + 1 };
 
+const isLastRow = (table: (string | boolean)[][], point: Point): boolean => {
+    return point.row === table.length - 1;
+};
+
+const isSuccessCell = (table: (string | boolean)[][], point: Point): boolean => {
+    if (!isLastRow(table, point)) {
+        return false;
+    }
+
+    return table[point.row][point.col] === true || table[point.row][point.col] === 'T';
+};
+
 const update = (value: boolean, state: State): State => {
 
     const { currentPoint, errors, success } = state;
@@ -47,20 +59,19 @@ const update = (value: boolean, state: State): State => {
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
         tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
-        addHelperStyles(tableStyles, currentPoint);
+        addHelperStyles(tableStyles, currentPoint, table);
         return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
     }
 
-    if (isLastCell(table, currentPoint)) {
+    if (isSuccessCell(table, currentPoint) || isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
-        const lastCell = getLastCell(table);
-        tableStyles[lastCell.row][lastCell.col] = helperStyle;
+        tableStyles[currentPoint.row][currentPoint.col] = helperStyle;
         return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
     }
 
     const nextPoint = getNextPoint(table, currentPoint);
     table[nextPoint.row][nextPoint.col] = '?';
-    addHelperStyles(tableStyles, nextPoint);
+    addHelperStyles(tableStyles, nextPoint, table);
 
     return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint };
 };
