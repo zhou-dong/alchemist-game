@@ -46,14 +46,17 @@ const random = (max: number) => Math.floor(Math.random() * max);
 export const create = () => {
     const stringOne: string = Array(8).fill(bases.length).map(random).map(i => bases[i]).join('');
     const stringTwo: string = Array(4).fill(bases.length).map(random).map(i => bases[i]).join('');
+
+    const table = helper.createTableMatrix(stringOne, stringTwo);
+
     return ({
         ...header,
         ...dialog,
         ...codeFormula,
         currentPoint: helper.startPoint,
         comparedTable: helper.createComparedTable(stringOne, stringTwo),
-        table: helper.createTableMatrix(stringOne, stringTwo),
-        tableStyles: helper.createTableStyles(stringOne, stringTwo),
+        table,
+        tableStyles: helper.createTableStyles(stringOne, stringTwo, table),
         buttons: helper.createButtons(stringOne, stringTwo),
         buttonsStyles: helper.createButtonsStyles(stringOne, stringTwo),
         handleButtonClick: buttonClick,
