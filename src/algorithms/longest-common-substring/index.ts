@@ -1,6 +1,6 @@
 import createDPTable from './algorithm';
 import { Point } from '../../store/BasicState';
-import { helperStyle } from '../../pages/withRoot';
+import { helperStyle, helperStyleSecondary } from '../../pages/withRoot';
 
 const startPoint: Point = {
     row: 2,
@@ -52,7 +52,7 @@ const createComparedTable = (stringOne: string, stringTwo: string): (number | st
     return tableMatrix;
 };
 
-const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void => {
+const addHelperStyles = (styles: React.CSSProperties[][], point: Point, table: (number | string)[][]): void => {
     for (let col = 0; col < styles[0].length && col <= point.col; col++) {
         styles[0][col] = helperStyle;
     }
@@ -60,13 +60,17 @@ const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void =>
     for (let row = 0; row < styles.length && row <= point.row; row++) {
         styles[row][0] = helperStyle;
     }
+
+    if (table[point.row][0] === table[0][point.col]) {
+        styles[point.row - 1][point.col - 1] = helperStyleSecondary;
+    }
 };
 
-const createTableStyles = (stringOne: string, stringTwo: string): (React.CSSProperties)[][] => {
+const createTableStyles = (stringOne: string, stringTwo: string, table: (number | string)[][]): (React.CSSProperties)[][] => {
     const { rows, cols } = getTableSize(stringOne, stringTwo);
-    const table = new Array(rows).fill(0).map(() => new Array(cols).fill({}));
-    addHelperStyles(table, startPoint);
-    return table;
+    const styles = new Array(rows).fill(0).map(() => new Array(cols).fill({}));
+    addHelperStyles(styles, startPoint, table);
+    return styles;
 };
 
 const createButtons = (stringOne: string, stringTwo: string): number[] => {

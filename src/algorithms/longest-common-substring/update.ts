@@ -25,7 +25,7 @@ const getNextPoint = (table: (string | number)[][], { row, col }: Point): Point 
     return (col === table[row].length - 1) ? { row: row + 1, col: 2 } : { row, col: col + 1 };
 };
 
-const getMax = (table: (string |number)[][]): number => {
+const getMax = (table: (string | number)[][]): number => {
     let max = 0;
     for (let row = 1; row < table.length; row++) {
         for (let col = 1; col < table[row].length; col++) {
@@ -65,7 +65,7 @@ const update = (value: number, state: State): State => {
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
         tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
-        addHelperStyles(tableStyles, currentPoint);
+        addHelperStyles(tableStyles, currentPoint, table);
         return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
     }
 
@@ -77,7 +77,7 @@ const update = (value: number, state: State): State => {
 
     const nextPoint = getNextPoint(table, currentPoint);
     table[nextPoint.row][nextPoint.col] = '?';
-    addHelperStyles(tableStyles, nextPoint);
+    addHelperStyles(tableStyles, nextPoint, table);
 
     return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint };
 };
