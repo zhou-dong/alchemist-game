@@ -44,15 +44,19 @@ const total = 8;
 const random = (max: number) => Math.floor(Math.random() * max) + 1;
 
 export const create = () => {
+
     const array: number[] = Array(4).fill(4).map(random);
+
+    const table = helper.createTableMatrix(total, array);
+
     return ({
         ...header,
         ...dialog,
         ...codeFormula,
         currentPoint: helper.startPoint,
         comparedTable: helper.createComparedTable(total, array),
-        table: helper.createTableMatrix(total, array),
-        tableStyles: helper.createTableStyles(total, array),
+        table,
+        tableStyles: helper.createTableStyles(total, array, table),
         buttons: helper.createButtons(total, array),
         buttonsStyles: helper.createButtonsStyles(total, array),
         handleButtonClick: buttonClick,

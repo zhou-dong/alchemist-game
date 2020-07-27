@@ -47,7 +47,7 @@ const update = (value: boolean, state: State): State => {
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
         tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
-        addHelperStyles(tableStyles, currentPoint);
+        addHelperStyles(tableStyles, currentPoint, table);
         return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
     }
 
@@ -60,7 +60,7 @@ const update = (value: boolean, state: State): State => {
 
     const nextPoint = getNextPoint(table, currentPoint);
     table[nextPoint.row][nextPoint.col] = '?';
-    addHelperStyles(tableStyles, nextPoint);
+    addHelperStyles(tableStyles, nextPoint, table);
 
     return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint };
 };
