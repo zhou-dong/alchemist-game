@@ -48,7 +48,7 @@ const random = (sequence: string): string => {
 };
 
 export const create = () => {
-    const sequence = 'abcd';
+    const sequence = 'bcd';
     const input = Array(size).fill(sequence).map(random).join('');
 
     return ({

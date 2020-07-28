@@ -30,6 +30,7 @@ palindromic substring.`;
 
 export const alUsecases = '';
 
-export const example = `Input: "dbcdcd"
-Output: 3
-Note: "cdc", "dcd" with length 3`;
+export const example = `
+- Input: "dbcdcd"
+- Output: 3
+- Note: "cdc", "dcd" with length 3`;
