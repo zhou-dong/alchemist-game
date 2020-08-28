@@ -20,8 +20,7 @@ for (let len = 3; len <= table.length; len += 1) {
     if (front === end) {
       table[i][i + len - 1] = 2 + table[i + 1][i + len - 2];
     } else {
-      table[i][i + len - 1] = Math.max(
-        table[i][i + len - 2], table[i + 1][i + len - 1]);
+      table[i][i + len - 1] = Math.max(table[i][i + len - 2], table[i + 1][i + len - 1]);
     }
   }
 }`;
