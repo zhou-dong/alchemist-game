@@ -37,24 +37,6 @@ const styles = (theme: Theme) => createStyles({
 
 interface Props extends HeaderProps, WithStyles<typeof styles> { }
 
-// interface AlertProps {
-//     open: boolean;
-//     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-// }
-// const PleaseSignIn = ({ open, setOpen }: AlertProps) => (
-//     <Collapse in={open}>
-//         <Alert severity="success" onClose={() => setOpen(false)}>
-//             <strong>Congratulation ! </strong> Also you cloud sign in to save your records.
-//         </Alert>
-//     </Collapse>
-// );
-
-// const [alertOpen, setAlertOpen] = React.useState(false);
-// Uncaught Error: Too many re-renders. React limits the number of renders to prevent an infinite loop.
-// if (success && !userState.user) {
-//     setTimeout(() => { setAlertOpen(true); }, 1000);
-// }
-
 interface TitleParams {
     challengeId: number;
     success: boolean;

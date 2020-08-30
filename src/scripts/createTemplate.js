@@ -140,3 +140,6 @@ renderIndexTs();
 renderInitialStateTs();
 cpReducerJs();
 cpSagasTs();
+
+// example:
+// node ./src/scripts/createTemplate.js binary-tree-inorder-traversal 23

@@ -2,12 +2,18 @@ import React from "react";
 import Action, { RectProps, TextProps } from "./TreeButton";
 import TreeNode, { Status } from "../treeNode";
 import { ActionType, Actions } from "../actions/action";
+import { Records } from '../../../../records/records';
+import { RecordsContext } from "../../../../records/recordsContext";
+import { Record } from '../../../../records/record';
+import { save as saveRecord, getRecords } from '../../../../records/recordsUtils';
 
 const rx = 8; // rectangle corners rounded
-const horizontalMargin = 3;
-const verticalMargin = 4;
+const horizontalMargin = 2;
+const verticalMargin = 2;
+const yPlus = 14.3;
 
 export interface Props {
+    challengeId: number;
     width: number;
     height: number;
     treeNode: TreeNode;
@@ -15,7 +21,8 @@ export interface Props {
     actionsIndex: number;
     setActionIndex: React.Dispatch<React.SetStateAction<number>>;
     setTreeNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>;
-    setResults: React.Dispatch<React.SetStateAction<string[]>>
+    setResults: React.Dispatch<React.SetStateAction<string[]>>;
+    setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface ButtonProps extends Props {
@@ -25,10 +32,17 @@ interface ButtonProps extends Props {
 
 const calculateStartPosition = (node: TreeNode) => {
     if (node.parent === undefined) {
-        return { x: node.circleCx - 95, y: node.circleCy - 78 };
+        return { x: node.circleCx + 24, y: node.circleCy - 24 };
     } else {
-        return { x: node.circleCx - 95, y: node.circleCy - 78 };
+        return { x: node.circleCx - 84, y: node.circleCy - 64 };
     }
+};
+
+const triggerAlert = (setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setAlertOpen(true);
+    setTimeout(() => {
+        setAlertOpen(false);
+    }, 2000)
 };
 
 const doNothingClick = () => { };
@@ -38,7 +52,8 @@ const handleGoLeftClick = (
     actions: Actions,
     actionsIndex: number,
     setActionIndex: React.Dispatch<React.SetStateAction<number>>,
-    setTreeNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>
+    setTreeNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>,
+    setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     const currentAction = actions.get(actionsIndex);
 
@@ -60,16 +75,16 @@ const handleGoLeftClick = (
         })
         setActionIndex(index => index + 1);
     } else {
-        console.log("wrong left")
+        triggerAlert(setAlertOpen);
     }
 };
 
-const GoLeft = ({ x, y, width, height, treeNode, setTreeNodes, actions, actionsIndex, setActionIndex }: ButtonProps) => {
-    const handleClick = treeNode.goLeftEnabled ? () => handleGoLeftClick(treeNode, actions, actionsIndex, setActionIndex, setTreeNodes) : doNothingClick;
+const GoLeft = ({ x, y, width, height, treeNode, setTreeNodes, actions, actionsIndex, setActionIndex, setAlertOpen }: ButtonProps) => {
+    const handleClick = treeNode.goLeftEnabled ? () => handleGoLeftClick(treeNode, actions, actionsIndex, setActionIndex, setTreeNodes, setAlertOpen) : doNothingClick;
 
     const disabled = !treeNode.goLeftEnabled;
     const rectProps: RectProps = { x, y, rx, width, height, handleClick, disabled };
-    const textProps: TextProps = { x: x + 8, y: y + 18, content: "①LEFT", disabled };
+    const textProps: TextProps = { x: x + 6, y: y + yPlus, content: "①LEFT", disabled };
     return <Action rect={rectProps} text={textProps} />;
 };
 
@@ -79,7 +94,8 @@ const handlePrintValClick = (
     actionsIndex: number,
     setActionIndex: React.Dispatch<React.SetStateAction<number>>,
     setTreeNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>,
-    setResults: React.Dispatch<React.SetStateAction<string[]>>
+    setResults: React.Dispatch<React.SetStateAction<string[]>>,
+    setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     const currentAction = actions.get(actionsIndex);
 
@@ -106,17 +122,19 @@ const handlePrintValClick = (
 
         setActionIndex(index => index + 1);
     } else {
-        console.log("wrong print")
+        triggerAlert(setAlertOpen);
     }
 };
 
-const PrintVal = ({ x, y, width, height, treeNode, setTreeNodes, actions, actionsIndex, setActionIndex, setResults }: ButtonProps) => {
+const PrintVal = ({ x, y, width, height, treeNode, setTreeNodes, actions, actionsIndex, setActionIndex, setResults, setAlertOpen }: ButtonProps) => {
     x = x + width + horizontalMargin;
-    const handleClick = treeNode.printValEnabled ? () => handlePrintValClick(treeNode, actions, actionsIndex, setActionIndex, setTreeNodes, setResults) : doNothingClick;
+    const handleClick = treeNode.printValEnabled ? () => handlePrintValClick(
+        treeNode, actions, actionsIndex, setActionIndex, setTreeNodes, setResults, setAlertOpen
+    ) : doNothingClick;
 
     const disabled = !treeNode.printValEnabled;
     const rectProps: RectProps = { x, y, rx, width, height, handleClick, disabled };
-    const textProps: TextProps = { x: x + 6, y: y + 18, content: "②PRINT", disabled };
+    const textProps: TextProps = { x: x + 3, y: y + yPlus, content: "②PRINT", disabled };
     return <Action rect={rectProps} text={textProps} />;
 };
 
@@ -125,7 +143,8 @@ const handleGoRightClick = (
     actions: Actions,
     actionsIndex: number,
     setActionIndex: React.Dispatch<React.SetStateAction<number>>,
-    setTreeNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>
+    setTreeNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>,
+    setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     const currentAction = actions.get(actionsIndex);
 
@@ -145,20 +164,71 @@ const handleGoRightClick = (
 
         setActionIndex(index => index + 1);
     } else {
-        console.log("click right");
+        triggerAlert(setAlertOpen);
     }
 };
 
-const GoRight = ({ x, y, width, height, treeNode, setTreeNodes, actions, actionsIndex, setActionIndex }: ButtonProps) => {
+const GoRight = ({ x, y, width, height, treeNode, setTreeNodes, actions, actionsIndex, setActionIndex, setAlertOpen }: ButtonProps) => {
     x = x + width * 2 + horizontalMargin * 2;
 
-    const handleClick = treeNode.goRightEnabled ? () => handleGoRightClick(treeNode, actions, actionsIndex, setActionIndex, setTreeNodes) : doNothingClick;
+    const handleClick = treeNode.goRightEnabled ? () => handleGoRightClick(
+        treeNode, actions, actionsIndex, setActionIndex, setTreeNodes, setAlertOpen
+    ) : doNothingClick;
 
     const disabled = !treeNode.goRightEnabled;
     const rectProps: RectProps = { x, y, rx, width, height, handleClick, disabled };
-    const textProps: TextProps = { x: x + 5, y: y + 18, content: "③RIGHT", disabled };
+    const textProps: TextProps = { x: x + 2, y: y + yPlus, content: "③RIGHT", disabled };
 
     return <Action rect={rectProps} text={textProps} />;
+};
+
+const isInSucceedList = (challengeId: number, records: Record[]): boolean => (
+    records.map(record => record.challengeId).includes(challengeId)
+);
+
+const updateLocalRecords = (
+    currentRecords: Record[],
+    newRecords: Record[],
+    setRecords: React.Dispatch<React.SetStateAction<any[]>>
+): void => {
+    const currentIds: number[] = currentRecords.map(record => record.challengeId).sort();
+    const newIds: number[] = newRecords.map(record => record.challengeId).sort();
+
+    const str1 = JSON.stringify(currentIds);
+    const str2 = JSON.stringify(newIds);
+
+    if (str1 !== str2) {
+        setRecords(newRecords);
+    }
+};
+
+const updateRecords = (
+    challengeId: number,
+    records?: Record[],
+    setRecords?: React.Dispatch<React.SetStateAction<any[]>>
+): void => {
+
+    if (!records) {
+        return;
+    }
+
+    if (!setRecords) {
+        return;
+    }
+
+    if (isInSucceedList(challengeId, records)) {
+        return;
+    }
+    saveRecord(challengeId).then(saveResult => {
+        if (!saveResult) {
+            return;
+        }
+        getRecords().then(newRecords => {
+            if (records && newRecords) {
+                updateLocalRecords(records, newRecords, setRecords);
+            }
+        });
+    });
 };
 
 const handleReturnToParentClick = (
@@ -166,7 +236,11 @@ const handleReturnToParentClick = (
     actions: Actions,
     actionsIndex: number,
     setActionIndex: React.Dispatch<React.SetStateAction<number>>,
-    setTreeNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>
+    setTreeNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>,
+    setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    challengeId: number,
+    records?: Record[],
+    setRecords?: React.Dispatch<React.SetStateAction<any[]>>,
 ) => {
 
     const currentAction = actions.get(actionsIndex);
@@ -183,22 +257,31 @@ const handleReturnToParentClick = (
             })
         })
 
+        if (actionsIndex === actions.length - 1) {
+            updateRecords(challengeId, records, setRecords);
+        }
+
         setActionIndex(index => index + 1);
     } else {
-
-        console.log("go back to parent");
+        triggerAlert(setAlertOpen);
     }
 
 };
 
-const ReturnToParent = ({ x, y, width, height, treeNode, setTreeNodes, actions, actionsIndex, setActionIndex }: ButtonProps) => {
+const ReturnToParent = (
+    { x, y, width, height, treeNode, setTreeNodes, actions, actionsIndex, setActionIndex, challengeId, setAlertOpen }: ButtonProps
+) => {
     y = y + height + verticalMargin;
 
-    const handleClick = treeNode.returnToParentEnabled ? () => handleReturnToParentClick(treeNode, actions, actionsIndex, setActionIndex, setTreeNodes) : doNothingClick;
+    const { records, setRecords } = React.useContext<Partial<Records>>(RecordsContext);
+
+    const handleClick = treeNode.returnToParentEnabled ? () => handleReturnToParentClick(
+        treeNode, actions, actionsIndex, setActionIndex, setTreeNodes, setAlertOpen, challengeId, records, setRecords
+    ) : doNothingClick;
 
     const disabled = !treeNode.returnToParentEnabled;
     const rectProps: RectProps = { x, y, rx, width: width * 3 + horizontalMargin * 2, height, handleClick, disabled };
-    const textProps: TextProps = { x: x + 25, y: y + 18, content: "RETURN TO PARENT", disabled };
+    const textProps: TextProps = { x: x + 25, y: y + yPlus, content: "RETURN TO PARENT", disabled };
 
     return <Action rect={rectProps} text={textProps} />;
 };

@@ -68,4 +68,5 @@ export interface State extends Dialog, Header, Table, Buttons, Formula {
     readonly currentPoint: Point;
     readonly comparedTable: Array<Array<any>>;
     readonly increaseSuccessRecord?: () => Action;
+    readonly other?: any;
 }

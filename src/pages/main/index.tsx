@@ -85,6 +85,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.PalindromePartitioning />);
         case Names.House_Robber:
             return (<containers.HouseRobber />);
+        case Names.Binary_Tree_Inorder_Traversal:
+            return (<containers.BinaryTreeInorderTraversal />);
         default:
             return (<div>{match.params.name}</div>);
     }

@@ -20,6 +20,7 @@ import { basicInfo as LongestPalindromicSubstring } from '../store/longest-palin
 import { basicInfo as LongestPalindromicSubsequence } from '../store/longest-palindromic-subsequence/initialState';
 import { basicInfo as PalindromePartitioning } from '../store/palindrome-partitioning/initialState';
 import { basicInfo as HouseRobber } from '../store/house-robber/initialState';
+import { basicInfo as BinaryTreeInorderTraversal } from '../store/binary-tree-inorder-traversal/initialState';
 
 enum Names {
     Edit_Distance = 'edit-distance',
@@ -44,6 +45,7 @@ enum Names {
     Longest_Palindromic_Subsequence = 'longest-palindromic-subsequence',
     Palindrome_Partitioning = 'palindrome-partitioning',
     House_Robber = 'house-robber',
+    Binary_Tree_Inorder_Traversal = 'binary-tree-inorder-traversal',
 }
 
 export const getId = (name: string): number => {
@@ -70,6 +72,7 @@ export const getId = (name: string): number => {
         case Names.Longest_Palindromic_Subsequence: return LongestPalindromicSubsequence.id;
         case Names.Palindrome_Partitioning: return PalindromePartitioning.id;
         case Names.House_Robber: return HouseRobber.id;
+        case Names.Binary_Tree_Inorder_Traversal: return BinaryTreeInorderTraversal.id;
         default: return -1;
     }
 };

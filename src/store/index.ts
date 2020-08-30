@@ -51,6 +51,10 @@ import {
 import {
     LongestPalindromicSubsequence, LongestPalindromicSubsequenceReducer, LongestPalindromicSubsequenceWatchRecord
 } from './longest-palindromic-subsequence';
+import {
+    BinaryTreeInorderTraversal, BinaryTreeInorderTraversalReducer, BinaryTreeInorderTraversalWatchRecord
+} from './binary-tree-inorder-traversal';
+
 export interface ApplicationState {
     editDistance: State;
     knapsackProblem: State;
@@ -74,6 +78,7 @@ export interface ApplicationState {
     longestPalindromicSubsequence: LongestPalindromicSubsequenceState;
     palindromePartitioning: PalindromePartitioningState;
     houseRobber: State;
+    binaryTreeInorderTraversal: State;
 }
 
 export const rootReducer = (history: History) => combineReducers({
@@ -100,6 +105,7 @@ export const rootReducer = (history: History) => combineReducers({
     longestPalindromicSubsequence: LongestPalindromicSubsequenceReducer,
     palindromePartitioning: PalindromePartitioningReducer,
     houseRobber: HouseRobberReducer,
+    binaryTreeInorderTraversal: BinaryTreeInorderTraversalReducer,
 });
 
 export const containers = {
@@ -125,6 +131,7 @@ export const containers = {
     LongestPalindromicSubsequence,
     PalindromePartitioning,
     HouseRobber,
+    BinaryTreeInorderTraversal,
 };
 
 export function* rootSaga() {
@@ -151,5 +158,6 @@ export function* rootSaga() {
         LongestPalindromicSubsequenceWatchRecord(),
         PalindromePartitioningWatchRecord(),
         HouseRobberWatchRecord(),
+        BinaryTreeInorderTraversalWatchRecord(),
     ]);
 }
