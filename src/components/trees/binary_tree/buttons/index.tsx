@@ -22,7 +22,7 @@ export default ({ challengeId, treeNodes, setTreeNodes, actions, actionsIndex, s
                 key={index}
                 actions={actions}
                 width={55}
-                height={20}
+                height={25}
                 treeNode={treeNode}
                 actionsIndex={actionsIndex}
                 setActionIndex={setActionIndex}

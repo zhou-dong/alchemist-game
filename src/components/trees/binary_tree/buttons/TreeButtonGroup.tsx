@@ -10,7 +10,7 @@ import { save as saveRecord, getRecords } from '../../../../records/recordsUtils
 const rx = 8; // rectangle corners rounded
 const horizontalMargin = 2;
 const verticalMargin = 2;
-const yPlus = 14.3;
+const yPlus = 17;
 
 export interface Props {
     challengeId: number;
@@ -32,9 +32,9 @@ interface ButtonProps extends Props {
 
 const calculateStartPosition = (node: TreeNode) => {
     if (node.parent === undefined) {
-        return { x: node.circleCx + 24, y: node.circleCy - 24 };
+        return { x: node.circleCx + 24, y: node.circleCy - 33 };
     } else {
-        return { x: node.circleCx - 84, y: node.circleCy - 64 };
+        return { x: node.circleCx - 84, y: node.circleCy - 72 };
     }
 };
 

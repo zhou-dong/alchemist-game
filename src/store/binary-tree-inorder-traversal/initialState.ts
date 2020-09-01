@@ -75,12 +75,13 @@ const tree2 = (): Node => {
 
 const tree3 = (): Node => {
     const root = new Node("G", true);
-    root.left = new Node("C");
+    root.left = new Node("D");
     root.left.left = new Node("B");
     root.left.left.left = new Node("A");
-    root.left.right = new Node("E");
-    root.left.right.left = new Node("D");
-    root.left.right.right = new Node("F");
+    root.left.left.right = new Node("C");
+    root.left.right = new Node("F");
+    root.left.right.left = new Node("E");
+    // root.left.right.right = new Node("F");
 
     root.right = new Node("J");
     root.right.left = new Node("I");
