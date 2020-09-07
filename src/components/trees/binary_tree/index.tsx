@@ -8,7 +8,7 @@ import TreeNode, { Status } from "./treeNode";
 import Tree from "./tree";
 import { createTreeNodes } from "./helpers/displayNodesBuilder";
 import ButtonGroups from "./buttons";
-import { InOrderActions } from "./actions";
+import { Actions } from "./actions/action";
 
 const baseButtonStyle = {
     minWidth: 60,
@@ -32,6 +32,13 @@ export interface Props {
     heightUnit: number;
     nodeRadius: number;
     y: number;
+    actions: Actions;
+    leftTextContent: string;
+    middleTextContent: string;
+    rightTextContent: string;
+    goLeftIndex: number;
+    printIndex: number;
+    goRightIndex: number;
 }
 
 interface ResultsProps {
@@ -67,7 +74,22 @@ const StartButton = ({ actionIndex, handleClick }: StartButtonProps) => {
     }
 };
 
-export default ({ root, svgHeight, svgWidth, heightUnit, nodeRadius, y, challengeId }: Props) => {
+export default ({
+    root,
+    svgHeight,
+    svgWidth,
+    heightUnit,
+    nodeRadius,
+    y,
+    challengeId,
+    actions,
+    leftTextContent,
+    middleTextContent,
+    rightTextContent,
+    goLeftIndex,
+    printIndex,
+    goRightIndex,
+}: Props) => {
     const [results, setResults] = useState<string[]>([]);
     const [treeNodes, setTreeNodes] = useState<TreeNode[]>(createTreeNodes(root, svgWidth, heightUnit, nodeRadius, y));
     const [actionIndex, setActionIndex] = useState<number>(-1);
@@ -123,9 +145,15 @@ export default ({ root, svgHeight, svgWidth, heightUnit, nodeRadius, y, challeng
                 <Tree nodes={treeNodes} />
                 <ButtonGroups
                     challengeId={challengeId}
-                    actions={new InOrderActions(root)}
+                    actions={actions}
                     treeNodes={treeNodes}
                     actionsIndex={actionIndex}
+                    leftTextContent={leftTextContent}
+                    middleTextContent={middleTextContent}
+                    rightTextContent={rightTextContent}
+                    goLeftIndex={goLeftIndex}
+                    printIndex={printIndex}
+                    goRightIndex={goRightIndex}
                     setActionIndex={setActionIndex}
                     setTreeNodes={setTreeNodes}
                     setResults={setResults}

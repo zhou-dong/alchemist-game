@@ -21,6 +21,8 @@ import { basicInfo as LongestPalindromicSubsequence } from '../store/longest-pal
 import { basicInfo as PalindromePartitioning } from '../store/palindrome-partitioning/initialState';
 import { basicInfo as HouseRobber } from '../store/house-robber/initialState';
 import { basicInfo as BinaryTreeInorderTraversal } from '../store/binary-tree-inorder-traversal/initialState';
+import { basicInfo as BinaryTreePreorderTraversal } from '../store/binary-tree-preorder-traversal/initialState';
+import { basicInfo as BinaryTreePostorderTraversal } from '../store/binary-tree-postorder-traversal/initialState';
 
 enum Names {
     Edit_Distance = 'edit-distance',
@@ -45,7 +47,9 @@ enum Names {
     Longest_Palindromic_Subsequence = 'longest-palindromic-subsequence',
     Palindrome_Partitioning = 'palindrome-partitioning',
     House_Robber = 'house-robber',
+    Binary_Tree_Preorder_Traversal = 'binary-tree-preorder-traversal',
     Binary_Tree_Inorder_Traversal = 'binary-tree-inorder-traversal',
+    Binary_Tree_Postorder_Traversal = 'binary-tree-postorder-traversal',
 }
 
 export const getId = (name: string): number => {
@@ -73,6 +77,8 @@ export const getId = (name: string): number => {
         case Names.Palindrome_Partitioning: return PalindromePartitioning.id;
         case Names.House_Robber: return HouseRobber.id;
         case Names.Binary_Tree_Inorder_Traversal: return BinaryTreeInorderTraversal.id;
+        case Names.Binary_Tree_Preorder_Traversal: return BinaryTreePreorderTraversal.id;
+        case Names.Binary_Tree_Postorder_Traversal: return BinaryTreePostorderTraversal.id;
         default: return -1;
     }
 };

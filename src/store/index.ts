@@ -54,6 +54,12 @@ import {
 import {
     BinaryTreeInorderTraversal, BinaryTreeInorderTraversalReducer, BinaryTreeInorderTraversalWatchRecord
 } from './binary-tree-inorder-traversal';
+import {
+    BinaryTreePreorderTraversal, BinaryTreePreorderTraversalReducer, BinaryTreePreorderTraversalWatchRecord
+} from './binary-tree-preorder-traversal';
+import {
+    BinaryTreePostorderTraversal, BinaryTreePostorderTraversalReducer, BinaryTreePostorderTraversalWatchRecord
+} from './binary-tree-postorder-traversal';
 
 export interface ApplicationState {
     editDistance: State;
@@ -79,6 +85,8 @@ export interface ApplicationState {
     palindromePartitioning: PalindromePartitioningState;
     houseRobber: State;
     binaryTreeInorderTraversal: State;
+    binaryTreePreorderTraversal: State;
+    binaryTreePostorderTraversal: State;
 }
 
 export const rootReducer = (history: History) => combineReducers({
@@ -106,6 +114,8 @@ export const rootReducer = (history: History) => combineReducers({
     palindromePartitioning: PalindromePartitioningReducer,
     houseRobber: HouseRobberReducer,
     binaryTreeInorderTraversal: BinaryTreeInorderTraversalReducer,
+    binaryTreePreorderTraversal: BinaryTreePreorderTraversalReducer,
+    binaryTreePostorderTraversal: BinaryTreePostorderTraversalReducer,
 });
 
 export const containers = {
@@ -132,6 +142,8 @@ export const containers = {
     PalindromePartitioning,
     HouseRobber,
     BinaryTreeInorderTraversal,
+    BinaryTreePreorderTraversal,
+    BinaryTreePostorderTraversal,
 };
 
 export function* rootSaga() {
@@ -159,5 +171,7 @@ export function* rootSaga() {
         PalindromePartitioningWatchRecord(),
         HouseRobberWatchRecord(),
         BinaryTreeInorderTraversalWatchRecord(),
+        BinaryTreePreorderTraversalWatchRecord(),
+        BinaryTreePostorderTraversalWatchRecord(),
     ]);
 }
