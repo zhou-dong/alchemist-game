@@ -87,6 +87,10 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.HouseRobber />);
         case Names.Binary_Tree_Inorder_Traversal:
             return (<containers.BinaryTreeInorderTraversal />);
+        case Names.Binary_Tree_Preorder_Traversal:
+            return (<containers.BinaryTreePreorderTraversal />);
+        case Names.Binary_Tree_Postorder_Traversal:
+            return (<containers.BinaryTreePostorderTraversal />);
         default:
             return (<div>{match.params.name}</div>);
     }

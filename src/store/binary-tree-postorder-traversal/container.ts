@@ -1,11 +1,12 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+
 import { ApplicationState } from '..';
 import Card from './Card';
 import * as actions from './actions';
 
-const mapStateToProps = ({ binaryTreeInorderTraversal }: ApplicationState) => ({
-    ...binaryTreeInorderTraversal,
+const mapStateToProps = ({ binaryTreePostorderTraversal }: ApplicationState) => ({
+    ...binaryTreePostorderTraversal,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<actions.Action>) => ({

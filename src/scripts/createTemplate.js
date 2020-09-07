@@ -143,3 +143,5 @@ cpSagasTs();
 
 // example:
 // node ./src/scripts/createTemplate.js binary-tree-inorder-traversal 23
+// node ./src/scripts/createTemplate.js binary-tree-preorder-traversal 24
+// node ./src/scripts/createTemplate.js binary-tree-postorder-traversal 25

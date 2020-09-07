@@ -14,7 +14,7 @@ import Comments from '../../components/MainFooter';
 import { State } from '../BasicState';
 
 import Tree, { Node } from "../../components/trees/binary_tree";
-import { InOrderActions } from "../../components/trees/binary_tree/actions"
+import { PreOrderActions } from "../../components/trees/binary_tree/actions"
 
 const styles = (theme: Theme) => createStyles({});
 interface Props extends State, WithStyles<typeof styles> { }
@@ -75,12 +75,12 @@ const Algorithm = (props: Props) => {
                 nodeRadius={20}
                 y={40}
                 challengeId={props.id}
-                actions={new InOrderActions(root)}
-                leftTextContent="①LEFT"
-                middleTextContent="②PRINT"
+                actions={new PreOrderActions(root)}
+                leftTextContent="②LEFT"
+                middleTextContent="①PRINT"
                 rightTextContent="③RIGHT"
-                goLeftIndex={0}
-                printIndex={1}
+                goLeftIndex={1}
+                printIndex={0}
                 goRightIndex={2}
             />
             <Comments {...props} />

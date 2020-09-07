@@ -44,6 +44,8 @@ In a ***binary search tree*** ordered such that:
 - In each node the key is greater than all keys in its left subtree and less than all keys in its right subtree;
 - In-order traversal retrieves the keys in ascending sorted order.
 
+From Wikipedia.
 `;
+
 export const alUsecases = '';
 export const example = '';

@@ -4,8 +4,8 @@ import { ApplicationState } from '..';
 import Card from './Card';
 import * as actions from './actions';
 
-const mapStateToProps = ({ binaryTreeInorderTraversal }: ApplicationState) => ({
-    ...binaryTreeInorderTraversal,
+const mapStateToProps = ({ binaryTreePreorderTraversal }: ApplicationState) => ({
+    ...binaryTreePreorderTraversal,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<actions.Action>) => ({
