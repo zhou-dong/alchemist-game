@@ -43,6 +43,9 @@ import {
     MinimumNumberOfJumpsToReachEnd, MinimumNumberOfJumpsToReachEndReducer, MinimumNumberOfJumpsToReachEndWatchRecord
 } from './minimum-number-of-jumps-to-reach-end';
 import {
+    MinimumNumberOfJumpsToReachEndIi, MinimumNumberOfJumpsToReachEndIiReducer, MinimumNumberOfJumpsToReachEndIiWatchRecord
+} from './minimum-number-of-jumps-to-reach-end-ii';
+import {
     LongestIncreasingSubsequence, LongestIncreasingSubsequenceReducer, LongestIncreasingSubsequenceWatchRecord
 } from './longest-increasing-subsequence';
 import {
@@ -75,6 +78,7 @@ export interface ApplicationState {
     longestCommonSubstring: State;
     subsetSumProblem: State;
     minimumNumberOfJumpsToReachEnd: State;
+    minimumNumberOfJumpsToReachEndIi: State;
     longestIncreasingSubsequence: State;
     minimumPathSum: State;
     wordBreak: WordBreakState;
@@ -104,6 +108,7 @@ export const rootReducer = (history: History) => combineReducers({
     longestCommonSubstring: LongestCommonSubstringReducer,
     subsetSumProblem: SubsetSumProblemReducer,
     minimumNumberOfJumpsToReachEnd: MinimumNumberOfJumpsToReachEndReducer,
+    minimumNumberOfJumpsToReachEndIi: MinimumNumberOfJumpsToReachEndIiReducer,
     longestIncreasingSubsequence: LongestIncreasingSubsequenceReducer,
     minimumPathSum: MinimumPathSumReducer,
     wordBreak: WordBreakReducer,
@@ -132,6 +137,7 @@ export const containers = {
     LongestCommonSubstring,
     SubsetSumProblem,
     MinimumNumberOfJumpsToReachEnd,
+    MinimumNumberOfJumpsToReachEndIi,
     LongestIncreasingSubsequence,
     MinimumPathSum,
     WordBreak,
@@ -161,6 +167,7 @@ export function* rootSaga() {
         LongestCommonSubstringWatchRecord(),
         SubsetSumProblemWatchRecord(),
         MinimumNumberOfJumpsToReachEndWatchRecord(),
+        MinimumNumberOfJumpsToReachEndIiWatchRecord(),
         LongestIncreasingSubsequenceWatchRecord(),
         MinimumPathSumWatchRecord(),
         WordBreakWatchRecord(),
