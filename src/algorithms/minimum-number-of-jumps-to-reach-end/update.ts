@@ -1,5 +1,6 @@
 import { State, Point } from '../../store/BasicState';
 import { addHelperStyles } from '.';
+import { helperStyle } from '../../pages/withRoot';
 
 const max = Number.MAX_SAFE_INTEGER;
 
@@ -55,6 +56,7 @@ const update = (value: number, state: State): State => {
 
     if (isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
+        tableStyles[2][currentPoint.col + 1] = helperStyle;
         return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
     }
 

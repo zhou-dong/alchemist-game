@@ -44,6 +44,10 @@ const addHelperStyles = (styles: React.CSSProperties[][], point: Point, table: (
         jumpsStyles[i] = helperStyleSecondary;
     }
 
+    if (jumpIndex + jumpLength > point.col + 1) {
+        styles[2][jumpIndex - 1] = helperStyleThird;
+    }
+
     styles[2][point.col + 1] = helperStyleThird;
 };
 
