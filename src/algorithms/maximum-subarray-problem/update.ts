@@ -1,5 +1,5 @@
 import { State, Point } from '../../store/BasicState';
-import { addHelperStyles } from '.';
+import { addHelperStyles, addMaxSumRange, updateMaxValueStyles } from '.';
 
 const isMatch = ({ row, col }: Point, r: number, c: number) => (row === r && col === c);
 
@@ -21,11 +21,7 @@ const isLastCell = (table: (string | number)[][], point: Point): boolean => {
 };
 
 const getNextPoint = (table: (string | number)[][], { row, col }: Point): Point => {
-    if (row === 2) {
-        return { row: row + 1, col };
-    } else {
-        return { row: 2, col: col + 1 };
-    }
+    return { row, col: col + 1 };
 };
 
 const update = (value: number, state: State): State => {
@@ -50,6 +46,8 @@ const update = (value: number, state: State): State => {
 
     if (isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
+        addMaxSumRange(tableStyles, currentPoint, state.comparedTable);
+        updateMaxValueStyles(tableStyles, currentPoint, state.comparedTable);
         return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
     }
 

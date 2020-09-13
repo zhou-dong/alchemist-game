@@ -1,6 +1,6 @@
 import createDPTable from './algorithm';
 import { Point } from '../../store/BasicState';
-// import { helperStyle } from '../../pages/withRoot';
+import { helperStyle } from '../../pages/withRoot';
 
 const startPoint: Point = { row: 2, col: 1 };
 
@@ -10,7 +10,7 @@ interface TableSize {
 }
 
 const getTableSize = (array: number[]): TableSize => {
-    const rows = 4;
+    const rows = 3;
     const cols = array.length + 1;
     return { rows, cols };
 };
@@ -22,7 +22,6 @@ const createTableMatrix = (array: number[]): (number | string)[][] => {
     table[0][0] = 'INDEX';
     table[1][0] = 'VALUE';
     table[2][0] = 'CUR_MAX';
-    table[3][0] = 'GLO_MAX';
 
     for (let col = 1; col < cols; col++) {
         table[0][col] = col - 1;
@@ -35,8 +34,39 @@ const createTableMatrix = (array: number[]): (number | string)[][] => {
 
 const createComparedTable = (array: number[]): (number | string)[][] => createDPTable(array);
 
-const addHelperStyles = (styles: React.CSSProperties[][], point: Point, table: (string | number)[][]): void => {
-    // TODO
+const addHelperStyles = (styles: React.CSSProperties[][], point: Point, table: (string | number)[][]): void => { };
+
+const addMaxSumRange = (styles: React.CSSProperties[][], point: Point, table: (string | number)[][]): void => {
+    const start = Number(table[0][point.col]) + 1;
+    const end = Number(table[1][point.col]) + 1;
+    for (let i = start; i <= end && styles.length; i++) {
+        styles[1][i] = helperStyle;
+    }
+};
+
+const updateMaxValueStyles = (styles: React.CSSProperties[][], point: Point, table: (string | number)[][]): void => {
+
+    const currentMaxs = table[2];
+
+    const findMax = (): number => {
+        let max = Number(currentMaxs[1]);
+        for (let i = 2; i < currentMaxs.length; i++) {
+            max = Math.max(max, Number(currentMaxs[i]));
+        }
+        return max;
+    }
+
+    const updateStyles = (max: number): void => {
+        for (let i = 0; i < currentMaxs.length; i++) {
+            const current = Number(currentMaxs[i]);
+            if (max === current) {
+                styles[2][i] = helperStyle;
+            }
+        }
+    }
+
+    const max = findMax();
+    updateStyles(max);
 };
 
 const createTableStyles = (array: number[]): (React.CSSProperties)[][] => {
@@ -52,9 +82,7 @@ const createButtons = (array: number[]): number[] => {
     const dpTable = createDPTable(array);
     for (let col = 0; col < array.length; col++) {
         const currentMax = Number(dpTable[2][col + 1]);
-        const globalMax = Number(dpTable[3][col + 1]);
         set.add(currentMax);
-        set.add(globalMax);
     }
     return Array.from(set).sort(((a, b) => a - b));
 };
@@ -70,5 +98,7 @@ export {
     createTableStyles,
     createButtons,
     createButtonsStyles,
+    addMaxSumRange,
+    updateMaxValueStyles,
     startPoint,
 };

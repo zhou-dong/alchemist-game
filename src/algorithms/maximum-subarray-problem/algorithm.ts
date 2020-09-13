@@ -45,12 +45,10 @@ const createDPTable = (array: number[]): (number | string)[][] => {
     starts.unshift('starts');
     ends.unshift('ends');
     currentMaxs.unshift('current_max');
-    globalMaxs.unshift('global_max');
 
     table.push(starts);
     table.push(ends);
     table.push(currentMaxs);
-    table.push(globalMaxs);
     return table;
 };
 

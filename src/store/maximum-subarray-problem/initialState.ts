@@ -41,7 +41,7 @@ const header: Header = {
 };
 
 const maxNumber = 15;
-const size = 7;
+const size = 9;
 const random = (max: number) => Math.floor(Math.random() * max) + 1;
 const randomInt = (max: number) => random(2) === 1 ? random(max) : 0 - random(max);
 
