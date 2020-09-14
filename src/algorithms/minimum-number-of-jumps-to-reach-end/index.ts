@@ -2,6 +2,8 @@ import createDPTable from './algorithm';
 import { Point } from '../../store/BasicState';
 import { helperStyle, helperStyleSecondary, helperStyleThird } from '../../pages/withRoot';
 
+const updatedSecondaryHelper = { ...helperStyleSecondary, backgroundColor: "lightgray" };
+
 const max = Number.MAX_SAFE_INTEGER;
 
 const startPoint: Point = {
@@ -24,7 +26,7 @@ const createTableMatrix = (array: number[]): (number | string)[][] => {
     const table: (number | string)[][] = [];
     const indices: (string | number)[] = ['INDEX', ...Array.from(Array(array.length).keys())];
     const jumps: (string | number)[] = ['JUMPS', ...array];
-    const result: (string | number)[] = ['RESULT', 0, ...Array(array.length - 1).fill('')];
+    const result: (string | number)[] = ['RESULT', 0, ...Array(array.length - 1).fill('x')];
     table[0] = indices;
     table[1] = jumps;
     table[2] = result;
@@ -41,7 +43,7 @@ const addHelperStyles = (styles: React.CSSProperties[][], point: Point, table: (
 
     const jumpsStyles = styles[1];
     for (let i = jumpIndex; i < jumpsStyles.length && i < (jumpIndex + jumpLength); i++) {
-        jumpsStyles[i] = helperStyleSecondary;
+        jumpsStyles[i] = updatedSecondaryHelper;
     }
 
     if (jumpIndex + jumpLength > point.col + 1) {

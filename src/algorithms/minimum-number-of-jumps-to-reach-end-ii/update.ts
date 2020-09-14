@@ -8,30 +8,43 @@ const getLastCell = (table: (string | number)[][]): Point => {
     return { row, col };
 };
 
-const isMatch = ({ row, col }: Point, r: number, c: number) => (row === r && col === c);
-
 const newTableStyles = (table: React.CSSProperties[][]): React.CSSProperties[][] =>
     table.map(row => row.map(() => ({})));
 
-const updateTable = (table: (string | number)[][], point: Point, value: number): (string | number)[][] =>
-    table.map((row, rowIndex) => {
-        return row.map((cell, colIndex) => isMatch(point, rowIndex, colIndex) ? value : cell);
-    });
+const updateTable = (table: (string | number)[][], point: Point, value: number): (string | number)[][] => {
+    const cloned = [...table];
+    cloned[1][point.col] = value;
+    return cloned;
+};
 
-const nonCorrect = (comparedTable: (string | number)[][], { row, col }: Point, value: number): boolean =>
-    (comparedTable[row][col] !== value);
+const nonCorrect = (comparedTable: (string | number)[][], { row, col }: Point, value: number): boolean => {
+    return (comparedTable[row - 1][col - 1] !== value);
+}
 
 const isLastCell = (table: (string | number)[][], point: Point): boolean => {
     const { row, col } = getLastCell(table);
-    return isMatch(point, row, col);
+    return row === 1 && point.col === col;
 };
 
-const getNextPoint = (table: (string | number)[][], { row, col }: Point): Point =>
-    (col === table[row].length - 1) ? { row: row + 1, col: 2 } : { row, col: col + 1 };
+const getNextPoint = ({ row, col }: Point, inputArray: number[]): Point => {
+
+    const length = inputArray[row - 1];
+
+    const lastCol = row - 1 + length + 1;
+    if (col === inputArray.length) {
+        return { row: row + 1, col: row + 2 };
+    }
+
+    if (col === lastCol) {
+        return { row: row + 1, col: row + 2 };
+    } else {
+        return { row, col: col + 1 };
+    }
+};
 
 const update = (value: number, state: State): State => {
 
-    const { currentPoint, errors, success } = state;
+    const { currentPoint, errors, success, other } = state;
 
     const startTime: number = (state.startTime) ? state.startTime : new Date().getTime();
 
@@ -44,8 +57,8 @@ const update = (value: number, state: State): State => {
     const tableStyles = newTableStyles(state.tableStyles);
 
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
-        tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
-        addHelperStyles(tableStyles, currentPoint);
+        tableStyles[1][currentPoint.col] = { backgroundColor: 'red' };
+        addHelperStyles(tableStyles, currentPoint, state.table);
         return { ...state, startTime, steps, errors: errors + 1, table, tableStyles };
     }
 
@@ -56,9 +69,11 @@ const update = (value: number, state: State): State => {
         return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
     }
 
-    const nextPoint = getNextPoint(table, currentPoint);
-    table[nextPoint.row][nextPoint.col] = '?';
-    addHelperStyles(tableStyles, nextPoint);
+    const inputArray: number[] = other;
+    const nextPoint = getNextPoint(currentPoint, inputArray);
+
+    tableStyles[1][nextPoint.col] = helperStyle;
+    addHelperStyles(tableStyles, nextPoint, table);
 
     return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint };
 };

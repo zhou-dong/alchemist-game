@@ -1,29 +1,32 @@
-const createDPTable = (stringOne: string, stringTwo: string): number[][] => {
-    const rows = stringTwo.length + 1;
-    const cols = stringOne.length + 1;
+const max: number = Number.MAX_SAFE_INTEGER;
 
-    const table = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
+const initTable = (array: number[]): number[][] => {
+    const table: number[][] = [];
+    for (let row = 0; row < array.length; row++) {
+        table.push(Array(array.length).fill(max));
+    }
+    return table;
+};
 
-    for (let col = 0; col < cols; col++) {
-        table[0][col] = col;
+const createDPTable = (array: number[]): number[][] => {
+
+    const table = initTable(array);
+
+    if (array[0] <= 0) {
+        return table;
     }
 
-    for (let row = 0; row < rows; row++) {
-        table[row][0] = row;
-    }
+    table[0][0] = 0;
 
-    for (let row = 1; row < rows; row++) {
-        for (let col = 1; col < cols; col++) {
-            if (stringOne.charAt(col - 1) === stringTwo.charAt(row - 1)) {
-                table[row][col] = table[row - 1][col - 1];
-            } else {
-                const min = Math.min(
-                    table[row - 1][col - 1],
-                    table[row - 1][col],
-                    table[row][col - 1]
-                );
-                table[row][col] = min + 1;
+    for (let i = 0; i < table.length; i++) {
+        if (i > 0) {
+            table[i] = [...table[i - 1]];
+        }
+        for (let j = 1; j <= array[i]; j++) {
+            if (i + j >= array.length) {
+                break;
             }
+            table[i][i + j] = Math.min(table[i][i + j], table[i][i] + 1);
         }
     }
 

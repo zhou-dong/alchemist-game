@@ -1,5 +1,4 @@
 export const formula = `public int jump(int[] nums) {
-
     int[] dp = new int[nums.length];
 
     dp[0] = 0;
@@ -8,11 +7,11 @@ export const formula = `public int jump(int[] nums) {
     }
 
     for (int i = 0; i < nums.length; i++) {
-        for (int j = 0; j < nums[i]; j++ ) {
-            if (i + j + 1 >= nums.length) {
-                break;
+        for (int j = 1; j <= nums[i]; j++ ) {
+            if (i + j >= nums.length) {
+                return dp[dp.length - 1];
             }
-            dp[i + j + 1] = Math.min(dp[i + j + 1], dp[i] + 1); 
+            dp[i + j] = Math.min(dp[i + j], dp[i] + 1); 
         }
     }
 
@@ -28,4 +27,10 @@ Optimum result is when you reach the goal in
 minimum number of jumps.`;
 
 export const alUsecases = '';
-export const example = '';
+export const example = `
+- Input: \\[2, 3, 1, 1, 4, 1, 2, 3]
+- Output: 3
+- Explanation: 
+    + The minimum number of jumps to reach the last index is 3.
+    + Paths: 2 -> 3 -> 4 -> end.
+`;

@@ -43,9 +43,7 @@ const header: Header = {
 const random = (max: number) => Math.floor(Math.random() * max);
 
 export const create = () => {
-    let array = Array(8).fill(4).map(random);
-
-    // array = [1, 2, 0, 2, 1, 2, 3, 3];
+    const array = Array(9).fill(4).map(random);
     return ({
         ...header,
         ...dialog,

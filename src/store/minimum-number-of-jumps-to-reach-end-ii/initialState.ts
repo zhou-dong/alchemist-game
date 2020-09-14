@@ -40,24 +40,25 @@ const header: Header = {
     handleOpenFormulaClick: openFormula,
 };
 
-const bases = 'ACGT';
-const random = (max: number) => Math.floor(Math.random() * max);
+const random = (max: number) => Math.floor(Math.random() * max) + 1;
 
 export const create = () => {
-    const stringOne: string = Array(5).fill(bases.length).map(random).map(i => bases[i]).join('');
-    const stringTwo: string = Array(5).fill(bases.length).map(random).map(i => bases[i]).join('');
+    const array = Array(9).fill(3).map(random);
+    const table = helper.createTableMatrix(array);
     return ({
         ...header,
         ...dialog,
         ...codeFormula,
         currentPoint: helper.startPoint,
-        comparedTable: helper.createComparedTable(stringOne, stringTwo),
-        table: helper.createTableMatrix(stringOne, stringTwo),
-        tableStyles: helper.createTableStyles(stringOne, stringTwo),
-        buttons: helper.createButtons(stringOne, stringTwo),
-        buttonsStyles: helper.createButtonsStyles(stringOne, stringTwo),
+        comparedTable: helper.createComparedTable(array),
+        table: table,
+        tableStyles: helper.createTableStyles(array, table),
+        buttons: helper.createButtons(array),
+        buttonsStyles: helper.createButtonsStyles(array),
         handleButtonClick: buttonClick,
+        other: array,
     });
 };
+
 
 export const state: State = create();

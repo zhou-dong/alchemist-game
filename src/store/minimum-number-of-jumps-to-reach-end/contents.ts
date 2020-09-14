@@ -26,4 +26,10 @@ Optimum result is when you reach the goal in
 minimum number of jumps.`;
 
 export const alUsecases = '';
-export const example = '';
+export const example = `
+- Input: \\[2, 3, 1, 1, 4, 1, 2, 3]
+- Output: 3
+- Explanation: 
+    + The minimum number of jumps to reach the last index is 3.
+    + Paths: 2 -> 3 -> 4 -> end.
+`;
