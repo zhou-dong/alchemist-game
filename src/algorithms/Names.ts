@@ -11,6 +11,7 @@ import { basicInfo as LongestCommonSubsequence } from '../store/longest-common-s
 import { basicInfo as LongestCommonSubstring } from '../store/longest-common-substring/initialState';
 import { basicInfo as SubsetSumProblem } from '../store/subset-sum-problem/initialState';
 import { basicInfo as MinimumOfJumpsToReachEnd } from '../store/minimum-number-of-jumps-to-reach-end/initialState';
+import { basicInfo as MinimumOfJumpsToReachEndII } from '../store/minimum-number-of-jumps-to-reach-end-ii/initialState';
 import { basicInfo as LongestIncreasingSubsequence } from '../store/longest-increasing-subsequence/initialState';
 import { basicInfo as MinimumPathSum } from '../store/minimum-path-sum/initialState';
 import { basicInfo as WordBreak } from '../store/word-break/initialState';
@@ -40,6 +41,7 @@ enum Names {
     Longest_Common_Substring = 'longest-common-substring',
     Subset_Sum_Problem = 'subset-sum-problem',
     Minimum_Jumps_To_End = 'minimum-number-of-jumps-to-reach-end',
+    Minimum_Jumps_To_End_II = 'minimum-number-of-jumps-to-reach-end-ii',
     Longest_Increasing_Subsequence = 'longest-increasing-subsequence',
     Maximum_Subarray_Problem = 'maximum-subarray-problem',
     EggDropping_Problem = 'egg-dropping-problem',
@@ -67,6 +69,7 @@ export const getId = (name: string): number => {
         case Names.Longest_Common_Substring: return LongestCommonSubstring.id;
         case Names.Subset_Sum_Problem: return SubsetSumProblem.id;
         case Names.Minimum_Jumps_To_End: return MinimumOfJumpsToReachEnd.id;
+        case Names.Minimum_Jumps_To_End_II: return MinimumOfJumpsToReachEndII.id;
         case Names.Longest_Increasing_Subsequence: return LongestIncreasingSubsequence.id;
         case Names.Minimum_Path_Sum: return MinimumPathSum.id;
         case Names.Word_Break: return WordBreak.id;

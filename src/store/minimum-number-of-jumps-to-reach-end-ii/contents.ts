@@ -6,11 +6,12 @@ export const formula = `public int jump(int[] nums) {
         dp[i] = nums.length + 1;
     }
 
-    for (int i = 1; i < nums.length; i++) {
-        for (int j = 0; j < i; j++) {
-            if (j + nums[j] >= i) {
-                dp[i] = Math.min(dp[i], dp[j] + 1);
+    for (int i = 0; i < nums.length; i++) {
+        for (int j = 1; j <= nums[i]; j++ ) {
+            if (i + j >= nums.length) {
+                return dp[dp.length - 1];
             }
+            dp[i + j] = Math.min(dp[i + j], dp[i] + 1); 
         }
     }
 

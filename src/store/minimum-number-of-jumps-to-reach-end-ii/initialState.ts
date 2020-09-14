@@ -1,11 +1,11 @@
 import { Dialog, DialogScroll, Header, BasicInfo, State, Difficulty, Formula } from '../BasicState';
 import { buttonClick, refresh, openDialog, closeDialog, closeFormula, openFormula } from './actions';
 import { description, formula, example, alUsecases } from './contents';
-import * as helper from '../../algorithms/minimum-number-of-jumps-to-reach-end';
+import * as helper from '../../algorithms/minimum-number-of-jumps-to-reach-end-ii';
 
 export const basicInfo: BasicInfo = {
-    id: 21,
-    title: 'Minimum Number Of Jumps To Reach End',
+    id: 26,
+    title: 'Minimum Number Of Jumps To Reach End Ii',
 };
 
 const codeFormula: Formula = {
@@ -40,22 +40,25 @@ const header: Header = {
     handleOpenFormulaClick: openFormula,
 };
 
-const random = (max: number) => Math.floor(Math.random() * max);
+const random = (max: number) => Math.floor(Math.random() * max) + 1;
 
 export const create = () => {
-    const array = Array(9).fill(4).map(random);
+    const array = Array(9).fill(3).map(random);
+    const table = helper.createTableMatrix(array);
     return ({
         ...header,
         ...dialog,
         ...codeFormula,
         currentPoint: helper.startPoint,
         comparedTable: helper.createComparedTable(array),
-        table: helper.createTableMatrix(array),
-        tableStyles: helper.createTableStyles(array),
+        table: table,
+        tableStyles: helper.createTableStyles(array, table),
         buttons: helper.createButtons(array),
         buttonsStyles: helper.createButtonsStyles(array),
         handleButtonClick: buttonClick,
+        other: array,
     });
 };
+
 
 export const state: State = create();

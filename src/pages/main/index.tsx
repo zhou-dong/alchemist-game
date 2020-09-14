@@ -67,6 +67,8 @@ const Algorithm = ({ match }: PathParamsType1) => {
             return (<containers.SubsetSumProblem />);
         case Names.Minimum_Jumps_To_End:
             return (<containers.MinimumNumberOfJumpsToReachEnd />);
+        case Names.Minimum_Jumps_To_End_II:
+            return (<containers.MinimumNumberOfJumpsToReachEndIi />);
         case Names.Longest_Increasing_Subsequence:
             return (<containers.LongestIncreasingSubsequence />);
         case Names.Minimum_Path_Sum:
