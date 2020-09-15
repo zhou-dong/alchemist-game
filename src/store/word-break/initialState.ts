@@ -56,12 +56,15 @@ const swap = (array: Array<any>, i: number, j: number) => {
 };
 
 const stringShuffle = (str: string): string => arrayShuffle(str.split('')).join('');
-
-const input = 'iamace';
-const dictionary = ['i', 'a', 'am', 'ace', 'me'];
+const random = (max: number) => Math.floor(Math.random() * max);
+const input = 'itisanice';
+const dictionary = ["a", "an", "i", "ice", "is", "it", "nice"];
 
 export const create = () => {
-    const sentence = stringShuffle(input);
+    let sentence = stringShuffle(input);
+    if (random(3) === 2) {
+        sentence = input;
+    }
     return ({
         ...header,
         ...dialog,
