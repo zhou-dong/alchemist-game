@@ -1,5 +1,5 @@
 import { Point } from '../../store/BasicState';
-import { addHelperStyles } from '.';
+import { addHelperStyles, addHelperStylesToPalindromeTable } from '.';
 import { State } from '../../store/palindrome-partitioning/state';
 import { helperStyle } from '../../pages/withRoot';
 
@@ -43,6 +43,8 @@ const update = (value: number, state: State): State => {
     const table = updateTable(state.table, currentPoint, value);
     const tableStyles = newTableStyles(state.tableStyles);
 
+    const palindromeTableStyles = newTableStyles(state.palindromeTableStyles);
+
     if (nonCorrect(state.comparedTable, currentPoint, value)) {
         tableStyles[currentPoint.row][currentPoint.col] = { backgroundColor: 'red' };
         addHelperStyles(tableStyles, currentPoint, state.length, table);
@@ -52,15 +54,16 @@ const update = (value: number, state: State): State => {
     if (isLastCell(table, currentPoint)) {
         const finishTime = new Date().getTime();
         tableStyles[2][tableStyles[2].length - 1] = helperStyle;
-        return { ...state, startTime, finishTime, steps, table, tableStyles, success: true };
+        return { ...state, startTime, finishTime, steps, table, tableStyles, success: true, palindromeTableStyles };
     }
 
     const next = getNext(table, currentPoint, state.length);
     const nextPoint = { row: next.row, col: next.col };
     table[nextPoint.row][nextPoint.col] = '?';
     addHelperStyles(tableStyles, nextPoint, next.length, table);
+    addHelperStylesToPalindromeTable(palindromeTableStyles, nextPoint, next.length, table);
 
-    return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint, length: next.length };
+    return { ...state, steps, startTime, table, tableStyles, currentPoint: nextPoint, length: next.length, palindromeTableStyles };
 };
 
 export default update;

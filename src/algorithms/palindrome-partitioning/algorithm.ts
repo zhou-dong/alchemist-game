@@ -9,7 +9,7 @@ const getTableSize = (sequence: string): TableSize => {
     return { rows, cols };
 };
 
-const createPalindromeBooleanTable = (sequence: string): boolean[][] => {
+export const createPalindromeBooleanTable = (sequence: string): boolean[][] => {
     const { rows, cols } = getTableSize(sequence);
     const table = Array(rows).fill(false).map(() => Array(cols).fill(false));
 

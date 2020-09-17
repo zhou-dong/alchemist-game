@@ -1,4 +1,4 @@
-import createDPTable from './algorithm';
+import createDPTable, { createPalindromeBooleanTable } from './algorithm';
 import { Point } from '../../store/BasicState';
 import { helperStyle, helperStyleSecondary, helperStyleThird } from '../../pages/withRoot';
 
@@ -35,6 +35,56 @@ const createTableMatrix = (sequence: string): (number | string)[][] => {
 
     table[startPoint.row][startPoint.col] = '?';
     return table;
+};
+
+const createPalindromeTable = (sequence: string): string[][] => {
+    const { rows, cols } = getTableSize(sequence);
+
+    const palindromeTable = createPalindromeBooleanTable(sequence);
+    const table = new Array(rows).fill('').map(() => new Array(cols).fill(''));
+
+    for (let col = 2; col < cols; col++) {
+        table[0][col] = col - 2;
+        table[1][col] = sequence.charAt(col - 2);
+    }
+
+    for (let row = 2; row < rows; row++) {
+        table[row][0] = row - 2;
+        table[row][1] = sequence.charAt(row - 2);
+    }
+
+    for (let row = 2; row < table.length; row++) {
+        for (let col = row; col < table[row].length; col++) {
+            table[row][col] = palindromeTable[row - 2][col - 2] ? "T" : "F";
+        }
+    }
+
+    return table;
+};
+
+const createPalindromeTableStyles = (sequence: string): (React.CSSProperties)[][] => {
+    const { rows, cols } = getTableSize(sequence);
+    const table = new Array(rows).fill(0).map(() => new Array(cols).fill({}));
+    addHelperStylesToPalindromeTable(table, startPoint, 1, []);
+    return table;
+};
+
+const addHelperStylesToPalindromeTable = (
+    styles: React.CSSProperties[][],
+    { row, col }: Point,
+    nextLength: number,
+    table: (string | number)[][]
+): void => {
+
+    for (let r = 0; r <= row; r++) {
+        styles[r][col] = helperStyle;
+    }
+
+    for (let c = 0; c <= col; c++) {
+        styles[row][c] = helperStyle;
+    }
+
+    styles[row][col] = { ...helperStyleSecondary, "fontWeight": "bolder" };
 };
 
 const createComparedTable = (sequence: string): (number | string)[][] => {
@@ -104,5 +154,8 @@ export {
     createTableStyles,
     createButtons,
     createButtonsStyles,
+    createPalindromeTable,
+    createPalindromeTableStyles,
+    addHelperStylesToPalindromeTable,
     startPoint,
 };

@@ -62,6 +62,8 @@ export const create = () => {
         buttons: helper.createButtons(input),
         buttonsStyles: helper.createButtonsStyles(input),
         handleButtonClick: buttonClick,
+        palindromeTable: helper.createPalindromeTable(input),
+        palindromeTableStyles: helper.createPalindromeTableStyles(input),
         length: 1,
     });
 };
