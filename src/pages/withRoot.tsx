@@ -69,6 +69,17 @@ const theme = createMuiTheme({
         height: 35,
         width: 70,
       },
+      head: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: "gray",
+        color: "black",
+        borderRadius: 0,
+        fontSize: 15,
+        fontWeight: 600,
+        height: 35,
+        // width: 155,
+      }
     },
     MuiTableRow: {
       root: {

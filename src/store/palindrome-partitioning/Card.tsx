@@ -22,16 +22,16 @@ const Algorithm = (props: Props) => (
         <div style={{ marginBottom: "10px" }} />
 
         <Grid container >
-            <Grid item md={1} />
-            <Grid item sm={12} md={5}>
+            <Grid item md={12} lg={1} />
+            <Grid item md={12} lg={5}>
                 <div style={{ fontSize: "18px", fontWeight: "bold" }}>Palindrome Table</div>
                 <Table table={props.palindromeTable} tableStyles={props.palindromeTableStyles} />
             </Grid>
-            <Grid item sm={12} md={5}>
+            <Grid item md={12} lg={5}>
                 <div style={{ fontSize: "18px", fontWeight: "bold" }}>DP Table</div>
                 <Table {...props} />
             </Grid>
-            <Grid item md={1} />
+            <Grid item md={12} lg={1} />
         </Grid>
 
         <CardContent>

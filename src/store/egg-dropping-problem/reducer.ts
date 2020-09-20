@@ -2,7 +2,7 @@ import update from '../../algorithms/egg-dropping-problem/update';
 import { Reducer } from 'redux';
 import * as Constants from './constants';
 import { create } from './initialState';
-import { State } from '../BasicState';
+import { State } from './state';
 import { Action } from './actions';
 
 const reducer: Reducer<State> = (state: State = create(), action: Action) => {

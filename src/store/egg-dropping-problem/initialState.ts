@@ -43,6 +43,9 @@ const header: Header = {
 const eggs = 3;
 const size = 7;
 
+const resultsInDifferentFloors: number[] = [];
+const helperTable: string[][] = [];
+
 export const create = () => {
     return ({
         ...header,
@@ -55,6 +58,8 @@ export const create = () => {
         buttons: helper.createButtons(eggs, size),
         buttonsStyles: helper.createButtonsStyles(eggs, size),
         handleButtonClick: buttonClick,
+        helperTable,
+        resultsInDifferentFloors,
     });
 };
 

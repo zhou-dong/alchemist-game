@@ -8,6 +8,7 @@ import { State as WordBreakState } from './word-break/state';
 import { State as LongestPalindromicSubstringState } from './longest-palindromic-substring/state';
 import { State as LongestPalindromicSubsequenceState } from './longest-palindromic-subsequence/state';
 import { State as PalindromePartitioningState } from './palindrome-partitioning/state';
+import { State as EggDroppingState } from "./egg-dropping-problem/state";
 
 import { EditDistance, EditDistanceReducer, EditDistanceWatchRecord } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer, KnapsackProblemWatchRecord } from './knapsack-problem';
@@ -83,7 +84,7 @@ export interface ApplicationState {
     minimumPathSum: State;
     wordBreak: WordBreakState;
     maximumSubarrayProblem: State;
-    eggDroppingProblem: State;
+    eggDroppingProblem: EggDroppingState;
     longestPalindromicSubstring: LongestPalindromicSubstringState;
     longestPalindromicSubsequence: LongestPalindromicSubsequenceState;
     palindromePartitioning: PalindromePartitioningState;
