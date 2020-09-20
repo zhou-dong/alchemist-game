@@ -31,7 +31,7 @@ export const alUsecases = '';
 export const example = `
 Example 1:
 - Input: Eggs: 1, Floors: K.
-- Output: k
+- Output: K.
 
 Example 2:
 - Input: Egss: Infinity, Floors: K.
