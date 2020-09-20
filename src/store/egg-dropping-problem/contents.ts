@@ -34,6 +34,6 @@ Example 1:
 - Output: K.
 
 Example 2:
-- Input: Egss: Infinity, Floors: K.
+- Input: Eggs: Infinity, Floors: K.
 - Output: lg(K).
 `;
