@@ -1,21 +1,19 @@
 import { Store, createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'connected-react-router';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { History } from 'history';
-import { ApplicationState, rootReducer, rootSaga } from '.';
+import { ApplicationState, rootReducer } from '.';
 
 export default function configureStore(
     history: History,
     initialState: ApplicationState): Store<ApplicationState> {
 
     const composeEnhancers = composeWithDevTools({});
-    const sagaMiddleware = createSagaMiddleware();
 
     const store = createStore(
         rootReducer(history),
         initialState,
-        composeEnhancers(applyMiddleware(routerMiddleware(history), sagaMiddleware))
+        composeEnhancers(applyMiddleware(routerMiddleware(history)))
     );
 
     // Hot reloading
@@ -25,6 +23,6 @@ export default function configureStore(
     //         store.replaceReducer(rootReducer(history));
     //     });
     // }
-    sagaMiddleware.run(rootSaga);
+
     return store;
 }
