@@ -12,11 +12,14 @@ import Dialog from './Dialog';
 import Formula from './Formula';
 import Comments from './MainFooter';
 
+import TwoThreeTree from "./trees/two-three-tree"
+
 const styles = (theme: Theme) => createStyles({});
 interface Props extends State, WithStyles<typeof styles> { }
 
 const Algorithm = (props: Props) => (
     <div style={{ margin: 'auto', textAlign: 'center' }}>
+        <TwoThreeTree />
         <Header {...props} />
         <Table {...props} />
         <CardContent>
