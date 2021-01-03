@@ -83,7 +83,7 @@ export const getId = (name: string): number => {
         case Names.Binary_Tree_Inorder_Traversal: return BinaryTreeInorderTraversal.id;
         case Names.Binary_Tree_Preorder_Traversal: return BinaryTreePreorderTraversal.id;
         case Names.Binary_Tree_Postorder_Traversal: return BinaryTreePostorderTraversal.id;
-        case Names.Two_Three_Tree_vs_Red_Black_tree: return 27;
+        case Names.Two_Three_Tree_vs_Red_Black_tree: return -1;
         default: return -1;
     }
 };
