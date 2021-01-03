@@ -1,11 +1,35 @@
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
+import { uuidv4 } from "./uuid";
 
 export default class Node<T> {
+
+    x?: number;
+    y?: number;
+    z?: number;
+
+    private populateCoordinates(startY: number, marginY: number, z: number): void {
+        this.z = z;
+        if (this.isLeaf) {
+            this.y = startY;
+            return;
+        }
+
+        const child: Node<T> = this.children[0];
+        if (child && child.y) {
+            this.y = child.y + marginY;
+        }
+
+        if (this.minChild.x !== undefined && this.maxChild.x !== undefined) {
+            this.x = (this.minChild.x + this.maxChild.x) / 2
+        }
+    }
+
+    populateTreeCoordinates(startY: number, marginY: number, z: number): void {
+        this.children.forEach(item => {
+            item.populateTreeCoordinates(startY, marginY, z);
+            item.populateCoordinates(startY, marginY, z);
+        });
+        this.populateCoordinates(startY, marginY, z);
+    }
 
     private id: string;
     vals: T[];
@@ -115,20 +139,19 @@ export default class Node<T> {
                         this.sortVals();
 
                         const left_temp = new Node(this.vals[0]);
-                        const right_temp = new Node(this.vals[2]);
 
                         left_temp.children.push(this.children[0]);
                         left_temp.children.push(this.children[1]);
                         this.children[0].parent = left_temp;
                         this.children[1].parent = left_temp;
+                        left_temp.parent = this.parent;
+                        this.parent.children.push(left_temp);
 
+                        const right_temp = new Node(this.vals[2]);
                         right_temp.children.push(this.children[2]);
                         right_temp.children.push(this.children[3]);
                         this.children[2].parent = right_temp;
                         this.children[3].parent = right_temp;
-
-                        this.parent.children.push(left_temp);
-                        left_temp.parent = this.parent;
                         this.parent.children.push(right_temp);
                         right_temp.parent = this.parent;
 
@@ -152,23 +175,22 @@ export default class Node<T> {
                         this.vals.push(val);
                         this.sortVals();
 
-                        const left_temp = new Node(this.vals[0]);
-                        const right_temp = new Node(this.vals[2]);
+                        const root = new Node<T>(this.vals[1]);
 
+                        const left_temp = new Node(this.vals[0]);
                         left_temp.children.push(this.children[0]);
                         left_temp.children.push(this.children[1]);
                         this.children[0].parent = left_temp;
                         this.children[1].parent = left_temp;
+                        root.children.push(left_temp);
+                        left_temp.parent = root;
 
+                        const right_temp = new Node(this.vals[2]);
                         right_temp.children.push(this.children[2]);
                         right_temp.children.push(this.children[3]);
                         this.children[2].parent = right_temp;
                         this.children[3].parent = right_temp;
-
-                        const root = new Node<T>(this.vals[1]);
-                        root.children.push(left_temp);
                         root.children.push(right_temp);
-                        left_temp.parent = root;
                         right_temp.parent = root;
 
                         root.sortChildren();
