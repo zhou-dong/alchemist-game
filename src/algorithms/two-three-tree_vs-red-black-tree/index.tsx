@@ -4,16 +4,11 @@ import * as THREE from "three";
 import TwoThreeTree from "../../components/trees/two-three-tree";
 import RedBlackTree from "../../components/trees/red-black-tree";
 import { init as initThree, createPlane, createLight } from "../../components/trees/helpers/three-helpers";
-import { Button, Grid, MobileStepper, Typography } from '@material-ui/core';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
+import { Button, Grid, IconButton, MobileStepper, Typography } from '@material-ui/core';
+import { KeyboardArrowLeft, KeyboardArrowRight, RefreshOutlined } from '@material-ui/icons';
 
 interface Params<T> {
     input: T[];
-}
-
-interface StepperParams<T> {
-    input: T[];
-    disabledSteps: number;
 }
 
 const width = window.innerWidth / 2;
@@ -52,26 +47,39 @@ export default <T extends unknown>({ input }: Params<T>) => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    const handleRefresh = () => {
+        setActiveStep(() => 0);
+        setCurrent(() => []);
+    };
+
     return (
         <>
-            <MobileStepper
-                variant="dots"
-                steps={input.length}
-                position="static"
-                activeStep={activeStep}
-                nextButton={
-                    <Button size="small" onClick={handleNext} disabled={activeStep === input.length}>
-                        Next
-                        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-                    </Button>
-                }
-                backButton={
-                    <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-                        Back
-                    </Button>
-                }
-            />
+            <Grid container justify="center" alignItems="center">
+                <Grid item sm={11}>
+                    <MobileStepper
+                        variant="dots"
+                        steps={input.length}
+                        position="static"
+                        activeStep={activeStep}
+                        nextButton={
+                            <Button size="small" onClick={handleNext} disabled={activeStep === input.length}>
+                                Next  {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                            </Button>
+                        }
+                        backButton={
+                            <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />} Back
+                            </Button>
+                        }
+                    />
+
+                </Grid>
+                <Grid item sm={1}>
+                    <IconButton onClick={handleRefresh}>
+                        <RefreshOutlined />
+                    </IconButton>
+                </Grid>
+            </Grid>
 
             <Grid container justify="center" alignItems="center">
                 <Grid item sm={6}>
@@ -91,7 +99,7 @@ export default <T extends unknown>({ input }: Params<T>) => {
                 </Grid>
                 <Grid item sm={6}>
                     <Typography align="center">
-                        Red-Black Tree
+                        <span style={{ color: "red" }}>Red</span>-Black Tree
                     </Typography>
                     <RedBlackTree
                         {...three2}

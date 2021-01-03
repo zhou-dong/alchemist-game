@@ -2,7 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import Node from "./node";
 import Decorator from "./Decorator";
-
+import { clearScene } from "../helpers/three-helpers";
 interface Props<T> {
     renderer: THREE.WebGLRenderer;
     camera: THREE.PerspectiveCamera;
@@ -24,5 +24,6 @@ function buildTree<T>(input: T[]) {
 }
 
 export default <T extends unknown>(props: Props<T>) => {
+    clearScene(props.scene);
     return props.input.length === 0 ? <></> : <Decorator {...props} root={buildTree(props.input)} z={1} />;
 };

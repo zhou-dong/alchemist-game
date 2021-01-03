@@ -5,6 +5,9 @@ import Queue from "../helpers/queue";
 import { clearScene, getContentCoordinates, resize, textFont } from "../helpers/three-helpers";
 import Sphere from "../helpers/sphere";
 
+const singleNodeLen = 3;
+const doubleNodeLen = 3;
+
 class NodeMap<T> {
 
     private _level: number;
@@ -50,9 +53,6 @@ class NodeMap<T> {
         }
     }
 }
-
-const singleNodeLen = 3;
-const doubleNodeLen = 5;
 
 function computeTotalLen<T>(nodes: Node<T>[]): number {
 
