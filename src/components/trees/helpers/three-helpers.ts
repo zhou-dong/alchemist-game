@@ -25,11 +25,11 @@ export const clearScene = (scene: THREE.Scene): void => {
     }
 };
 
-const getWidth = () => {
+export const getWidth = () => {
     return window.innerWidth / 2;
 };
 
-const getHeight = () => {
+export const getHeight = () => {
     return window.innerHeight / 5 * 4;
 };
 

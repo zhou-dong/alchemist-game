@@ -3,7 +3,7 @@ import { useTheme } from '@material-ui/core/styles';
 import * as THREE from "three";
 import TwoThreeTree from "../../components/trees/two-three-tree";
 import RedBlackTree from "../../components/trees/red-black-tree";
-import { init as initThree, createPlane, createLight } from "../../components/trees/helpers/three-helpers";
+import { init as initThree, createPlane, createLight, getWidth, getHeight } from "../../components/trees/helpers/three-helpers";
 import { Button, Grid, IconButton, MobileStepper, Typography } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight, RefreshOutlined } from '@material-ui/icons';
 
@@ -11,8 +11,8 @@ interface Params<T> {
     input: T[];
 }
 
-const width = window.innerWidth / 2;
-const height = window.innerHeight;
+const width = getWidth();
+const height = getHeight();
 
 const three1 = initThree(width, height);
 const scene1 = new THREE.Scene();
