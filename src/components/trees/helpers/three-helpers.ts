@@ -4,7 +4,7 @@ export const init = (width: number, height: number) => {
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.01, 1000);
     camera.position.x = 3;
     camera.position.y = 3;
-    camera.position.z = 22;
+    camera.position.z = 20;
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
     return { renderer, camera };
@@ -26,7 +26,7 @@ export const clearScene = (scene: THREE.Scene): void => {
 };
 
 export const getWidth = () => {
-    return window.innerWidth / 2;
+    return window.innerWidth / 2.02;
 };
 
 export const getHeight = () => {

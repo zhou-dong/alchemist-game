@@ -53,7 +53,7 @@ export default <T extends unknown>({ input }: Params<T>) => {
     };
 
     return (
-        <>
+        <div style={{ overflow: "hidden" }}>
             <Grid container justify="center" alignItems="center">
                 <Grid item sm={11}>
                     <MobileStepper
@@ -112,6 +112,6 @@ export default <T extends unknown>({ input }: Params<T>) => {
                     />
                 </Grid>
             </Grid>
-        </>
+        </div>
     );
 };
