@@ -72,7 +72,6 @@ export default <T extends unknown>({ input }: Params<T>) => {
                             </Button>
                         }
                     />
-
                 </Grid>
                 <Grid item sm={1}>
                     <IconButton onClick={handleRefresh}>
