@@ -104,14 +104,15 @@ function setLastLevelNodesPosition<T>(nodeMap: NodeMap<T>) {
 }
 
 class SimpleSphere<T> extends Sphere {
-    constructor(node: Node<T>, radius: number) {
-        super(node.x!, node.y!, node.z!, 0xfff00, radius, 30, 30);
+    constructor(node: Node<T>, radius: number, color?: THREE.Color | string | number,) {
+        super(node.x!, node.y!, node.z!, color, radius, 30, 30);
     }
 }
 
 function loadSpheres<T>(root: Node<T>, radius: number, renderer: THREE.Renderer, camera: THREE.Camera, scene: THREE.Scene) {
     function helper<T>(node: Node<T>) {
-        const sphere = new SimpleSphere(node, radius);
+        const color = node.vals.length === 2 ? "red" : "black";
+        const sphere = new SimpleSphere(node, radius, color);
         scene.add(sphere);
         node.children.forEach(child => helper(child));
     }
