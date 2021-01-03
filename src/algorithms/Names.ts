@@ -52,6 +52,7 @@ enum Names {
     Binary_Tree_Preorder_Traversal = 'binary-tree-preorder-traversal',
     Binary_Tree_Inorder_Traversal = 'binary-tree-inorder-traversal',
     Binary_Tree_Postorder_Traversal = 'binary-tree-postorder-traversal',
+    Two_Three_Tree_vs_Red_Black_tree = "two-three-tree-red-black-tree",
 }
 
 export const getId = (name: string): number => {
@@ -82,6 +83,7 @@ export const getId = (name: string): number => {
         case Names.Binary_Tree_Inorder_Traversal: return BinaryTreeInorderTraversal.id;
         case Names.Binary_Tree_Preorder_Traversal: return BinaryTreePreorderTraversal.id;
         case Names.Binary_Tree_Postorder_Traversal: return BinaryTreePostorderTraversal.id;
+        case Names.Two_Three_Tree_vs_Red_Black_tree: return -1;
         default: return -1;
     }
 };
