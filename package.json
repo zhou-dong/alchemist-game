@@ -10,6 +10,7 @@
         "@material-ui/lab": "^4.0.0-alpha.55",
         "classnames": "^2.2.6",
         "connected-react-router": "^6.5.2",
+        "gsap": "^3.6.0",
         "react": "latest",
         "react-dom": "latest",
         "react-highlight": "^0.12.0",
