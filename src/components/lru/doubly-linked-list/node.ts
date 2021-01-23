@@ -49,6 +49,7 @@ export default class Node<T> {
     ) {
         this.data = data;
         this.scene = scene;
+        this.arrowStyles = arrowStyles;
 
         this.planeGeometry = new THREE.PlaneGeometry(planeParameters.width, planeParameters.height);
         this.plane = new THREE.Mesh(this.planeGeometry, planeParameters.material);
@@ -58,10 +59,16 @@ export default class Node<T> {
         this.text = new THREE.Mesh(this.textGeometry, textParameters.material);
         this.text.position.copy(textParameters.position);
 
+        this.addToScene();
+    }
+
+    addToScene(): void {
         this.scene.add(this.plane);
         this.scene.add(this.text);
+    }
 
-        this.arrowStyles = arrowStyles;
+    isInScene(): boolean {
+        return this.scene.children.indexOf(this.plane) > -1 || this.scene.children.indexOf(this.text) > -1
     }
 
     set previous(node: Node<T> | undefined) {
@@ -98,28 +105,6 @@ export default class Node<T> {
         return this._next;
     }
 
-    set forwardArrow(arrow: ForwardArrow | undefined) {
-        this._forwardArrow = arrow;
-        if (this._forwardArrow) {
-            this.scene.add(this._forwardArrow);
-        }
-    }
-
-    get forwardArrow() {
-        return this._forwardArrow;
-    }
-
-    set backwardArrow(arrow: BackwardArrow | undefined) {
-        this._backwardArrow = arrow;
-        if (this._backwardArrow) {
-            this.scene.add(this._backwardArrow);
-        }
-    }
-
-    get backwardArrow() {
-        return this._backwardArrow;
-    }
-
     append(node: Node<T>): void {
         node.previous = this;
         node.next = this.next;
@@ -128,6 +113,19 @@ export default class Node<T> {
             this.next.previous = node;
         }
         this.next = node;
+    }
+
+    delete(): void {
+        if (this.previous) {
+            this.previous.next = this.next;
+        }
+        if (this.next) {
+            this.next.previous = this.previous;
+        }
+        this.removeFromScene();
+        this.removeArrowsFromScene();
+        this.forwardArrow = undefined;
+        this.backwardArrow = undefined;
     }
 
     update(): void {
@@ -143,6 +141,42 @@ export default class Node<T> {
             this.previous.next = node;
         }
         this.previous = node;
+    }
+
+    private removeFromScene(): void {
+        this.scene.remove(this.plane);
+        this.scene.remove(this.text);
+    }
+
+    private removeArrowsFromScene(): void {
+        if (this.forwardArrow) {
+            this.scene.remove(this.forwardArrow);
+        }
+        if (this.backwardArrow) {
+            this.scene.remove(this.backwardArrow);
+        }
+    }
+
+    private set forwardArrow(arrow: ForwardArrow | undefined) {
+        this._forwardArrow = arrow;
+        if (this._forwardArrow) {
+            this.scene.add(this._forwardArrow);
+        }
+    }
+
+    private get forwardArrow() {
+        return this._forwardArrow;
+    }
+
+    private set backwardArrow(arrow: BackwardArrow | undefined) {
+        this._backwardArrow = arrow;
+        if (this._backwardArrow) {
+            this.scene.add(this._backwardArrow);
+        }
+    }
+
+    private get backwardArrow() {
+        return this._backwardArrow;
     }
 
     private updateBackwardArrow(): void {
