@@ -1,8 +1,7 @@
 import * as THREE from "three";
-import { ArrowHelper } from "three";
 import Node from "./node";
 
-abstract class Arrow extends ArrowHelper {
+abstract class Arrow extends THREE.ArrowHelper {
 
     private readonly headLength: number;
     private readonly headWidth: number;
@@ -27,7 +26,7 @@ abstract class Arrow extends ArrowHelper {
 
     public update(): void {
         this.position.copy(this.origin);
-        this.setDirection(this.direction);
+        this.setDirection(this.direction.normalize());
         this.setLength(this.direction.length(), this.headLength, this.headWidth);
     }
 
