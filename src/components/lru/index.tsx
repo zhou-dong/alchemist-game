@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import DoubleLinkedList from "./doubly-linked-list";
@@ -11,7 +11,7 @@ const HASHMAP_ROWS = 5;
 const HASHMAP_BUCKET_SIZE = 8;
 const HASHMAP_POSITION = { x: -35, y: 15, z: 0 };
 
-const createBackgroundColor = () => `rgba(0, 127, 127, ${Math.random() * 0.5 + 0.25})`;
+const createBackgroundColor = () => `rgba(0, 127, 127)`;
 const hashMapMaterial = new THREE.MeshBasicMaterial({ color: createBackgroundColor(), side: THREE.DoubleSide });
 const textMaterials = new THREE.MeshPhongMaterial({
     color: 0xFF00FF,
@@ -21,6 +21,7 @@ const textMaterials = new THREE.MeshPhongMaterial({
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 2000);
 const scene: THREE.Scene = new THREE.Scene();
+camera.position.y = 50;
 camera.position.z = 100;
 
 let doubleLinkedList: DoubleLinkedList<number>;
@@ -98,30 +99,35 @@ const createHashMap = (font: THREE.Font): void => {
     }
 };
 
+const loader = new THREE.FontLoader();
+
+loader.load('/fonts/Roboto_Regular.json', function (font) {
+
+    while (scene.children.length > 0) {
+        scene.remove(scene.children[0]);
+    }
+
+    const gridHelper = new THREE.GridHelper(1000, 20);
+    scene.add(gridHelper);
+
+    createHashMap(font);
+    doubleLinkedList = new DoubleLinkedList(
+        scene,
+        8,
+        new THREE.Vector3(-65, 20, 0),
+        { color: "black", headLength: 3, headWidth: 1.5 },
+        { color: "green", width: 10, height: 6, textGeometryParameters: { font, size: 2, height: 0.02 }, textColor: 'rgb(250, 250, 0)' },
+        render,
+        1
+    );
+
+    renderer.render(scene, camera);
+});
+
+let i = 0;
+
 export default () => {
     const ref = useRef<HTMLDivElement>(null);
-
-    const loader = new THREE.FontLoader();
-
-    loader.load('/fonts/Roboto_Regular.json', function (font) {
-
-        while (scene.children.length > 0) {
-            scene.remove(scene.children[0]);
-        }
-
-        // createHashMap(font);
-        doubleLinkedList = new DoubleLinkedList(
-            scene,
-            8,
-            new THREE.Vector3(-65, 20, 0),
-            { color: "black", headLength: 3, headWidth: 1.5 },
-            { color: "pink", width: 10, height: 6, textGeometryParameters: { font, size: 2, height: 0.02 }, textColor: 'rgb(250, 250, 0)' },
-            render,
-        );
-        console.log(doubleLinkedList);
-
-        renderer.render(scene, camera);
-    });
 
     useEffect(() => {
         if (ref && ref.current && ref.current.children.length === 0) {
@@ -131,19 +137,48 @@ export default () => {
         }
     });
 
-    let i = 0;
-    const handleOnClient = () => {
-        doubleLinkedList.insertFirst(i);
-        console.log(doubleLinkedList);
+    const [buttionsDisabled, setButtionsDisabled] = useState(false);
 
+    const handleOnClientAppendFirst = async () => {
+        setButtionsDisabled(true);
+        await doubleLinkedList.insertFirst(i);
+        setButtionsDisabled(false);
         i++;
     };
 
+    const handleOnClientDeleteLast = async () => {
+        setButtionsDisabled(true);
+        await doubleLinkedList.deleteLast();
+        setButtionsDisabled(false);
+    };
+
+    const handleOnClickMoveToHead = async () => {
+        setButtionsDisabled(true);
+        await doubleLinkedList.moveToHead();
+        setButtionsDisabled(false);
+    };
+
     return (
-        <div>
-            <button onClick={handleOnClient}>increase</button>
+        <>
+            <div>
+                {buttionsDisabled ?
+                    <button disabled> append first</button> :
+                    <button onClick={handleOnClientAppendFirst}>append first</button>
+                }
+
+                {buttionsDisabled ?
+                    <button disabled>delete last</button> :
+                    <button onClick={handleOnClientDeleteLast}>delete last</button>
+                }
+
+                {buttionsDisabled ?
+                    <button disabled>move to head</button> :
+                    <button onClick={handleOnClickMoveToHead}>move to head</button>
+                }
+            </div>
             <div ref={ref} />
-        </div>
+        </>
+
     );
 
 };

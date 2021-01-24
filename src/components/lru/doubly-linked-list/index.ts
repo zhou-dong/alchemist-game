@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import gsap from "gsap";
-
-import Node, { PlaneParameters, TextParameters, ArrowStyles } from "./node";
+import { PlaneParameters, TextParameters } from "../commons/node";
+import Node, { ArrowStyles } from "./node";
 
 export interface NodeParameters {
     width: number;
@@ -24,7 +24,8 @@ export default class DoublyLinkedList<T> {
     private planeMaterial: THREE.Material;
     private textMaterial: THREE.Material;
 
-    render: Function;
+    private render: Function;
+    duration: number;
 
     constructor(
         scene: THREE.Scene,
@@ -32,9 +33,11 @@ export default class DoublyLinkedList<T> {
         start: THREE.Vector3,
         arrowStyles: ArrowStyles,
         nodeParameters: NodeParameters,
-        render: Function
+        render: Function,
+        duration: number
     ) {
         this.render = render;
+        this.duration = duration;
 
         this.scene = scene;
         this.margin = margin;
@@ -51,47 +54,163 @@ export default class DoublyLinkedList<T> {
         this.tail.previous = this.head;
     }
 
-    insertFirst(data: T): void {
-
-        this.tails.forEach((item, i) => {
-
-            console.log(item.data);
-
+    insertFirst(data: T) {
+        this.getTails(this.head).forEach(item => {
+            const onUpdate = () => {
+                if (item.previous === this.head) {
+                    this.head.update();
+                }
+                item.update();
+                this.render();
+            };
             const nextPlanePosition = this.calculateNextPosistion(item.plane.position);
             const nextTextPosition = this.calculateNextPosistion(item.text.position);
-
-            gsap.to(item.plane.position, {
-                ...nextPlanePosition,
-                duration: 3,
-                onUpdate: () => {
-                    if (item.previous == this.head) {
-                        this.head.update();
-                    }
-                    item.update();
-                    this.render();
-                }
-            });
-
-            gsap.to(item.text.position, { ...nextTextPosition, duration: 3 });
+            gsap.to(item.plane.position, { ...nextPlanePosition, duration: this.duration, onUpdate });
+            gsap.to(item.text.position, { ...nextTextPosition, duration: this.duration });
         });
 
-        setTimeout(() => {
+        const append = () => {
             const nextPosition = this.calculateNextPosistion(this.head.plane.position);
             const newNode = this.createNode(data, nextPosition);
             this.head.append(newNode);
             this.render();
-        }, 3000)
+        };
 
+        return new Promise(resolve => {
+            setTimeout(() => {
+                append();
+                resolve(0);
+            }, this.duration * 1000)
+        });
     }
 
-    private get tails(): Node<any>[] {
+    deleteLast() {
+        const target = this.tail.previous;
+
+        if (!target) {
+            return;
+        }
+        if (target === this.head) {
+            return;
+        }
+
+        target.delete();
+        this.render();
+
+        this.getTails(target).forEach(item => {
+            const onUpdate = () => {
+                if (item.previous) {
+                    item.previous.update();
+                }
+                item.update();
+                this.render();
+            };
+            const nextPlanePosition = this.calculatePreviousPosistion(item.plane.position);
+            const nextTextPosition = this.calculatePreviousPosistion(item.text.position);
+            gsap.to(item.plane.position, { ...nextPlanePosition, duration: this.duration, onUpdate });
+            gsap.to(item.text.position, { ...nextTextPosition, duration: this.duration });
+        });
+
+        return new Promise(resolve => setTimeout(resolve, this.duration * 1000));
+    }
+
+    moveToHead() {
+
+        const node: Node<T> | undefined = this.tail.previous;
+        if (node && node !== this.head && node !== this.head.next) {
+            const next = node.next;
+            node.delete();
+            if (!node.isInScene()) {
+                node.addToScene();
+            }
+            this.render();
+
+            const tempHeight = this.nodeParameters.height;
+
+            const tempPlanePosition = this.calculateNextPosistion(this.head.plane.position);
+            tempPlanePosition.setY(tempPlanePosition.y + tempHeight);
+            const tempTextPosition = this.calculateNextPosistion(this.head.text.position);
+            tempTextPosition.setY(tempTextPosition.y + tempHeight);
+
+            gsap.to(node.plane.position, { ...tempPlanePosition, duration: this.duration, onUpdate: () => this.render() });
+            gsap.to(node.text.position, { ...tempTextPosition, duration: this.duration });
+
+            const tails = this.getHeads(node);
+            tails.pop();
+            tails.forEach(item => {
+                const onUpdate = () => {
+                    if (item.previous === this.head) {
+                        this.head.update();
+                    }
+                    if (next && item.next === next) {
+                        item.next.update();
+                    }
+                    item.update();
+                    this.render();
+                };
+                const nextPlanePosition = this.calculateNextPosistion(item.plane.position);
+                const nextTextPosition = this.calculateNextPosistion(item.text.position);
+                gsap.to(item.plane.position, { ...nextPlanePosition, duration: this.duration, onUpdate });
+                gsap.to(item.text.position, { ...nextTextPosition, duration: this.duration });
+            });
+
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    this.head.append(node);
+                    this.render();
+
+                    const onUpdate = () => {
+                        if (node.previous) {
+                            node.previous.update();
+                        }
+                        if (node.next) {
+                            node.next.update();
+                        }
+                        node.update();
+                        this.render();
+                    };
+
+                    const onComplete = () => {
+                        resolve(0);
+                    };
+
+                    const nextPlanePosition = this.calculateNextPosistion(this.head.plane.position);
+                    const nextTextPosition = this.calculateNextPosistion(this.head.text.position);
+                    gsap.to(node.plane.position, { ...nextPlanePosition, duration: this.duration, onUpdate, onComplete });
+                    gsap.to(node.text.position, { ...nextTextPosition, duration: this.duration });
+
+                }, this.duration * 1000);
+            });
+
+        }
+    }
+
+    private getTails(node: Node<any>): Node<any>[] {
         const result: Node<any>[] = [];
-        let current = this.head.next;
+        let current = node.next;
         while (current) {
             result.push(current);
             current = current.next;
         }
         return result;
+    }
+
+    private getHeads(node: Node<T>): Node<any>[] {
+        const result: Node<any>[] = [];
+        let current = node.previous;
+        while (current) {
+            result.push(current);
+            current = current.previous;
+        }
+        return result;
+    }
+
+    private calculatePreviousPosistion(position: THREE.Vector3): THREE.Vector3 {
+        return position.clone().setX(this.calculatePreviousX(position.x));
+    }
+
+    private calculatePreviousX(x: number): number {
+        return x - this.nodeParameters.width - this.margin;
     }
 
     private calculateNextPosistion(position: THREE.Vector3): THREE.Vector3 {
