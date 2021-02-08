@@ -108,10 +108,8 @@ export default class HashMap<T> {
         this.render();
     }
 
-    // TODO
     async delete(key: number): Promise<T | undefined> {
         const bucket = this.getBucket(key);
-        console.log(bucket);
         bucket.delete(key);
         return;
     }
