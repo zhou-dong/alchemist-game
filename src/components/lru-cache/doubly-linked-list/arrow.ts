@@ -19,7 +19,7 @@ abstract class Arrow extends THREE.ArrowHelper {
         headLength: number,
         headWidth: number
     ) {
-        super(direction, origin, direction.length(), color, headLength, headWidth)
+        super(direction.clone().normalize(), origin, direction.length(), color, headLength, headWidth)
         this.headLength = headLength;
         this.headWidth = headWidth;
     }

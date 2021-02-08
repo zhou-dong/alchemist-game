@@ -1,32 +1,28 @@
 import * as THREE from "three";
+import gsap from "gsap";
+
 import Node from "./node";
 import { PlaneParameters, TextParameters } from "../commons/node";
-import gsap from "gsap";
+import { createPlaneParameters, createTextParameters } from "../commons/helpers";
+import { NodeStyles } from "../commons/styles";
 
 export default class Bucket<T> {
 
     private nodes: Node<T>[];
-
     private scene: THREE.Scene;
     private planeMaterial: THREE.Material;
     private textMaterial: THREE.Material;
-    private textGeometryParameters: THREE.TextGeometryParameters;
-
     private render: Function;
-
+    private nodeStyles: NodeStyles;
     private start: THREE.Vector3;
-    private width: number;
-    private height: number;
     public duration: number;
 
     constructor(
         scene: THREE.Scene,
         planeMaterial: THREE.Material,
         textMaterial: THREE.Material,
-        textGeometryParameters: THREE.TextGeometryParameters,
         render: Function,
-        width: number,
-        height: number,
+        nodeStyles: NodeStyles,
         start: THREE.Vector3,
         duration: number,
     ) {
@@ -34,16 +30,19 @@ export default class Bucket<T> {
         this.scene = scene;
         this.planeMaterial = planeMaterial;
         this.textMaterial = textMaterial;
-        this.textGeometryParameters = textGeometryParameters;
         this.render = render;
+        this.nodeStyles = nodeStyles;
         this.start = start;
-        this.width = width;
-        this.height = height;
         this.duration = duration;
     }
 
-    find(key: string | number): Node<T> | undefined {
+    get head(): Node<T> {
+        return this.nodes[0];
+    }
+
+    findNode(key: number): Node<T> | undefined {
         let result: Node<T> | undefined = undefined;
+
         this.nodes.forEach(node => {
             if (node.key === key) {
                 result = node;
@@ -52,27 +51,29 @@ export default class Bucket<T> {
         return result;
     }
 
-    append(key: number, data: T) {
+    append(key: number, data: T, display: string): Node<T> {
         const last = this.last;
         if (last) {
-            const node = new Node<T>(key, data, this.scene,
+            const node = new Node<T>(key, data, display, this.scene,
                 this.createPlaneParameters(last.nextPlanePosition),
                 this.createTextParameters(last.nextTextPosition)
             );
             this.nodes.push(node);
+            return node;
         } else {
             const { x, y, z } = this.start;
-            const textPosition = new THREE.Vector3(x - 3.6, y - 1, z);
-            const node = new Node<T>(key, data, this.scene,
+            const textPosition = new THREE.Vector3(x - 3, y - 1, z);
+            const node = new Node<T>(key, data, display, this.scene,
                 this.createPlaneParameters(this.start),
                 this.createTextParameters(textPosition)
             );
             this.nodes.push(node);
+            return node;
         }
     }
 
-    delete(key: number) {
-        const node = this.find(key);
+    async delete(key: number): Promise<T | undefined> {
+        const node = this.findNode(key);
 
         if (node === undefined) {
             return;
@@ -85,6 +86,8 @@ export default class Bucket<T> {
             const onUpdate = () => { this.render() };
             const nextPlanePosition = item.previousPlanePosition;
             const nextTextPosition = item.previousTextPosition;
+            const nextIndexPosition = item.previousIndexPosition;
+            gsap.to(item.index.position, { ...nextIndexPosition, duration: this.duration });
             gsap.to(item.plane.position, { ...nextPlanePosition, duration: this.duration, onUpdate });
             gsap.to(item.text.position, { ...nextTextPosition, duration: this.duration });
         });
@@ -104,31 +107,22 @@ export default class Bucket<T> {
     }
 
     private createPlaneParameters(position: THREE.Vector3): PlaneParameters {
-        return {
-            width: this.width,
-            height: this.height,
-            position,
-            material: this.planeMaterial
-        };
+        return createPlaneParameters(this.planeMaterial, position, this.nodeStyles);
     }
 
     private createTextParameters(position: THREE.Vector3): TextParameters {
-        return {
-            position,
-            textGeometryParameters: this.textGeometryParameters,
-            material: this.textMaterial
-        };
+        return createTextParameters(this.textMaterial, position, this.nodeStyles);
     }
 
     private get last(): Node<T> | undefined {
         return this.isEmpty ? undefined : this.nodes[this.length - 1];
     }
 
-    private get length(): number {
+    get length(): number {
         return this.nodes.length;
     }
 
-    private get isEmpty(): boolean {
+    get isEmpty(): boolean {
         return this.length === 0;
     }
 }

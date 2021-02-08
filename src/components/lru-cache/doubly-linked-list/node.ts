@@ -1,12 +1,8 @@
 import * as THREE from "three";
 import BaseNode, { PlaneParameters, TextParameters } from "../commons/node";
+import { ArrowStyles } from "../commons/styles";
 import { BackwardArrow, ForwardArrow } from "./arrow";
-
-export interface ArrowStyles {
-    color: THREE.Color | string | number;
-    headLength: number;
-    headWidth: number;
-}
+import { toMemoryAddress } from "../commons/helpers";
 
 export default class Node<T> extends BaseNode<T> {
 
@@ -16,17 +12,42 @@ export default class Node<T> extends BaseNode<T> {
     private _forwardArrow?: ForwardArrow;
     private _backwardArrow?: BackwardArrow;
 
-    arrowStyles: ArrowStyles;
+    private arrowStyles: ArrowStyles;
+
+    address: THREE.Mesh;
+    readonly key: number;
 
     constructor(
+        key: number,
         data: T,
+        display: string,
+        address: number,
         scene: THREE.Scene,
         planeParameters: PlaneParameters,
         textParameters: TextParameters,
-        arrowStyles: ArrowStyles
+        arrowStyles: ArrowStyles,
+        addressColor: THREE.Color | string | number,
     ) {
-        super(data, scene, planeParameters, textParameters)
+        super(data, display, scene, planeParameters, textParameters)
+        this.key = key;
         this.arrowStyles = arrowStyles;
+        this.address = this.createAddress(address, textParameters, planeParameters, addressColor);
+        scene.add(this.address);
+    }
+
+    private createAddress(
+        address: number,
+        { textGeometryParameters }: TextParameters,
+        { height, position }: PlaneParameters,
+        color: THREE.Color | string | number,
+    ): THREE.Mesh {
+        const text = toMemoryAddress(address);
+        const material = new THREE.MeshBasicMaterial({ color });
+        const addressGeometry = new THREE.TextGeometry(text, textGeometryParameters);
+        const addressMesh = new THREE.Mesh(addressGeometry, material);
+        const addressPostion = position.clone().set(position.x - 3, position.y - height, position.z);
+        addressMesh.position.copy(addressPostion);
+        return addressMesh;
     }
 
     set previous(node: Node<T> | undefined) {
@@ -82,6 +103,7 @@ export default class Node<T> extends BaseNode<T> {
         }
         this.removeFromScene();
         this.removeArrowsFromScene();
+        this.scene.remove(this.address);
         this.forwardArrow = undefined;
         this.backwardArrow = undefined;
     }
@@ -99,6 +121,13 @@ export default class Node<T> extends BaseNode<T> {
             this.previous.next = node;
         }
         this.previous = node;
+    }
+
+    addToScene(): void {
+        super.addToScene();
+        if (this.address) {
+            this.scene.add(this.address);
+        }
     }
 
     private removeArrowsFromScene(): void {

@@ -2,11 +2,11 @@ import * as THREE from "three";
 import Node from "./node";
 
 function computeDirection(from: Node<any>, to: Node<any>): THREE.Vector3 {
-    return to.rightConnectPosition.clone().sub(from.leftConnectPosition);
+    return to.leftConnectPosition.clone().sub(from.rightConnectPosition);
 }
 
 function getOrigin(from: Node<any>): THREE.Vector3 {
-    return from.leftConnectPosition;
+    return from.rightConnectPosition;
 }
 
 export default class Arrow extends THREE.ArrowHelper {
@@ -25,7 +25,7 @@ export default class Arrow extends THREE.ArrowHelper {
         headWidth: number
     ) {
         const direction = computeDirection(from, to);
-        super(direction, getOrigin(from), direction.length(), color, headLength, headWidth)
+        super(direction.clone().normalize(), getOrigin(from), direction.length(), color, headLength, headWidth)
         this.headLength = headLength;
         this.headWidth = headWidth;
         this._from = from;
@@ -33,9 +33,10 @@ export default class Arrow extends THREE.ArrowHelper {
     }
 
     public update(): void {
+        const direction = this.direction;
         this.position.copy(this.origin);
-        this.setDirection(this.direction.normalize());
-        this.setLength(this.direction.length(), this.headLength, this.headWidth);
+        this.setDirection(direction.clone().normalize());
+        this.setLength(direction.length(), this.headLength, this.headWidth);
     }
 
     set from(node: Node<any>) {

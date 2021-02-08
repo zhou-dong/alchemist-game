@@ -11,7 +11,7 @@ import { containers } from '../../store';
 import Names from '../../algorithms/Names';
 
 import TwoThreeRBT from "../../algorithms/two-three-tree_vs-red-black-tree";
-import LRU from "../../components/lru";
+import LRU from "../../algorithms/lru-cache";
 
 const styles = (theme: Theme) => createStyles({
     drawerHeader: {

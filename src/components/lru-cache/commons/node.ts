@@ -16,28 +16,31 @@ export interface TextParameters {
 export default class Node<T> {
 
     data: T;
+    display: string;
     scene: THREE.Scene;
 
     plane: THREE.Mesh;
-    planeGeometry: THREE.PlaneGeometry;
+    protected planeGeometry: THREE.PlaneGeometry;
 
     text: THREE.Mesh;
-    textGeometry: THREE.TextGeometry;
+    private textGeometry: THREE.TextGeometry;
 
     constructor(
         data: T,
+        display: string,
         scene: THREE.Scene,
         planeParameters: PlaneParameters,
         textParameters: TextParameters
     ) {
         this.data = data;
+        this.display = display;
         this.scene = scene;
 
         this.planeGeometry = new THREE.PlaneGeometry(planeParameters.width, planeParameters.height);
         this.plane = new THREE.Mesh(this.planeGeometry, planeParameters.material);
         this.plane.position.copy(planeParameters.position);
 
-        this.textGeometry = new THREE.TextGeometry(data + "", textParameters.textGeometryParameters);
+        this.textGeometry = new THREE.TextGeometry(display, textParameters.textGeometryParameters);
         this.text = new THREE.Mesh(this.textGeometry, textParameters.material);
         this.text.position.copy(textParameters.position);
 
