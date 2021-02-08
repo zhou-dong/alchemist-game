@@ -11,6 +11,7 @@ import { containers } from '../../store';
 import Names from '../../algorithms/Names';
 
 import TwoThreeRBT from "../../algorithms/two-three-tree_vs-red-black-tree";
+import LRU from "../../algorithms/lru-cache";
 
 const styles = (theme: Theme) => createStyles({
     drawerHeader: {
@@ -78,6 +79,7 @@ const Algorithm = ({ match }: PathParamsType1) => {
         case Names.Binary_Tree_Preorder_Traversal: return (<containers.BinaryTreePreorderTraversal />);
         case Names.Binary_Tree_Postorder_Traversal: return (<containers.BinaryTreePostorderTraversal />);
         case Names.Two_Three_Tree_vs_Red_Black_tree: return <TwoThreeRBT input={mock()} />;
+        case Names.LRU_Cache: return <LRU />;
         default: return (<div>{match.params.name}</div>);
     }
 };
