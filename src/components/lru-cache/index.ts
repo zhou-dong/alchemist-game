@@ -169,14 +169,14 @@ export default class LRUCache<T> {
         });
     }
 
-    async put(key: number, data: T, display: string) {
+    async put(key: number, data: T, display: string): Promise<number> {
 
         if (!this.hashMap) {
-            return undefined;
+            return this.currentSize;
         }
 
         if (!this.doublyLinkedList) {
-            return undefined;
+            return this.currentSize;
         }
 
         const current = this.hashMap.get(key);
@@ -185,7 +185,7 @@ export default class LRUCache<T> {
             if (node) {
                 await this.doublyLinkedList.moveToHead(node);
             }
-            return;
+            return this.currentSize;
         }
 
         if (this.currentSize === this.capacity) {
@@ -203,6 +203,8 @@ export default class LRUCache<T> {
         this.hashMap.push(key, node, hashMapDisplay);
 
         memoryAddress += 1;
+
+        return this.currentSize;
     }
 
     public resize(div: HTMLDivElement): void {

@@ -72,6 +72,7 @@ const cache: LRUCache<Team> = new LRUCache(capacity);
 interface SelectorParams {
     setButtionsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
     setResult: React.Dispatch<React.SetStateAction<Team | undefined>>;
+    setSize: React.Dispatch<React.SetStateAction<number>>
 }
 
 const GetSelector = ({ setButtionsDisabled, setResult }: SelectorParams) => {
@@ -111,15 +112,16 @@ const getTeam = (id: number): Team => {
     return teams.filter(team => team.id === id)[0];
 }
 
-const PutSelector = ({ setButtionsDisabled, setResult }: SelectorParams) => {
+const PutSelector = ({ setButtionsDisabled, setResult, setSize }: SelectorParams) => {
 
     const handleChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
         setButtionsDisabled(true);
         const selected = parseInt(event.target.value + "");
         const team = getTeam(selected);
-        await cache.put(selected, team, team["abbreviation"]);
+        const size = await cache.put(selected, team, team["abbreviation"]);
         setResult(getTeam(selected));
         setButtionsDisabled(false);
+        setSize(size);
     };
 
     return (
@@ -227,10 +229,23 @@ export default () => {
 
     const [buttionsDisabled, setButtionsDisabled] = useState(false);
     const [result, setResult] = useState<Team | undefined>(undefined);
+    const [size, setSize] = useState<number>(0);
+
     return (
         <>
             <Typography className={classes.titie} align="center">Least Recently Used (LRU) cache</Typography>
-            <Chip className={classes.capacity} avatar={<Avatar>{capacity}</Avatar>} label="Capacity" variant="outlined" />
+            <Table className={classes.capacity}>
+                <TableBody>
+                    <TableRow>
+                        <TableCell className={classes.displayTeamCell} padding="none" style={{ fontWeight: "bold" }}>capacity</TableCell>
+                        <TableCell className={classes.displayTeamCell} padding="none">{capacity}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell className={classes.displayTeamCell} padding="none" style={{ fontWeight: "bold" }}>size</TableCell>
+                        <TableCell className={classes.displayTeamCell} padding="none">{size}</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
             <Result team={result} />
             <Teams />
             <div ref={ref} style={{ overflow: "hidden" }} />
@@ -239,10 +254,10 @@ export default () => {
                     {
                         buttionsDisabled ?
                             <FormControl disabled>
-                                <GetSelector setButtionsDisabled={setButtionsDisabled} setResult={setResult} />
+                                <GetSelector setButtionsDisabled={setButtionsDisabled} setResult={setResult} setSize={setSize} />
                             </FormControl> :
                             <FormControl>
-                                <GetSelector setButtionsDisabled={setButtionsDisabled} setResult={setResult} />
+                                <GetSelector setButtionsDisabled={setButtionsDisabled} setResult={setResult} setSize={setSize} />
                             </FormControl>
                     }
                 </Grid>
@@ -250,10 +265,10 @@ export default () => {
                     {
                         buttionsDisabled ?
                             <FormControl disabled>
-                                <PutSelector setButtionsDisabled={setButtionsDisabled} setResult={setResult} />
+                                <PutSelector setButtionsDisabled={setButtionsDisabled} setResult={setResult} setSize={setSize} />
                             </FormControl> :
                             <FormControl>
-                                <PutSelector setButtionsDisabled={setButtionsDisabled} setResult={setResult} />
+                                <PutSelector setButtionsDisabled={setButtionsDisabled} setResult={setResult} setSize={setSize} />
                             </FormControl>
                     }
                 </Grid>
