@@ -68,6 +68,7 @@ const theme = createMuiTheme({
         fontWeight: 400,
         height: 35,
         width: 70,
+        minWidth: 70
       },
       head: {
         borderWidth: 1,
