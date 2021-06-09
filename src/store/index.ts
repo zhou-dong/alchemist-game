@@ -35,6 +35,7 @@ import { LongestPalindromicSubsequence, LongestPalindromicSubsequenceReducer } f
 import { BinaryTreeInorderTraversal, BinaryTreeInorderTraversalReducer } from './binary-tree-inorder-traversal';
 import { BinaryTreePreorderTraversal, BinaryTreePreorderTraversalReducer } from './binary-tree-preorder-traversal';
 import { BinaryTreePostorderTraversal, BinaryTreePostorderTraversalReducer } from './binary-tree-postorder-traversal';
+import { TwoSum, TwoSumReducer } from "./two-sum";
 
 export interface ApplicationState {
     editDistance: State;
@@ -63,6 +64,7 @@ export interface ApplicationState {
     binaryTreeInorderTraversal: State;
     binaryTreePreorderTraversal: State;
     binaryTreePostorderTraversal: State;
+    twoSum: State;
 }
 
 export const rootReducer = (history: History) => combineReducers({
@@ -93,6 +95,7 @@ export const rootReducer = (history: History) => combineReducers({
     binaryTreeInorderTraversal: BinaryTreeInorderTraversalReducer,
     binaryTreePreorderTraversal: BinaryTreePreorderTraversalReducer,
     binaryTreePostorderTraversal: BinaryTreePostorderTraversalReducer,
+    twoSum: TwoSumReducer,
 });
 
 export const containers = {
@@ -122,4 +125,5 @@ export const containers = {
     BinaryTreeInorderTraversal,
     BinaryTreePreorderTraversal,
     BinaryTreePostorderTraversal,
+    TwoSum,
 };
