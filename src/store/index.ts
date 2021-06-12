@@ -8,6 +8,7 @@ import { State as LongestPalindromicSubstringState } from './longest-palindromic
 import { State as LongestPalindromicSubsequenceState } from './longest-palindromic-subsequence/state';
 import { State as PalindromePartitioningState } from './palindrome-partitioning/state';
 import { State as EggDroppingState } from "./egg-dropping-problem/state";
+import { State as TwoSumState } from "./two-sum/state";
 
 import { EditDistance, EditDistanceReducer } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer } from './knapsack-problem';
@@ -64,7 +65,7 @@ export interface ApplicationState {
     binaryTreeInorderTraversal: State;
     binaryTreePreorderTraversal: State;
     binaryTreePostorderTraversal: State;
-    twoSum: State;
+    twoSum: TwoSumState;
 }
 
 export const rootReducer = (history: History) => combineReducers({

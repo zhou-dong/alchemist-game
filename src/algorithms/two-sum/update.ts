@@ -1,4 +1,5 @@
-import { State, Point } from '../../store/BasicState';
+import { Point } from '../../store/BasicState';
+import { State } from "../../store/two-sum/state";
 import { addHelperStyles } from '.';
 import { helperStyle } from '../../pages/withRoot';
 

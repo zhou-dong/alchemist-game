@@ -3,8 +3,8 @@ import { Point } from '../../store/BasicState';
 import { helperStyle } from '../../pages/withRoot';
 
 const startPoint: Point = {
-    row: 2,
-    col: 2,
+    row: 1,
+    col: 1,
 };
 
 interface TableSize {
@@ -12,76 +12,48 @@ interface TableSize {
     cols: number;
 }
 
-const getTableSize = (stringOne: string, stringTwo: string): TableSize => {
-    const rows = stringTwo.length + 2;
-    const cols = stringOne.length + 2;
-    return { rows, cols };
-};
+const getTableSize = (nums: number[]): TableSize => ({ rows: 2, cols: nums.length + 1 });
 
-const createTableMatrix = (stringOne: string, stringTwo: string): (number | string)[][] => {
-    const { rows, cols } = getTableSize(stringOne, stringTwo);
+const createTableMatrix = (nums: number[]): (number | string)[][] => {
+    const { rows, cols } = getTableSize(nums);
 
-    const table = new Array(rows).fill('').map(() => new Array(cols).fill(''));
+    const table = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
 
-    for (let col = 2; col < cols; col++) {
-        table[0][col] = stringOne.charAt(col - 2);
-        table[1][col] = col - 1;
+    table[0][0] = "index"
+    table[1][0] = "value"
+
+    for (let col = 1; col < cols; col++) {
+        table[0][col] = col - 1;
     }
 
-    for (let row = 2; row < rows; row++) {
-        table[row][0] = stringTwo.charAt(row - 2);
-        table[row][1] = row - 1;
+    for (let col = 1; col < cols; col++) {
+        table[1][col] = nums[col - 1];
     }
 
-    table[1][1] = 0;
-    table[startPoint.row][startPoint.col] = '?';
     return table;
 };
 
-const createComparedTable = (stringOne: string, stringTwo: string): (number | string)[][] => {
-    const { rows, cols } = getTableSize(stringOne, stringTwo);
-
-    const dpTable = createDPTable(stringOne, stringTwo);
-    const tableMatrix = createTableMatrix(stringOne, stringTwo);
-
-    for (let row = 1; row < rows; row++) {
-        for (let col = 1; col < cols; col++) {
-            tableMatrix[row][col] = dpTable[row - 1][col - 1];
-        }
-    }
-    return tableMatrix;
-};
+const createComparedTable = (nums: number[]): (number | string)[][] => createDPTable(nums);
 
 const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void => {
-    for (let col = 0; col < styles[0].length && col <= point.col; col++) {
-        styles[0][col] = helperStyle;
-    }
-
-    for (let row = 0; row < styles.length && row <= point.row; row++) {
-        styles[row][0] = helperStyle;
-    }
+    styles[0][0] = { backgroundColor: "lightgray" }
+    styles[1][0] = { backgroundColor: "lightgray" }
+    styles[1][point.col] = helperStyle;
 };
 
-const createTableStyles = (stringOne: string, stringTwo: string): (React.CSSProperties)[][] => {
-    const { rows, cols } = getTableSize(stringOne, stringTwo);
+const createTableStyles = (nums: number[]): (React.CSSProperties)[][] => {
+    const { rows, cols } = getTableSize(nums);
     const table = new Array(rows).fill(0).map(() => new Array(cols).fill({}));
     addHelperStyles(table, startPoint);
     return table;
 };
 
-const createButtons = (stringOne: string, stringTwo: string): number[] => {
-    const dpTable = createDPTable(stringOne, stringTwo);
-    const set = new Set<number>();
-    for (let row = 1; row < dpTable.length; row++) {
-        for (let col = 1; col < dpTable[row].length; col++) {
-            set.add(dpTable[row][col]);
-        }
-    }
-    return Array.from(set).sort();
+const createButtons = (): string[] => {
+    return ["Add To HashTable", "Gotcha"];
 };
 
-const createButtonsStyles = (stringOne: string, stringTwo: string): (React.CSSProperties)[] => {
-    return createButtons(stringOne, stringTwo).map(() => ({ color: 'back' }));
+const createButtonsStyles = (nums: number[]): (React.CSSProperties)[] => {
+    return createButtons().map(() => ({ color: 'back', paddingLeft: "6px", paddingRight: "6px" }));
 };
 
 export {
