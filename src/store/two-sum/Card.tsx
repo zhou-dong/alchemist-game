@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableCell, TableRow, Typography, WithStyles } from '@material-ui/core';
+import { Avatar, Chip, Table, TableBody, TableCell, TableRow, Typography, WithStyles } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
 import Header from '../../components/MainHeader';
 import Buttons from '../../components/Buttons';
@@ -12,14 +12,13 @@ import DisplayTable from '../../components/Table';
 import Comments from '../../components/MainFooter';
 import { helperStyle } from '../../pages/withRoot';
 
-import { State } from '../../store/BasicState';
+import { State } from './state';
 
 const styles = (theme: Theme) => createStyles({});
 interface Props extends State, WithStyles<typeof styles> { }
 
 const HashTable = (props: Props) => {
     const comparedTable = props.comparedTable;
-
 
     return (
         <Table>
@@ -49,11 +48,21 @@ const Algorithm = (props: Props) => (
     <div style={{ margin: "auto", "textAlign": "center" }}>
         <Header {...props} />
         <div style={{ minHeight: 20 }} />
-        <Typography variant="subtitle1">
-            Array(nums)
-            </Typography>
+
+        <Typography>
+            <Chip label={"nums = [" + props.nums.join(", ") + "]"} variant="outlined" />
+            &nbsp;&nbsp;&nbsp;
+            <Chip label={"target = " + props.target} variant="outlined" />
+        </Typography>
+
+        <div style={{ minHeight: 20 }} />
+
+        <Typography variant="subtitle1">Array</Typography>
+
         <DisplayTable {...props} />
-        <div style={{ minHeight: 40 }} />
+
+        <div style={{ minHeight: 20 }} />
+
         <CardContent>
             <Typography variant="subtitle1">
                 HashTable

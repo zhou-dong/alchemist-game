@@ -57,6 +57,7 @@ export const create = () => {
         buttonsStyles: helper.createButtonsStyles(nums),
         handleButtonClick: buttonClick,
         target: 100,
+        nums,
     });
 };
 
