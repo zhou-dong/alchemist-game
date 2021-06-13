@@ -44,8 +44,25 @@ const header: Header = {
 const random = (max: number) => Math.floor(Math.random() * max);
 
 export const create = () => {
-    const nums: number[] = Array(6).fill(10).map(random);
-    const target = 10
+    const size = 6;
+    const nums: number[] = [];
+    for (let i = 0; i < size; i++) {
+        let flag = true;
+        while (flag) {
+            const num = random(9) + 1;
+            if (!nums.includes(num)) {
+                nums.push(num);
+                flag = false;
+            }
+        }
+    }
+    const one = random(6);
+    let two = one;
+    while (two === one) {
+        two = random(6);
+    }
+    const target = nums[one] + nums[two];
+
     return ({
         ...header,
         ...dialog,
