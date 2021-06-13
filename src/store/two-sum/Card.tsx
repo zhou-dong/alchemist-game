@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import { withStyles, createStyles } from '@material-ui/core/styles';
-import { Avatar, Chip, Table, TableBody, TableCell, TableRow, Typography, WithStyles } from '@material-ui/core';
+import { Chip, Table, TableBody, TableCell, TableRow, Typography, WithStyles } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
 import Header from '../../components/MainHeader';
 import Buttons from '../../components/Buttons';
@@ -10,7 +10,6 @@ import Dialog from '../../components/Dialog';
 import Formula from '../../components/Formula';
 import DisplayTable from '../../components/Table';
 import Comments from '../../components/MainFooter';
-import { helperStyle } from '../../pages/withRoot';
 
 import { State } from './state';
 
@@ -28,7 +27,13 @@ const HashTable = (props: Props) => {
                         key
                     </TableCell>
                     {
-                        comparedTable[0].map((col, i) => <TableCell padding="none" key={i}>{col}</TableCell>)
+                        comparedTable[0].map((col, i) => {
+                            if (i + 1 < props.currentPoint.col) {
+                                return < TableCell padding="none" key={i} >{col}</TableCell>
+                            } else {
+                                return < TableCell padding="none" key={i} ></TableCell>
+                            }
+                        })
                     }
                 </TableRow>
                 <TableRow>
@@ -36,11 +41,17 @@ const HashTable = (props: Props) => {
                         value
                     </TableCell>
                     {
-                        comparedTable[1].map((col, i) => <TableCell padding="none" key={i}>{col}</TableCell>)
+                        comparedTable[1].map((col, i) => {
+                            if (i + 1 < props.currentPoint.col) {
+                                return < TableCell padding="none" key={i} >{col}</TableCell>
+                            } else {
+                                return < TableCell padding="none" key={i} ></TableCell>
+                            }
+                        })
                     }
                 </TableRow>
             </TableBody>
-        </Table>
+        </Table >
     )
 };
 
@@ -49,11 +60,11 @@ const Algorithm = (props: Props) => (
         <Header {...props} />
         <div style={{ minHeight: 20 }} />
 
-        <Typography>
+        <CardContent>
             <Chip label={"nums = [" + props.nums.join(", ") + "]"} variant="outlined" />
             &nbsp;&nbsp;&nbsp;
             <Chip label={"target = " + props.target} variant="outlined" />
-        </Typography>
+        </CardContent>
 
         <div style={{ minHeight: 20 }} />
 

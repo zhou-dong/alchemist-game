@@ -1,4 +1,4 @@
-import createDPTable from './algorithm';
+import createDPTable, { getIndices } from './algorithm';
 import { Point } from '../../store/BasicState';
 import { helperStyle } from '../../pages/withRoot';
 
@@ -36,8 +36,8 @@ const createTableMatrix = (nums: number[]): (number | string)[][] => {
 const createComparedTable = (nums: number[]): (number | string)[][] => createDPTable(nums);
 
 const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void => {
-    styles[0][0] = { backgroundColor: "lightgray" }
-    styles[1][0] = { backgroundColor: "lightgray" }
+    styles[0][0] = { backgroundColor: "lightgray" };
+    styles[1][0] = { backgroundColor: "lightgray" };
     styles[1][point.col] = helperStyle;
 };
 
@@ -64,4 +64,5 @@ export {
     createButtons,
     createButtonsStyles,
     startPoint,
+    getIndices,
 };

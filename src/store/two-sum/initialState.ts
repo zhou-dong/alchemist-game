@@ -45,6 +45,7 @@ const random = (max: number) => Math.floor(Math.random() * max);
 
 export const create = () => {
     const nums: number[] = Array(6).fill(10).map(random);
+    const target = 10
     return ({
         ...header,
         ...dialog,
@@ -56,8 +57,9 @@ export const create = () => {
         buttons: helper.createButtons(),
         buttonsStyles: helper.createButtonsStyles(nums),
         handleButtonClick: buttonClick,
-        target: 100,
+        target,
         nums,
+        results: helper.getIndices(nums, target),
     });
 };
 

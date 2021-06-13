@@ -8,7 +8,7 @@ import { Action } from './actions';
 const reducer: Reducer<State> = (state: State = create(), action: Action) => {
     switch (action.type) {
         case Constants.BUTTON_CLICK:
-            return update(Number(action.payload), state);
+            return update(action.payload, state);
         case Constants.OPEN_DIALOG_CLICK:
             return { ...state, dialogOpen: true };
         case Constants.CLOSE_DIALOG_CLICK:
