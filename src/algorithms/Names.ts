@@ -24,6 +24,7 @@ import { basicInfo as HouseRobber } from '../store/house-robber/initialState';
 import { basicInfo as BinaryTreeInorderTraversal } from '../store/binary-tree-inorder-traversal/initialState';
 import { basicInfo as BinaryTreePreorderTraversal } from '../store/binary-tree-preorder-traversal/initialState';
 import { basicInfo as BinaryTreePostorderTraversal } from '../store/binary-tree-postorder-traversal/initialState';
+import { basicInfo as TwoSum } from "../store/two-sum/initialState";
 
 enum Names {
     Edit_Distance = 'edit-distance',
@@ -54,6 +55,7 @@ enum Names {
     Binary_Tree_Postorder_Traversal = 'binary-tree-postorder-traversal',
     Two_Three_Tree_vs_Red_Black_tree = "two-three-tree-red-black-tree",
     LRU_Cache = "lru-cache",
+    Two_Sum = "two-sum",
 }
 
 export const getId = (name: string): number => {
@@ -86,6 +88,7 @@ export const getId = (name: string): number => {
         case Names.Binary_Tree_Postorder_Traversal: return BinaryTreePostorderTraversal.id;
         case Names.Two_Three_Tree_vs_Red_Black_tree: return -1;
         case Names.LRU_Cache: return -1;
+        case Names.Two_Sum: return TwoSum.id;
         default: return -1;
     }
 };
