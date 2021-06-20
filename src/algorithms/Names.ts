@@ -50,12 +50,12 @@ enum Names {
     Longest_Palindromic_Subsequence = 'longest-palindromic-subsequence',
     Palindrome_Partitioning = 'palindrome-partitioning',
     House_Robber = 'house-robber',
+    Two_Sum = "two-sum",
     Binary_Tree_Preorder_Traversal = 'binary-tree-preorder-traversal',
     Binary_Tree_Inorder_Traversal = 'binary-tree-inorder-traversal',
     Binary_Tree_Postorder_Traversal = 'binary-tree-postorder-traversal',
     Two_Three_Tree_vs_Red_Black_tree = "two-three-tree-red-black-tree",
     LRU_Cache = "lru-cache",
-    Two_Sum = "two-sum",
 }
 
 export const getId = (name: string): number => {
