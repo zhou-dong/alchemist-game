@@ -37,6 +37,7 @@ import { BinaryTreeInorderTraversal, BinaryTreeInorderTraversalReducer } from '.
 import { BinaryTreePreorderTraversal, BinaryTreePreorderTraversalReducer } from './binary-tree-preorder-traversal';
 import { BinaryTreePostorderTraversal, BinaryTreePostorderTraversalReducer } from './binary-tree-postorder-traversal';
 import { TwoSum, TwoSumReducer } from "./two-sum";
+import { TrappingRainWater, TrappingRainWaterReducer } from "./trapping-rain-water";
 
 export interface ApplicationState {
     editDistance: State;
@@ -66,6 +67,7 @@ export interface ApplicationState {
     binaryTreePreorderTraversal: State;
     binaryTreePostorderTraversal: State;
     twoSum: TwoSumState;
+    trappingRainWater: State;
 }
 
 export const rootReducer = (history: History) => combineReducers({
@@ -97,6 +99,7 @@ export const rootReducer = (history: History) => combineReducers({
     binaryTreePreorderTraversal: BinaryTreePreorderTraversalReducer,
     binaryTreePostorderTraversal: BinaryTreePostorderTraversalReducer,
     twoSum: TwoSumReducer,
+    trappingRainWater: TrappingRainWaterReducer,
 });
 
 export const containers = {
@@ -127,4 +130,5 @@ export const containers = {
     BinaryTreePreorderTraversal,
     BinaryTreePostorderTraversal,
     TwoSum,
+    TrappingRainWater,
 };
