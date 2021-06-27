@@ -1,10 +1,10 @@
-import createDPTable from './algorithm';
+import createDPTable, { createRightMax, createLeftMax } from './algorithm';
 import { Point } from '../../store/BasicState';
-import { helperStyle } from '../../pages/withRoot';
+import { helperStyle, helperStyleSecondary } from '../../pages/withRoot';
 
 const startPoint: Point = {
-    row: 2,
-    col: 2,
+    row: 0,
+    col: 0,
 };
 
 interface TableSize {
@@ -12,44 +12,24 @@ interface TableSize {
     cols: number;
 }
 
-const getTableSize = (stringOne: string, stringTwo: string): TableSize => {
-    const rows = stringTwo.length + 2;
-    const cols = stringOne.length + 2;
-    return { rows, cols };
+const getTableSize = (nums: number[]): TableSize => {
+    return { rows: Math.max(...nums), cols: nums.length + 1 };
 };
 
-const createTableMatrix = (stringOne: string, stringTwo: string): (number | string)[][] => {
-    const { rows, cols } = getTableSize(stringOne, stringTwo);
-
+const createTableMatrix = (nums: number[]): (number | string)[][] => {
+    const { rows, cols } = getTableSize(nums);
     const table = new Array(rows).fill('').map(() => new Array(cols).fill(''));
 
-    for (let col = 2; col < cols; col++) {
-        table[0][col] = stringOne.charAt(col - 2);
-        table[1][col] = col - 1;
+    for (let row = 0; row < rows; row++) {
+        table[row][0] = rows - row;
     }
 
-    for (let row = 2; row < rows; row++) {
-        table[row][0] = stringTwo.charAt(row - 2);
-        table[row][1] = row - 1;
-    }
-
-    table[1][1] = 0;
-    table[startPoint.row][startPoint.col] = '?';
     return table;
 };
 
-const createComparedTable = (stringOne: string, stringTwo: string): (number | string)[][] => {
-    const { rows, cols } = getTableSize(stringOne, stringTwo);
+const createComparedTable = (nums: Number[]): (number | string)[][] => {
 
-    const dpTable = createDPTable(stringOne, stringTwo);
-    const tableMatrix = createTableMatrix(stringOne, stringTwo);
-
-    for (let row = 1; row < rows; row++) {
-        for (let col = 1; col < cols; col++) {
-            tableMatrix[row][col] = dpTable[row - 1][col - 1];
-        }
-    }
-    return tableMatrix;
+    return [];
 };
 
 const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void => {
@@ -62,26 +42,35 @@ const addHelperStyles = (styles: React.CSSProperties[][], point: Point): void =>
     }
 };
 
-const createTableStyles = (stringOne: string, stringTwo: string): (React.CSSProperties)[][] => {
-    const { rows, cols } = getTableSize(stringOne, stringTwo);
+const createTableStyles = (nums: number[]): (React.CSSProperties)[][] => {
+    const { rows, cols } = getTableSize(nums);
     const table = new Array(rows).fill(0).map(() => new Array(cols).fill({}));
-    addHelperStyles(table, startPoint);
+    const dpTable = createDPTable(nums);
+
+    for (let row = 0; row < rows; row++) {
+        table[row][0] = { borderWidth: 0, border: 0 }
+    }
+
+    for (let col = 1; col < cols; col++) {
+        const elevations = nums[col - 1];
+        for (let i = 0; i < elevations; i++) {
+            table[rows - 1 - i][col] = { backgroundColor: "darkgray" };
+        }
+    }
+
+    for (let col = 1; col < cols; col++) {
+        const elevations = nums[col - 1];
+        const wasters = dpTable[col - 1];
+        for (let i = 0; i < wasters; i++) {
+            table[rows - 1 - elevations - i][col] = helperStyleSecondary;
+        }
+    }
+
     return table;
 };
 
-const createButtons = (stringOne: string, stringTwo: string): number[] => {
-    const dpTable = createDPTable(stringOne, stringTwo);
-    const set = new Set<number>();
-    for (let row = 1; row < dpTable.length; row++) {
-        for (let col = 1; col < dpTable[row].length; col++) {
-            set.add(dpTable[row][col]);
-        }
-    }
-    return Array.from(set).sort();
-};
-
-const createButtonsStyles = (stringOne: string, stringTwo: string): (React.CSSProperties)[] => {
-    return createButtons(stringOne, stringTwo).map(() => ({ color: 'back' }));
+const createButtonsStyles = (buttons: number[]): (React.CSSProperties)[] => {
+    return buttons.map(() => ({ color: 'back' }));
 };
 
 export {
@@ -89,7 +78,9 @@ export {
     createTableMatrix,
     createComparedTable,
     createTableStyles,
-    createButtons,
     createButtonsStyles,
+    createLeftMax,
+    createRightMax,
+    createDPTable,
     startPoint,
 };

@@ -9,6 +9,7 @@ import { State as LongestPalindromicSubsequenceState } from './longest-palindrom
 import { State as PalindromePartitioningState } from './palindrome-partitioning/state';
 import { State as EggDroppingState } from "./egg-dropping-problem/state";
 import { State as TwoSumState } from "./two-sum/state";
+import { State as TrappingRainWaterState } from "./trapping-rain-water/state";
 
 import { EditDistance, EditDistanceReducer } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer } from './knapsack-problem';
@@ -67,7 +68,7 @@ export interface ApplicationState {
     binaryTreePreorderTraversal: State;
     binaryTreePostorderTraversal: State;
     twoSum: TwoSumState;
-    trappingRainWater: State;
+    trappingRainWater: TrappingRainWaterState;
 }
 
 export const rootReducer = (history: History) => combineReducers({

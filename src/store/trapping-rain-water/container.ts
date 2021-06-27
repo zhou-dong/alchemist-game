@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { ApplicationState } from '..';
-import Card from '../../components/Card';
+import Card from './Card';
 import * as actions from './actions';
 
 const mapStateToProps = ({ trappingRainWater }: ApplicationState) => ({

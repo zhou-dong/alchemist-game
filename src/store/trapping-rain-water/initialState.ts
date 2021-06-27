@@ -1,7 +1,8 @@
-import { Dialog, DialogScroll, Header, BasicInfo, State, Difficulty, Formula } from '../BasicState';
+import { Dialog, DialogScroll, Header, BasicInfo, Difficulty, Formula } from '../BasicState';
 import { buttonClick, refresh, openDialog, closeDialog, closeFormula, openFormula } from './actions';
 import { description, formula, example, alUsecases } from './contents';
 import * as helper from '../../algorithms/trapping-rain-water';
+import { State } from "./state";
 
 export const basicInfo: BasicInfo = {
     id: 28,
@@ -40,23 +41,39 @@ const header: Header = {
     handleOpenFormulaClick: openFormula,
 };
 
-const bases = 'ACGT';
 const random = (max: number) => Math.floor(Math.random() * max);
 
-export const create = () => {
-    const stringOne: string = Array(5).fill(bases.length).map(random).map(i => bases[i]).join('');
-    const stringTwo: string = Array(5).fill(bases.length).map(random).map(i => bases[i]).join('');
+const createButtons = (water: number[], left: number[], right: number[]): number[] => {
+    const set = new Set<number>();
+    water.forEach(item => set.add(item));
+    left.forEach(item => set.add(item));
+    right.forEach(item => set.add(item));
+    return Array.from(set).sort();
+};
+
+
+export const create = (): State => {
+    let heights: number[] = Array(9).fill(5).map(random);
+    heights = [1, 2, 4, 1, 3, 2, 5, 0, 1];
+    const leftMax: number[] = helper.createLeftMax(heights);
+    const rightMax: number[] = helper.createRightMax(heights);
+    const water: number[] = helper.createDPTable(heights);
+    const buttons: number[] = createButtons(water, leftMax, rightMax);
     return ({
         ...header,
         ...dialog,
         ...codeFormula,
         currentPoint: helper.startPoint,
-        comparedTable: helper.createComparedTable(stringOne, stringTwo),
-        table: helper.createTableMatrix(stringOne, stringTwo),
-        tableStyles: helper.createTableStyles(stringOne, stringTwo),
-        buttons: helper.createButtons(stringOne, stringTwo),
-        buttonsStyles: helper.createButtonsStyles(stringOne, stringTwo),
+        comparedTable: helper.createComparedTable(heights),
+        table: helper.createTableMatrix(heights),
+        tableStyles: helper.createTableStyles(heights),
+        buttons,
+        buttonsStyles: helper.createButtonsStyles(buttons),
         handleButtonClick: buttonClick,
+        heights,
+        leftMax,
+        rightMax,
+        water,
     });
 };
 
