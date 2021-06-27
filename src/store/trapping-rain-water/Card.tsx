@@ -18,6 +18,8 @@ import { Point } from '../BasicState';
 const styles = (_: Theme) => createStyles({});
 interface Props extends State, WithStyles<typeof styles> { }
 
+const backgroundColor = "rgb(69,69,69)";
+
 interface NumsTableParams {
     current: Point;
     data: number[];
@@ -41,7 +43,7 @@ const Heights = ({ data }: NumsTableParams) => (
         <Table>
             <TableBody>
                 <TableRow>
-                    <TableCell padding="none" style={{ backgroundColor: "darkgray", color: "white" }}>Height </TableCell>
+                    <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Height </TableCell>
                     {data.map((item, i) => <TableCell key={i} padding="none">{item}</TableCell>)}
                 </TableRow>
             </TableBody>
@@ -135,7 +137,7 @@ const Water = ({ data, current }: NumsTableParams) => {
     }
 };
 
-const al = `waterHeight = Math.Min(LeftMax, RightMax);              
+const al = `waterHeight = Math.Min(MaxLeft, MaxRight);              
 water = waterHeight > Height ? waterHeight - Height : 0;`
 
 const Total = ({ data, current, success }: NumsTableParams) => {
@@ -184,7 +186,7 @@ const Algorithm = (props: Props) => (
             <Table>
                 <TableBody>
                     <TableRow>
-                        <TableCell padding="none" style={{ backgroundColor: "darkgray", color: "white" }}>Left Max</TableCell>
+                        <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Max Left</TableCell>
                         <LeftMax data={props.leftMax} current={props.currentPoint} />
                     </TableRow>
                 </TableBody>
@@ -196,7 +198,7 @@ const Algorithm = (props: Props) => (
             <Table>
                 <TableBody>
                     <TableRow>
-                        <TableCell padding="none" style={{ backgroundColor: "darkgray", color: "white" }}>Right Max</TableCell>
+                        <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Max Right</TableCell>
                         <RightMax data={props.rightMax} current={props.currentPoint} />
                     </TableRow>
                 </TableBody>
@@ -208,7 +210,7 @@ const Algorithm = (props: Props) => (
             <Table>
                 <TableBody>
                     <TableRow>
-                        <TableCell padding="none" style={{ backgroundColor: "darkgray", color: "white" }}>Water</TableCell>
+                        <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Water</TableCell>
                         <Water data={props.water} current={props.currentPoint} />
                     </TableRow>
                 </TableBody>
@@ -220,7 +222,7 @@ const Algorithm = (props: Props) => (
             <Table>
                 <TableBody>
                     <TableRow>
-                        <TableCell padding="none" style={{ backgroundColor: "darkgray", color: "white" }}>Total</TableCell>
+                        <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Total</TableCell>
                         <Total data={props.water} current={props.currentPoint} success={props.success} />
                     </TableRow>
                 </TableBody>

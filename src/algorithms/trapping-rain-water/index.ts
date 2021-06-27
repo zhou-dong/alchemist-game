@@ -54,7 +54,7 @@ const createTableStyles = (nums: number[]): (React.CSSProperties)[][] => {
     for (let col = 1; col < cols; col++) {
         const elevations = nums[col - 1];
         for (let i = 0; i < elevations; i++) {
-            table[rows - 1 - i][col] = { backgroundColor: "darkgray" };
+            table[rows - 1 - i][col] = { backgroundColor: "rgb(23,13,1)" };
         }
     }
 
