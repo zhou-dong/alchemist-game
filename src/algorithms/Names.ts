@@ -26,6 +26,7 @@ import { basicInfo as BinaryTreePreorderTraversal } from '../store/binary-tree-p
 import { basicInfo as BinaryTreePostorderTraversal } from '../store/binary-tree-postorder-traversal/initialState';
 import { basicInfo as TwoSum } from "../store/two-sum/initialState";
 import { basicInfo as TrappingRainWater } from "../store/trapping-rain-water/initialState";
+import { basicInfo as TrappingRainWaterII } from "../store/trapping-rain-water-ii/initialState";
 
 enum Names {
     Edit_Distance = 'edit-distance',
@@ -52,6 +53,7 @@ enum Names {
     Palindrome_Partitioning = 'palindrome-partitioning',
     House_Robber = 'house-robber',
     Trapping_Rain_Water = "trapping-rain-water",
+    Trapping_Rain_Water_II = "trapping-rain-water-ii",
     Two_Sum = "two-sum",
     Binary_Tree_Preorder_Traversal = 'binary-tree-preorder-traversal',
     Binary_Tree_Inorder_Traversal = 'binary-tree-inorder-traversal',
@@ -86,6 +88,7 @@ export const getId = (name: string): number => {
         case Names.Palindrome_Partitioning: return PalindromePartitioning.id;
         case Names.House_Robber: return HouseRobber.id;
         case Names.Trapping_Rain_Water: return TrappingRainWater.id;
+        case Names.Trapping_Rain_Water_II: return TrappingRainWaterII.id;
         case Names.Two_Sum: return TwoSum.id;
         case Names.Binary_Tree_Inorder_Traversal: return BinaryTreeInorderTraversal.id;
         case Names.Binary_Tree_Preorder_Traversal: return BinaryTreePreorderTraversal.id;

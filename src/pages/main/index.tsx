@@ -80,8 +80,9 @@ const Algorithm = ({ match }: PathParamsType1) => {
         case Names.Binary_Tree_Postorder_Traversal: return <containers.BinaryTreePostorderTraversal />;
         case Names.Two_Three_Tree_vs_Red_Black_tree: return <TwoThreeRBT input={mock()} />;
         case Names.LRU_Cache: return <LRU />;
-        case Names.Two_Sum: return <containers.TwoSum />
-        case Names.Trapping_Rain_Water: return <containers.TrappingRainWater />
+        case Names.Two_Sum: return <containers.TwoSum />;
+        case Names.Trapping_Rain_Water: return <containers.TrappingRainWater />;
+        case Names.Trapping_Rain_Water_II: return <containers.TrappingRainWaterIi />;
         default: return (<div>{match.params.name}</div>);
     }
 };

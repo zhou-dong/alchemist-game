@@ -10,6 +10,7 @@ import { State as PalindromePartitioningState } from './palindrome-partitioning/
 import { State as EggDroppingState } from "./egg-dropping-problem/state";
 import { State as TwoSumState } from "./two-sum/state";
 import { State as TrappingRainWaterState } from "./trapping-rain-water/state";
+import { State as TrappingRainWaterIIState } from "./trapping-rain-water-ii/state";
 
 import { EditDistance, EditDistanceReducer } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer } from './knapsack-problem';
@@ -39,6 +40,7 @@ import { BinaryTreePreorderTraversal, BinaryTreePreorderTraversalReducer } from 
 import { BinaryTreePostorderTraversal, BinaryTreePostorderTraversalReducer } from './binary-tree-postorder-traversal';
 import { TwoSum, TwoSumReducer } from "./two-sum";
 import { TrappingRainWater, TrappingRainWaterReducer } from "./trapping-rain-water";
+import { TrappingRainWaterIi, TrappingRainWaterIiReducer } from "./trapping-rain-water-ii";
 
 export interface ApplicationState {
     editDistance: State;
@@ -69,6 +71,7 @@ export interface ApplicationState {
     binaryTreePostorderTraversal: State;
     twoSum: TwoSumState;
     trappingRainWater: TrappingRainWaterState;
+    trappingRainWaterIi: TrappingRainWaterIIState;
 }
 
 export const rootReducer = (history: History) => combineReducers({
@@ -101,6 +104,7 @@ export const rootReducer = (history: History) => combineReducers({
     binaryTreePostorderTraversal: BinaryTreePostorderTraversalReducer,
     twoSum: TwoSumReducer,
     trappingRainWater: TrappingRainWaterReducer,
+    trappingRainWaterIi: TrappingRainWaterIiReducer,
 });
 
 export const containers = {
@@ -132,4 +136,5 @@ export const containers = {
     BinaryTreePostorderTraversal,
     TwoSum,
     TrappingRainWater,
+    TrappingRainWaterIi,
 };
