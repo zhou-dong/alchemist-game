@@ -45,7 +45,7 @@ const random = (max: number) => Math.floor(Math.random() * max);
 
 export const create = () => {
     let heights: number[] = Array(9).fill(5).map(random);
-    heights = [2, 1, 4, 0, 2, 1, 5, 2, 3, 0, 1];
+    // heights = [2, 1, 4, 0, 2, 1, 5, 2, 3, 0, 1];
     const leftMax: number[] = helper.createLeftMax(heights);
     const rightMax: number[] = helper.createRightMax(heights);
     const waters: number[] = helper.createDPTable(heights);

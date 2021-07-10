@@ -14,7 +14,7 @@ const nonCorrect = (state: State, value: number): boolean => {
 
 const isLastCell = (state: State): boolean => {
     const { row, col } = state.currentPoint;
-    return row === 2 && col === state.water.length;
+    return row === 2 && col === state.water.length - 1;
 };
 
 const getNextPoint = ({ row, col }: Point, cols: number): Point => {
@@ -45,14 +45,13 @@ const update = (value: number, state: State): State => {
 
     const steps = state.steps + 1;
 
+    if (nonCorrect(state, value)) {
+        return { ...state, startTime, steps, errors: errors + 1 };
+    }
+
     if (isLastCell(state)) {
         const finishTime = new Date().getTime();
         return { ...state, startTime, finishTime, success: true };
-    }
-
-
-    if (nonCorrect(state, value)) {
-        return { ...state, startTime, steps, errors: errors + 1 };
     }
 
     const nextPoint = getNextPoint(currentPoint, state.water.length);
