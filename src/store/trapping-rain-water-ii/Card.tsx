@@ -42,7 +42,7 @@ const Heights = ({ data, current, guiders }: NumsTableParams) => (
                             } else {
                                 const { left, right } = guiders.coordinates[current.col];
                                 if (i === left || i === right) {
-                                    return (<TableCell key={i} padding="none" style={{ backgroundColor: "green" }}>{item}</TableCell>)
+                                    return (<TableCell key={i} padding="none" style={{ backgroundColor: "green", color: "white" }}>{item}</TableCell>)
                                 } else {
                                     return (<TableCell key={i} padding="none">{item}</TableCell>)
                                 }
@@ -81,7 +81,7 @@ const Total = ({ current, guiders }: NumsTableParams) => {
     const { left, right } = coordinates[current.col];
     if (left > right) {
         return (
-            <TableCell padding="none" style={{ backgroundColor: "green" }}>
+            <TableCell padding="none" style={{ backgroundColor: "green", color: "white", fontSize: 20 }}>
                 {
                     waters[current.col]
                 }

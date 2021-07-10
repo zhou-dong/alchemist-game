@@ -54,7 +54,7 @@ const createButtons = (water: number[], left: number[], right: number[]): number
 
 export const create = (): State => {
     let heights: number[] = Array(9).fill(5).map(random);
-    heights = [1, 2, 4, 1, 3, 2, 5, 0, 1];
+    // heights = [1, 2, 4, 1, 3, 2, 5, 0, 1];
     const leftMax: number[] = helper.createLeftMax(heights);
     const rightMax: number[] = helper.createRightMax(heights);
     const water: number[] = helper.createDPTable(heights);

@@ -20,10 +20,14 @@ interface Props extends State, WithStyles<typeof styles> { }
 
 const backgroundColor = "rgb(69,69,69)";
 
+const helperColorOne = "#faca48";
+const helperColorTwo = "#fced88";
+const helperColorThree = "green";
+
 interface NumsTableParams {
     current: Point;
     data: number[];
-    success?: boolean;
+    success: boolean;
 }
 
 interface CodeBlockParams {
@@ -38,30 +42,77 @@ const CodeBlock = ({ content }: CodeBlockParams) => (
     </div>
 );
 
-const Heights = ({ data }: NumsTableParams) => (
-    <div>
-        <Table>
-            <TableBody>
-                <TableRow>
-                    <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Height </TableCell>
+const Heights = ({ data, current, success }: NumsTableParams) => {
+    const { row, col } = current;
+    if (row === 0) {
+        return (
+            <>
+                {
+                    data.map((item, i) => {
+                        if (i + 1 === col) {
+                            return <TableCell key={i} padding="none" style={{ backgroundColor: helperColorTwo }}>{item}</TableCell>
+                        } else {
+                            return <TableCell key={i} padding="none">{item}</TableCell>
+                        }
+                    })
+                }
+            </>
+        );
+    } else if (row === 1) {
+        return (
+            <>
+                {
+                    data.map((item, i) => {
+                        if (i - 1 === col) {
+                            return <TableCell key={i} padding="none" style={{ backgroundColor: helperColorTwo }}>{item}</TableCell>
+                        } else {
+                            return <TableCell key={i} padding="none">{item}</TableCell>
+                        }
+                    })
+                }
+            </>
+        );
+    } else {
+        if (success) {
+            return (
+                <>
                     {data.map((item, i) => <TableCell key={i} padding="none">{item}</TableCell>)}
-                </TableRow>
-            </TableBody>
-        </Table>
-    </div>
-);
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {
+                        data.map((item, i) => {
+                            if (i === col) {
+                                return <TableCell key={i} padding="none" style={{ backgroundColor: helperColorTwo }}>{item}</TableCell>
+                            } else {
+                                return <TableCell key={i} padding="none">{item}</TableCell>
+                            }
+                        })
+                    }
+                </>
+            );
+        }
+    }
+};
 
-const LeftMax = ({ data, current }: NumsTableParams) => {
-    if (current.row === 0) {
+const LeftMax = ({ data, current, success }: NumsTableParams) => {
+    const { row, col } = current;
+    if (row === 0) {
         return (
             <>
                 {
                     data.map((item, i) => {
-                        if (current.col === i) {
-                            return <TableCell key={i} padding="none">?</TableCell>
+                        if (col === i) {
+                            return <TableCell key={i} padding="none" style={{ color: helperColorThree, fontSize: 20 }}>?</TableCell>
                         }
-                        if (current.col > i) {
-                            return <TableCell key={i} padding="none">{item}</TableCell>
+                        if (col > i) {
+                            if (i + 1 === col) {
+                                return <TableCell key={i} padding="none" style={{ backgroundColor: helperColorOne }}>{item}</TableCell>
+                            } else {
+                                return <TableCell key={i} padding="none">{item}</TableCell>
+                            }
                         } else {
                             return <TableCell key={i} padding="none"></TableCell>
                         }
@@ -69,69 +120,125 @@ const LeftMax = ({ data, current }: NumsTableParams) => {
                 }
             </>
         );
-    } else {
+    } else if (row === 1) {
         return (
             <>
                 {data.map((item, i) => <TableCell key={i} padding="none">{item}</TableCell>)}
             </>
         );
+    } else {
+        if (success) {
+            return (
+                <>
+                    {data.map((item, i) => <TableCell key={i} padding="none">{item}</TableCell>)}
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {
+                        data.map((item, i) => {
+                            if (col === i) {
+                                return <TableCell key={i} padding="none" style={{ backgroundColor: helperColorOne }}>{item}</TableCell>
+                            } else {
+                                return <TableCell key={i} padding="none">{item}</TableCell>
+                            }
+                        })
+                    }
+                </>
+            );
+        }
     }
 };
 
-const RightMax = ({ data, current }: NumsTableParams) => {
-    if (current.row === 0) {
+const RightMax = ({ data, current, success }: NumsTableParams) => {
+    const { row, col } = current;
+    if (row === 0) {
         return (
             <>
-                {data.map((item, i) => <TableCell key={i} padding="none"></TableCell>)}
+                {data.map((_, i) => <TableCell key={i} padding="none"></TableCell>)}
             </>
         );
-    } else if (current.row === 1) {
+    } else if (row === 1) {
         return (
             <>
                 {
                     data.map((item, i) => {
-                        if (current.col === i) {
-                            return <TableCell key={i} padding="none">?</TableCell>
-                        } else if (i < current.col) {
+                        if (col === i) {
+                            return <TableCell key={i} padding="none" style={{ color: helperColorThree, fontSize: 20 }}>?</TableCell>
+                        } else if (i < col) {
                             return <TableCell key={i} padding="none"></TableCell>
                         } else {
-                            return <TableCell key={i} padding="none">{item}</TableCell>
+                            if (i - 1 === col) {
+                                return <TableCell key={i} padding="none" style={{ backgroundColor: helperColorOne }}>{item}</TableCell>
+                            } else {
+                                return <TableCell key={i} padding="none">{item}</TableCell>
+                            }
+
                         }
                     })
                 }
             </>
         );
     } else {
-        return (
-            <>
-                {data.map((item, i) => <TableCell key={i} padding="none">{item}</TableCell>)}
-            </>
-        );
+        if (success) {
+            return (
+                <>
+                    {data.map((item, i) => <TableCell key={i} padding="none">{item}</TableCell>)}
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {
+                        data.map((item, i) => {
+                            if (col === i) {
+                                return <TableCell key={i} padding="none" style={{ backgroundColor: helperColorOne }}>{item}</TableCell>
+                            } else {
+                                return <TableCell key={i} padding="none">{item}</TableCell>
+                            }
+                        })
+                    }
+                </>
+            );
+        }
     }
 };
 
-const Water = ({ data, current }: NumsTableParams) => {
+const Water = ({ data, current, success }: NumsTableParams) => {
     if (current.row === 2) {
-        return (
-            <>
-                {
-                    data.map((item, i) => {
-                        if (current.col === i) {
-                            return <TableCell key={i} padding="none">?</TableCell>
-                        }
-                        if (current.col > i) {
+        if (success) {
+            return (
+                <>
+                    {
+                        data.map((item, i) => {
                             return <TableCell key={i} padding="none">{item}</TableCell>
-                        } else {
-                            return <TableCell key={i} padding="none"></TableCell>
-                        }
-                    })
-                }
-            </>
-        );
+                        })
+                    }
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {
+                        data.map((item, i) => {
+                            if (current.col === i) {
+                                return <TableCell key={i} padding="none" style={{ color: helperColorThree, fontSize: 20 }}>?</TableCell>
+                            }
+                            if (current.col > i) {
+                                return <TableCell key={i} padding="none">{item}</TableCell>
+                            } else {
+                                return <TableCell key={i} padding="none"></TableCell>
+                            }
+                        })
+                    }
+                </>
+            );
+        }
     } else {
         return (
             <>
-                {data.map((item, i) => <TableCell key={i} padding="none"></TableCell>)}
+                {data.map((_, i) => <TableCell key={i} padding="none"></TableCell>)}
             </>
         );
     }
@@ -146,7 +253,7 @@ const Total = ({ data, current, success }: NumsTableParams) => {
     } else {
         if (success) {
             return (
-                <TableCell padding="none" style={{ backgroundColor: "green" }}>
+                <TableCell padding="none" style={{ backgroundColor: "green", color: "white", fontSize: 20 }}>
                     {
                         data.reduce((one, two) => one + two)
                     }
@@ -179,7 +286,16 @@ const Algorithm = (props: Props) => (
         <DisplayTable {...props} />
 
         <div style={{ marginTop: 10 }}>  </div>
-        <Heights data={props.heights} current={props.currentPoint} />
+        <div>
+            <Table>
+                <TableBody>
+                    <TableRow>
+                        <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Height </TableCell>
+                        <Heights data={props.heights} current={props.currentPoint} success={props.success} />
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </div>
 
         <CodeBlock content="max = Math.Max(max, Height[i-1]); i++;" />
         <div>
@@ -187,7 +303,7 @@ const Algorithm = (props: Props) => (
                 <TableBody>
                     <TableRow>
                         <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Max Left</TableCell>
-                        <LeftMax data={props.leftMax} current={props.currentPoint} />
+                        <LeftMax data={props.leftMax} current={props.currentPoint} success={props.success} />
                     </TableRow>
                 </TableBody>
             </Table>
@@ -199,7 +315,7 @@ const Algorithm = (props: Props) => (
                 <TableBody>
                     <TableRow>
                         <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Max Right</TableCell>
-                        <RightMax data={props.rightMax} current={props.currentPoint} />
+                        <RightMax data={props.rightMax} current={props.currentPoint} success={props.success} />
                     </TableRow>
                 </TableBody>
             </Table>
@@ -211,7 +327,7 @@ const Algorithm = (props: Props) => (
                 <TableBody>
                     <TableRow>
                         <TableCell padding="none" style={{ backgroundColor, color: "white" }}>Water</TableCell>
-                        <Water data={props.water} current={props.currentPoint} />
+                        <Water data={props.water} current={props.currentPoint} success={props.success} />
                     </TableRow>
                 </TableBody>
             </Table>
