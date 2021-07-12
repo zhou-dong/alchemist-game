@@ -1,5 +1,4 @@
-export const formula = `
-class Solution {
+export const formula = `class Solution {
     public int trap(int[] height) {
 
         if(height.length < 3 ) {
