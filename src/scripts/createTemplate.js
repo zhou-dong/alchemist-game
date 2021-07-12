@@ -147,3 +147,5 @@ cpSagasTs();
 // node ./src/scripts/createTemplate.js binary-tree-postorder-traversal 25
 // node ./src/scripts/createTemplate.js minimum-number-of-jumps-to-reach-end-ii 26
 // node ./src/scripts/createTemplate.js two-sum 27
+// node ./src/scripts/createTemplate.js trapping-rain-water 28
+// node ./src/scripts/createTemplate.js trapping-rain-water-ii 29

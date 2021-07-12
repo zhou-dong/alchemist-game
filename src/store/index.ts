@@ -9,6 +9,8 @@ import { State as LongestPalindromicSubsequenceState } from './longest-palindrom
 import { State as PalindromePartitioningState } from './palindrome-partitioning/state';
 import { State as EggDroppingState } from "./egg-dropping-problem/state";
 import { State as TwoSumState } from "./two-sum/state";
+import { State as TrappingRainWaterState } from "./trapping-rain-water/state";
+import { State as TrappingRainWaterIIState } from "./trapping-rain-water-ii/state";
 
 import { EditDistance, EditDistanceReducer } from './edit-distance';
 import { KnapsackProblem, KnapsackProblemReducer } from './knapsack-problem';
@@ -37,6 +39,8 @@ import { BinaryTreeInorderTraversal, BinaryTreeInorderTraversalReducer } from '.
 import { BinaryTreePreorderTraversal, BinaryTreePreorderTraversalReducer } from './binary-tree-preorder-traversal';
 import { BinaryTreePostorderTraversal, BinaryTreePostorderTraversalReducer } from './binary-tree-postorder-traversal';
 import { TwoSum, TwoSumReducer } from "./two-sum";
+import { TrappingRainWater, TrappingRainWaterReducer } from "./trapping-rain-water";
+import { TrappingRainWaterIi, TrappingRainWaterIiReducer } from "./trapping-rain-water-ii";
 
 export interface ApplicationState {
     editDistance: State;
@@ -66,6 +70,8 @@ export interface ApplicationState {
     binaryTreePreorderTraversal: State;
     binaryTreePostorderTraversal: State;
     twoSum: TwoSumState;
+    trappingRainWater: TrappingRainWaterState;
+    trappingRainWaterIi: TrappingRainWaterIIState;
 }
 
 export const rootReducer = (history: History) => combineReducers({
@@ -97,6 +103,8 @@ export const rootReducer = (history: History) => combineReducers({
     binaryTreePreorderTraversal: BinaryTreePreorderTraversalReducer,
     binaryTreePostorderTraversal: BinaryTreePostorderTraversalReducer,
     twoSum: TwoSumReducer,
+    trappingRainWater: TrappingRainWaterReducer,
+    trappingRainWaterIi: TrappingRainWaterIiReducer,
 });
 
 export const containers = {
@@ -127,4 +135,6 @@ export const containers = {
     BinaryTreePreorderTraversal,
     BinaryTreePostorderTraversal,
     TwoSum,
+    TrappingRainWater,
+    TrappingRainWaterIi,
 };
